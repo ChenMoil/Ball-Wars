@@ -530,7 +530,15 @@ MonoBehaviour:
   gridPrefab: {fileID: 3722811068276370260, guid: d467e221d5d0d7f43a0d59eb032f37c1, type: 3}
   soldierContent: {fileID: 734107009}
   ballList:
-  - {fileID: 11400000, guid: f902baf55cf6bd54098a20016613bf8d, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
+  - {fileID: 11400000, guid: 3c1760cd53cde5a478a2fbfa63e45bf3, type: 2}
 --- !u!1 &701640908
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,8 +684,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 240, y: 240}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!114 &734107012
 MonoBehaviour:
   m_ObjectHideFlags: 0
