@@ -13,6 +13,7 @@ public class PlaceSoliderScript : MonoBehaviour
     int rightNumberOfSoldiers;
     public bool isFree; //是否开启自由模式
     SummonBall ball;     //当前选择小球
+    private GameObject ballListGameObject;
     public SummonBall Ball{get{return ball;}}
     [SerializeField] Text leftTextCoin;   //显示金钱数量的Ui
     [SerializeField] Text leftTextSolider;   //显示小球数量的Ui
@@ -23,9 +24,10 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
     public List<SummonBall> ballList = new List<SummonBall>();
-    
+    public static List<GameObject> ballGameObjectList = new List<GameObject>();  //储存所有小球
     void Awake()
     {
+        ballListGameObject = GameObject.Find("BallList");
         if(!isFree)
         leftTextCoin.text=leftCurrentCoin.ToString();   //同步ui显示
         UpdateUI();
@@ -37,10 +39,14 @@ public class PlaceSoliderScript : MonoBehaviour
             {
                 Debug.Log("开始调试"+Input.GetTouch(0).position);
                 Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;
-                Instantiate(ball.ball,touchPos , Quaternion.identity);
+                GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
+                newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                 if (touchPos.x < 0){
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
                     PlaceSoldierToLeft(ball.coin);
                 }else{
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
                     PlaceSoldierToRight(ball.coin);
                 }
             }

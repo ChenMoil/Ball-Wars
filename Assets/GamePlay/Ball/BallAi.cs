@@ -26,16 +26,7 @@ public class BallBlackBoard : BlockBorad
 
     public int EXP;               //小球的经验
 
-    public int coin;
-
-    public GameObject ball;
-    //public BallInformation(Faction ballFaction, float acceleration, float addAngularVelocity, Vector2 initialOrientation)
-    //{
-    //    this.ballFaction = ballFaction;
-    //    this.acceleration = acceleration;
-    //    this.addAngularVelocity = addAngularVelocity;
-    //    this.initialOrientation = initialOrientation;
-    //}
+    [NonSerialized]public GameObject thisBall;  //这个小球
 }
 
 public class AI_IdleState : IState  //站立状态下执行的函数
@@ -50,7 +41,10 @@ public class AI_IdleState : IState  //站立状态下执行的函数
     }
     public void OnEnter()
     {
-        
+        if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
+        {
+            ballBlackBoard.thisBall.transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     public void OnExit()
@@ -107,16 +101,17 @@ public class AI_MoveState : IState  //移动状态下执行的函数
 }
 public class BallAi : MonoBehaviour
 {
-    private FSM fsm;
+    public FSM fsm;
     public BallBlackBoard ballBlackBoard;
 
     private void Start()
     {
         ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
+        ballBlackBoard.thisBall = this.gameObject;
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.SwitchState(StateType.Move);
+        fsm.SwitchState(StateType.Idle);
     }
     public void Update()
     {
