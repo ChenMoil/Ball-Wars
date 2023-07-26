@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -23,4 +24,7 @@ public class MainMenuScript : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(0, 1008);
         rectTransform.DOSizeDelta(new Vector2(1704, 1008),1f);
     }
+    public void StartLevel(int num){
+        SceneManager.LoadScene(num);
+        }
 }

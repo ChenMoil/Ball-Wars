@@ -35,12 +35,13 @@ public class PlaceSoliderScript : MonoBehaviour
         if(ball != null && (isFree || leftCurrentCoin>=ball.coin)){//放置小球
             if (Input.touchCount>0 && Input.GetTouch(0).phase==TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                Debug.Log("开始调试"+Input.GetTouch(0).position);
-                Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;
-                Instantiate(ball.ball,touchPos , Quaternion.identity);
+                //Debug.Log("开始调试"+Input.GetTouch(0).position);
+                Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;             
                 if (touchPos.x < 0){
+                     Instantiate(ball.ball,touchPos , Quaternion.identity);
                     PlaceSoldierToLeft(ball.coin);
-                }else{
+                }else if(isFree){
+                     Instantiate(ball.ball,touchPos , Quaternion.identity);
                     PlaceSoldierToRight(ball.coin);
                 }
             }
@@ -55,14 +56,18 @@ public class PlaceSoliderScript : MonoBehaviour
     }
     void PlaceSoldierToLeft(int coin)   //在左边放置士兵
     {
+        if(isFree) 
         leftCurrentCoin+=coin;
+        else leftCurrentCoin-=coin;
         leftTextCoin.text = leftCurrentCoin.ToString();
         leftNumberOfSoldiers++;
         leftTextSolider.text = leftNumberOfSoldiers.ToString();
     }
     void PlaceSoldierToRight(int coin)   //在右边放置士兵
     {
+        if(isFree)
         rightCurrentCoin += coin;
+        else rightCurrentCoin -= coin;
         rightTextCoin.text = rightCurrentCoin.ToString();
         rightNumberOfSoldiers++;
         rightTextSolider.text = rightNumberOfSoldiers.ToString();
