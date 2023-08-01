@@ -112,7 +112,7 @@ public class BallAi : MonoBehaviour
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.SwitchState(StateType.Move);
+        fsm.SwitchState(StateType.Idle);
     }
     public void Update()
     {
