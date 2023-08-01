@@ -37,16 +37,23 @@ public class PlaceSoliderScript : MonoBehaviour
         if(ball != null && (isFree || leftCurrentCoin>=ball.coin)){//放置小球
             if (Input.touchCount>0 && Input.GetTouch(0).phase==TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                Debug.Log("开始调试"+Input.GetTouch(0).position);
-                Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;
-                GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
-                newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                //Debug.Log("开始调试"+Input.GetTouch(0).position);
+                Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;             
                 if (touchPos.x < 0){
+                    GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
+                    
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                     newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
+                    
                     PlaceSoldierToLeft(ball.coin);
-                }else{
+                }else if(isFree){
+                    GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
+                    
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                     newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
+                    
                     PlaceSoldierToRight(ball.coin);
                 }
             }
@@ -61,14 +68,18 @@ public class PlaceSoliderScript : MonoBehaviour
     }
     void PlaceSoldierToLeft(int coin)   //在左边放置士兵
     {
+        if(isFree) 
         leftCurrentCoin+=coin;
+        else leftCurrentCoin-=coin;
         leftTextCoin.text = leftCurrentCoin.ToString();
         leftNumberOfSoldiers++;
         leftTextSolider.text = leftNumberOfSoldiers.ToString();
     }
     void PlaceSoldierToRight(int coin)   //在右边放置士兵
     {
+        if(isFree)
         rightCurrentCoin += coin;
+        else rightCurrentCoin -= coin;
         rightTextCoin.text = rightCurrentCoin.ToString();
         rightNumberOfSoldiers++;
         rightTextSolider.text = rightNumberOfSoldiers.ToString();
