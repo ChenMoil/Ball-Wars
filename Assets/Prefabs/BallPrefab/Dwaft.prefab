@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 503685297979573198}
   - component: {fileID: 503685297979573185}
   - component: {fileID: 503685297979573184}
-  - component: {fileID: 503685297979573187}
   - component: {fileID: 503685297979573199}
+  - component: {fileID: 7660830656906989818}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Weapon
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503685297979573189}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.7, y: 0, z: 0}
-  m_LocalScale: {x: 2.4999995, y: 2.4999995, z: 2.5}
+  m_LocalPosition: {x: 1.725, y: 0.006000042, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 503685299420640283}
@@ -135,7 +135,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.08891392, y: 0.61235636}
   m_EdgeRadius: 0
---- !u!254 &503685297979573187
+--- !u!114 &503685297979573199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503685297979573189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: 1
+--- !u!254 &7660830656906989818
 RelativeJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,21 +165,8 @@ RelativeJoint2D:
   m_MaxTorque: 20
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
-  m_LinearOffset: {x: 0.000000074309355, y: -1.6999998}
+  m_LinearOffset: {x: 0.0060001174, y: -1.7250004}
   m_AngularOffset: 1.5707964
---- !u!114 &503685297979573199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503685297979573189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attack: 1
 --- !u!1 &503685299420640282
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,5 +309,5 @@ MonoBehaviour:
     ballFaction: 1
     acceleration: 3
     addAngularVelocity: 0.5
-    HP: 5
+    HP: 100
     EXP: 0
