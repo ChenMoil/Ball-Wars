@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
-  m_Name: RedBall
+  m_Name: Human
   m_EditorClassIdentifier: 
-  coin: 20
-  ball: {fileID: 4148171640566884323, guid: 92896cd0689c29d43a8bc997ce316518, type: 3}
-  ballImage: {fileID: 21300000, guid: bac87e280d5a29e4eac5abc08033a1db, type: 3}
-  pressedImage: {fileID: 21300000, guid: eb733ef043aa0664dbc757d192373ddd, type: 3}
+  coin: 10
+  ball: {fileID: 7277085179200714122, guid: 28a5cab9d6b40d44fa5a025f8a6e95c4, type: 3}
+  ballImage: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}
+  pressedImage: {fileID: 21300000, guid: 51b9b05f5b80ec445bbff5cf5234668b, type: 3}
