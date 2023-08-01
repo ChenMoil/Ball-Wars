@@ -26,16 +26,7 @@ public class BallBlackBoard : BlockBorad
 
     public int EXP;               //小球的经验
 
-    public int coin;
-
-    public GameObject ball;
-    //public BallInformation(Faction ballFaction, float acceleration, float addAngularVelocity, Vector2 initialOrientation)
-    //{
-    //    this.ballFaction = ballFaction;
-    //    this.acceleration = acceleration;
-    //    this.addAngularVelocity = addAngularVelocity;
-    //    this.initialOrientation = initialOrientation;
-    //}
+    [NonSerialized]public GameObject thisBall;  //这个小球
 }
 
 public class AI_IdleState : IState  //站立状态下执行的函数
@@ -50,12 +41,16 @@ public class AI_IdleState : IState  //站立状态下执行的函数
     }
     public void OnEnter()
     {
-        
+        if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
+        {
+            ballBlackBoard.thisBall.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        ballBlackBoard.rigidbody2D.freezeRotation = true;   //冻结旋转
     }
 
     public void OnExit()
     {
-        
+        ballBlackBoard.rigidbody2D.freezeRotation = false;  //取消冻结旋转
     }
 
     public void OnFixedUpdate()
@@ -64,7 +59,7 @@ public class AI_IdleState : IState  //站立状态下执行的函数
 
     public void OnUpdate()
     {
-        
+        ballBlackBoard.rigidbody2D.velocity = Vector2.zero; //物体速度为0
     }
 }
 public class AI_MoveState : IState  //移动状态下执行的函数
@@ -87,7 +82,7 @@ public class AI_MoveState : IState  //移动状态下执行的函数
 
     public void OnExit()
     {
-
+        
     }
 
     public void OnFixedUpdate()
@@ -97,7 +92,7 @@ public class AI_MoveState : IState  //移动状态下执行的函数
             ballBlackBoard.rigidbody2D.AddForce(new Vector2(ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
             ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
         }
-        ballBlackBoard.rigidbody2D.AddTorque(ballBlackBoard.addAngularVelocity);
+        ballBlackBoard.rigidbody2D.AddTorque(ballBlackBoard.addAngularVelocity * MathF.Sign(ballBlackBoard.rigidbody2D.angularVelocity));
     }
 
     public void OnUpdate()
@@ -107,16 +102,17 @@ public class AI_MoveState : IState  //移动状态下执行的函数
 }
 public class BallAi : MonoBehaviour
 {
-    private FSM fsm;
+    public FSM fsm;
     public BallBlackBoard ballBlackBoard;
 
     private void Start()
     {
         ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
+        ballBlackBoard.thisBall = this.gameObject;
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.SwitchState(StateType.Move);
+        fsm.SwitchState(StateType.Idle);
     }
     public void Update()
     {
