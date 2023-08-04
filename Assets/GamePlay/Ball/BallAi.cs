@@ -75,6 +75,7 @@ public class AI_MoveState : IState  //移动状态下执行的函数
 
     public void OnEnter()
     {
+        //加初始速度
         ballBlackBoard.initialOrientation.x = (float)ballBlackBoard.ballFaction;
         ballBlackBoard.initialOrientation.y = Random.Range(-0.5f, 0.5f);
         ballBlackBoard.rigidbody2D.velocity = ballBlackBoard.initialOrientation;
@@ -87,11 +88,13 @@ public class AI_MoveState : IState  //移动状态下执行的函数
 
     public void OnFixedUpdate()
     {
+        //加速
         if (ballBlackBoard.rigidbody2D.velocity != Vector2.zero)
         {
             ballBlackBoard.rigidbody2D.AddForce(new Vector2(ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
             ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
         }
+        //加角速度
         ballBlackBoard.rigidbody2D.AddTorque(ballBlackBoard.addAngularVelocity * MathF.Sign(ballBlackBoard.rigidbody2D.angularVelocity));
     }
 
@@ -107,12 +110,7 @@ public class BallAi : MonoBehaviour
 
     private void Start()
     {
-        ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
-        ballBlackBoard.thisBall = this.gameObject;
-        fsm = new FSM(ballBlackBoard);
-        fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
-        fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.SwitchState(StateType.Idle);
+        initBall();
     }
     public void Update()
     {
@@ -129,5 +127,14 @@ public class BallAi : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+    public virtual void initBall() //初始化小球函数
+    {
+        ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
+        ballBlackBoard.thisBall = this.gameObject;
+        fsm = new FSM(ballBlackBoard);
+        fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
+        fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
+        fsm.SwitchState(StateType.Idle);
     }
 }
