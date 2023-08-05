@@ -24,7 +24,6 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
     public List<SummonBall> ballList = new List<SummonBall>();
-    public static List<GameObject> ballGameObjectList = new List<GameObject>();  //储存所有小球
     void Awake()
     {
         ballListGameObject = GameObject.Find("BallList");
@@ -43,7 +42,7 @@ public class PlaceSoliderScript : MonoBehaviour
                     GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
                     
                     newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                    ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                    BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                     newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
                     
                     PlaceSoldierToLeft(ball.coin);
@@ -51,7 +50,7 @@ public class PlaceSoliderScript : MonoBehaviour
                     GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
                     
                     newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                    ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                    BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                     newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
                     
                     PlaceSoldierToRight(ball.coin);

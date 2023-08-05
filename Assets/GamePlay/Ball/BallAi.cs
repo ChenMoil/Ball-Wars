@@ -135,6 +135,13 @@ public class BallAi : MonoBehaviour
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.SwitchState(StateType.Idle);
+        if (BallList.instance.sceneType == BallList.SceneType.Test)
+        {
+            fsm.SwitchState(StateType.Move);
+        }
+        else if (BallList.instance.sceneType == BallList.SceneType.level)
+        {
+            fsm.SwitchState(StateType.Idle);
+        }
     }
 }
