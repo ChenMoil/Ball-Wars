@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
 public class BallBlackBoard : BlockBorad
 {
-    public Rigidbody2D rigidbody2D;
+    [NonSerialized]public Rigidbody2D rigidbody2D;
     public enum Faction   //判断为左方还是右方
     {
         Left = 1, Right = -1    
@@ -24,9 +20,9 @@ public class BallBlackBoard : BlockBorad
 
     public int HP;                //小球的血量
 
-    public int EXP;               //小球的经验
-
     [NonSerialized]public GameObject thisBall;  //这个小球
+
+    public GameObject Weapon;  //这个小球所带的武器
 }
 
 public class AI_IdleState : IState  //站立状态下执行的函数
@@ -43,7 +39,7 @@ public class AI_IdleState : IState  //站立状态下执行的函数
     {
         if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
         {
-            ballBlackBoard.thisBall.transform.localScale = new Vector3(-1, 1, 1);
+            ballBlackBoard.thisBall.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         ballBlackBoard.rigidbody2D.freezeRotation = true;   //冻结旋转
     }
@@ -135,6 +131,11 @@ public class BallAi : MonoBehaviour
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
+        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
+        ChangeState();
+    }
+    public void ChangeState()
+    {
         if (BallList.instance.sceneType == BallList.SceneType.Test)
         {
             fsm.SwitchState(StateType.Move);

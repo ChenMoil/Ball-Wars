@@ -22,7 +22,7 @@ public class ArcherAI_IdleState : IState  //站立状态下执行的函数
     {
         if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
         {
-            ballBlackBoard.thisBall.transform.localScale = new Vector3(-1, 1, 1);
+            ballBlackBoard.thisBall.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         ballBlackBoard.rigidbody2D.freezeRotation = true;   //冻结旋转
     }
@@ -47,11 +47,11 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
 
     private float timer = 0;  //计时器
 
-    private float switchTime = 1; //切换目标所需时间
+    private float switchTime = 1f; //切换目标所需时间
 
     private float attackTimer = 0;  //转换到攻击状态计时器
 
-    private float attackSwitchTime = 1; //切换攻击状态所需时间
+    private float attackSwitchTime = 5; //切换攻击状态所需时间
 
     private GameObject targetGameObject;  //目标物体
 
@@ -64,10 +64,12 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
 
     public void OnEnter()
     {
-        ////加初始速度
-        //ballBlackBoard.initialOrientation.x = (float)ballBlackBoard.ballFaction;
-        //ballBlackBoard.initialOrientation.y = Random.Range(-0.5f, 0.5f);
-        //ballBlackBoard.rigidbody2D.velocity = ballBlackBoard.initialOrientation;
+        //ballBlackBoard.Arrow = ballBlackBoard.thisBall.transform.GetChild(0).gameObject;  //绑定箭
+        //ballBlackBoard.Arrow.SetActive(false);
+        //加初始速度
+        ballBlackBoard.initialOrientation.x = -(float)ballBlackBoard.ballFaction;
+        ballBlackBoard.initialOrientation.y = Random.Range(-0.5f, 0.5f);
+        ballBlackBoard.rigidbody2D.velocity = ballBlackBoard.initialOrientation;
     }
 
     public void OnExit()
@@ -83,8 +85,8 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
         //加速
         if (ballBlackBoard.rigidbody2D.velocity != Vector2.zero)
         {
-            ballBlackBoard.rigidbody2D.AddForce(new Vector2(-ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
-            -ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
+            ballBlackBoard.rigidbody2D.AddForce(new Vector2(ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
+            ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
         }
     }
 
@@ -98,7 +100,7 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
             float minDistance = 10000;
             foreach (GameObject ball in BallList.instance.ballGameObjectList)  //切换目标物体
             {
-                if (ball == null)
+                if (ball == null || ball == ballBlackBoard.thisBall)
                 {
                     continue;
                 }
@@ -110,13 +112,15 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
             }
             Debug.Log(targetGameObject);
         }
-        if (attackTimer >= attackSwitchTime)
+        float randomAttackTime = Random.Range(attackSwitchTime - 1.5f, attackSwitchTime + 1.5f);
+        if (attackTimer >= randomAttackTime)
         {
+            attackTimer = 0;
             fsm.SwitchState(StateType.Attack);
         }
     }
 
-    public void LookAt(GameObject target, GameObject self)    //朝向其他物体
+    public static void LookAt(GameObject target, GameObject self)    //朝向其他物体
     {
         Vector3 dir = target.transform.position - self.transform.position;
         dir.z = 0;
@@ -136,11 +140,12 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
 
     private GameObject targetGameObject;  //目标物体
 
-    public float shootTime;  //射出箭所需的时间
+    public float shootTime = 4;  //射出箭所需的时间
 
     public float attackTimer = 0; //射箭计时器
 
     public float minDistance = 10000;
+
     public ArcherAI_AttackState(FSM fsm)
     {
         this.fsm = fsm;
@@ -148,6 +153,7 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
     }
     public void OnEnter()
     {
+        ballBlackBoard.Weapon.GetComponent<Bow>().OpenArrowPic(); //显示箭图片
         minDistance = 10000;  //得到最近物体后重置
         foreach (GameObject ball in BallList.instance.ballGameObjectList)  //切换目标物体
         {
@@ -165,7 +171,7 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
 
     public void OnExit()
     {
-        
+        ballBlackBoard.Weapon.GetComponent<Bow>().CloseArrowPic();  //取消显示箭图片
     }
 
     public void OnFixedUpdate()
@@ -179,7 +185,13 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
         attackTimer += Time.deltaTime;
         if (attackTimer > shootTime)
         {
-
+            ballBlackBoard.Weapon.GetComponent<Bow>().Archery(); //射箭
+            fsm.SwitchState(StateType.Move);
+            attackTimer = 0;
+        }
+        if (targetGameObject != null)
+        {
+            ArcherAI_MoveState.LookAt(targetGameObject, ballBlackBoard.thisBall);  //转向目标物体
         }
     }
 }
@@ -193,6 +205,7 @@ public class ArcherAI : BallAi
         fsm.states.Add(StateType.Idle, new ArcherAI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new ArcherAI_MoveState(fsm));
         fsm.states.Add(StateType.Attack, new ArcherAI_AttackState(fsm));
-        fsm.SwitchState(StateType.Move);
+        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
+        ChangeState();
     }
 }
