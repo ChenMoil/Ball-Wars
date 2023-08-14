@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,6 +24,10 @@ public class BallBlackBoard : BlockBorad
     [NonSerialized]public GameObject thisBall;  //这个小球
 
     public GameObject Weapon;  //这个小球所带的武器
+
+    [NonSerialized] public SpriteRenderer spriteRenderer;  //精灵组件
+    public Sprite normalSprite;    //正常情况下的精灵
+    public Sprite beAttackSprite;  //被攻击的精灵
 }
 
 public class AI_IdleState : IState  //站立状态下执行的函数
@@ -106,6 +111,7 @@ public class BallAi : MonoBehaviour
 
     private void Start()
     {
+        ballBlackBoard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         initBall();
     }
     public void Update()
@@ -119,10 +125,30 @@ public class BallAi : MonoBehaviour
     public void DeductHP(int HP) //扣血函数
     {
         ballBlackBoard.HP -= HP;
+        StartCoroutine(BeHurtSprite());
+        StartCoroutine(BeHurtColor());
         if (ballBlackBoard.HP <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+    IEnumerator BeHurtSprite() //改变小球表情
+    {
+        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.beAttackSprite;
+        yield return new WaitForSeconds(1.5f);
+        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.normalSprite;
+    }
+    IEnumerator BeHurtColor() //改变小球颜色
+    {
+        float timer = 0;
+        ballBlackBoard.spriteRenderer.color = new Color32(255, 105, 105, 255);
+        while (timer < 1.5f)
+        {
+            timer += Time.deltaTime;
+            ballBlackBoard.spriteRenderer.color = new Color32(255, (byte)(105 + timer * 100), (byte)(105 + timer * 100), 255);
+            yield return null;
+        }
+        ballBlackBoard.spriteRenderer.color = Color.white;
     }
     public virtual void initBall() //初始化小球函数
     {
