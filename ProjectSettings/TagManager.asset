@@ -13,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Camera
   - 
   - 
   - 
@@ -42,4 +42,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Land
+    uniqueID: 2544600705
+    locked: 0
+  - name: BallAndWeapon
+    uniqueID: 823992435
+    locked: 0
+  - name: Boundary
+    uniqueID: 55898785
     locked: 0
