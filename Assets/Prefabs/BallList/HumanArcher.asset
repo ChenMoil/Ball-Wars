@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
   m_Name: HumanArcher
   m_EditorClassIdentifier: 
-  coin: 0
+  coin: 10
   ball: {fileID: 2606202684008845708, guid: 781767aad2b63b3449a45585d68898a1, type: 3}
-  ballImage: {fileID: 0}
-  pressedImage: {fileID: 0}
+  ballImage: {fileID: 21300000, guid: 7a98800980175bf41b4c4c49be02d0e5, type: 3}
+  pressedImage: {fileID: 21300000, guid: 51b9b05f5b80ec445bbff5cf5234668b, type: 3}

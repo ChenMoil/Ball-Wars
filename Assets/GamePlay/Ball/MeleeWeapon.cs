@@ -11,7 +11,6 @@ public class MeleeWeapon : MonoBehaviour
         if (collision.gameObject.tag == "BallSoldier" && gameObject.GetComponentInParent<BallAi>().ballBlackBoard.ballFaction != collision.gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction)
         {
             collision.gameObject.GetComponent<BallAi>().DeductHP(Attack);  //扣血
-            gameObject.GetComponentInParent<BallAi>().ballBlackBoard.EXP += Attack;  //增加经验
             Debug.Log(gameObject.name + "对" + collision.gameObject.name + "造成了" + Attack + " 点伤害");
         }
     }
