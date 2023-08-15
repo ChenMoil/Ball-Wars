@@ -6,20 +6,21 @@ using UnityEngine;
 public class FightStart : MonoBehaviour
 {
     private List<GameObject> ballList;
-    private GameObject PlaceSoldierUI;
-
+    public List<GameObject> closeUI;  //需要关闭的UI集合
     public void Start()
     {
         ballList = BallList.instance.ballGameObjectList;
-        PlaceSoldierUI = GameObject.Find("Place soldier");
     }
     public void FigthStart() //让战斗开始的函数
     {
         Debug.Log("战斗开始");
+        foreach (GameObject gameObject in closeUI)
+        {
+            gameObject.SetActive(false);
+        }
         foreach (GameObject ball in ballList)
         {
             ball.GetComponent<BallAi>().fsm.SwitchState(StateType.Move);
-            PlaceSoldierUI.SetActive(false);
         }
     }
 }
