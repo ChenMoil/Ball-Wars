@@ -8,7 +8,10 @@ public class PlaceSoliderScript : MonoBehaviour
 {
     //放置士兵功能
     [SerializeField] int leftCurrentCoin;   //当前金钱
-    [SerializeField] int rightCurrentCoin; 
+    [SerializeField] int rightCurrentCoin;
+    [SerializeField] Rigidbody2D cameraFollow;   //摄像机
+    [SerializeField] Material greenOutlineMat;   //绿描边材质
+    [SerializeField] Material redOutlineMat;     //红描边材质
     int leftNumberOfSoldiers;         //士兵数量
     int rightNumberOfSoldiers;
     public bool isFree; //是否开启自由模式
@@ -32,30 +35,43 @@ public class PlaceSoliderScript : MonoBehaviour
         UpdateUI();
     }
     void Update(){
+        if (Input.touchCount > 0)
+        {
+            cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;
+            //Debug.Log(-Input.GetTouch(0).deltaPosition);
+            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero)
+            {//放置小球
+                if (Input.GetTouch(0).phase == TouchPhase.Ended && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    //Debug.Log("开始调试"+Input.GetTouch(0).position);
+                    Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 10 * Vector3.forward;
+                    if (touchPos.x < 0)
+                    {
+                        GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+                        newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                        ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                        newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
+                        newBall.GetComponent<SpriteRenderer>().material=greenOutlineMat;
 
-        if(ball != null && (isFree || leftCurrentCoin>=ball.coin)){//放置小球
-            if (Input.touchCount>0 && Input.GetTouch(0).phase==TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-            {
-                //Debug.Log("开始调试"+Input.GetTouch(0).position);
-                Vector3 touchPos=Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position)+10*Vector3.forward;             
-                if (touchPos.x < 0){
-                    GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
-                    
-                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                    BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
-                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
-                    
-                    PlaceSoldierToLeft(ball.coin);
-                }else if(isFree){
-                    GameObject newBall = Instantiate(ball.ball,touchPos , Quaternion.identity);
-                    
-                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                    BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
-                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
-                    
-                    PlaceSoldierToRight(ball.coin);
+                        PlaceSoldierToLeft(ball.coin);
+                    }
+                    else if (isFree && touchPos.x>0)
+                    {
+                        GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+
+                        newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                        ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                        newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
+                       // newBall.GetComponent<SpriteRenderer>().material = redOutlineMat;
+
+                        PlaceSoldierToRight(ball.coin);
+                    }
                 }
             }
+        }
+        else
+        {
+            cameraFollow.velocity = Vector2.zero;
         }
     }
     public void ChangeBall(SummonBall newBall){    //改变当前选择小球
@@ -79,8 +95,10 @@ public class PlaceSoliderScript : MonoBehaviour
         if(isFree)
         rightCurrentCoin += coin;
         else rightCurrentCoin -= coin;
+        if(rightTextCoin!=null)
         rightTextCoin.text = rightCurrentCoin.ToString();
         rightNumberOfSoldiers++;
+        if(rightTextSolider!=null)
         rightTextSolider.text = rightNumberOfSoldiers.ToString();
     }
     void InsertSoldierToUI(SummonBall newBall){
