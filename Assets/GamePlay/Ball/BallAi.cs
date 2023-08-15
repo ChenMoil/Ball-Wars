@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -44,7 +45,7 @@ public class AI_IdleState : IState  //站立状态下执行的函数
     {
         if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
         {
-            ballBlackBoard.thisBall.transform.rotation = Quaternion.Euler(0, 0, 180);
+            ballBlackBoard.thisBall.transform.rotation = Quaternion.Euler(0, 0, 180);  
         }
         ballBlackBoard.rigidbody2D.freezeRotation = true;   //冻结旋转
     }
@@ -109,6 +110,8 @@ public class BallAi : MonoBehaviour
     public FSM fsm;
     public BallBlackBoard ballBlackBoard;
 
+    private List<Coroutine> beHurtIEnumerators = new List<Coroutine>();  //储存受伤运行的协程
+
     private void Start()
     {
         ballBlackBoard.spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -124,9 +127,16 @@ public class BallAi : MonoBehaviour
     }
     public void DeductHP(int HP) //扣血函数
     {
+        foreach(Coroutine beHurt in beHurtIEnumerators)  //结束之前的协程
+        {
+            StopCoroutine(beHurt);
+        }
+        beHurtIEnumerators.Clear(); //清除协程列表
         ballBlackBoard.HP -= HP;
-        StartCoroutine(BeHurtSprite());
-        StartCoroutine(BeHurtColor());
+        Coroutine a = StartCoroutine(BeHurtSprite());
+        Coroutine b = StartCoroutine(BeHurtColor());
+        beHurtIEnumerators.Add(a);
+        beHurtIEnumerators.Add(b);
         if (ballBlackBoard.HP <= 0)
         {
             Destroy(this.gameObject);

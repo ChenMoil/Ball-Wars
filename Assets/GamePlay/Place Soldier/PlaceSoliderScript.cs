@@ -49,7 +49,7 @@ public class PlaceSoliderScript : MonoBehaviour
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                        ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                        BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
                         newBall.GetComponent<SpriteRenderer>().material=greenOutlineMat;
 
@@ -60,7 +60,7 @@ public class PlaceSoliderScript : MonoBehaviour
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
 
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                        ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
+                        BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
                        // newBall.GetComponent<SpriteRenderer>().material = redOutlineMat;
 
