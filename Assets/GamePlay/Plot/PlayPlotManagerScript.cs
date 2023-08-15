@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class PlayPlotManagerScript : MonoBehaviour
 {
-    public Text text;
-    public List<string> lines = new List<string>();
-    public Queue<string> dialogues;
-    public GameObject canvas;
+    public Text text;                //剧情文字ui
+    public List<string> lines = new List<string>();   //对话列表
+    public Queue<string> dialogues;             //暂存对话的队列
+    public GameObject canvas;                  //剧情画布
     private void Awake()
     {
         dialogues = new Queue<string>(lines);
         ShowDialogue();
 
     }
-    public void ShowDialogue()
+    public void ShowDialogue()         //显示对话
     {
         text.text = "";
         if (dialogues.Count==0)
