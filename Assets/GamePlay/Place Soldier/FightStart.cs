@@ -10,7 +10,7 @@ public class FightStart : MonoBehaviour
 
     public void Start()
     {
-        ballList = PlaceSoliderScript.ballGameObjectList;
+        ballList = BallList.instance.ballGameObjectList;
         PlaceSoldierUI = GameObject.Find("Place soldier");
     }
     public void FigthStart() //让战斗开始的函数

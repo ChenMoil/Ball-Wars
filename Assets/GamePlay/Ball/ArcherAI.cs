@@ -3,8 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
+using Transform = UnityEngine.Transform;
 
 public class ArcherAI_IdleState : IState  //站立状态下执行的函数
 {
@@ -20,7 +22,7 @@ public class ArcherAI_IdleState : IState  //站立状态下执行的函数
     {
         if (ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
         {
-            ballBlackBoard.thisBall.transform.localScale = new Vector3(-1, 1, 1);
+            ballBlackBoard.thisBall.transform.rotation = Quaternion.Euler(0, 0, 180);
         }
         ballBlackBoard.rigidbody2D.freezeRotation = true;   //冻结旋转
     }
@@ -45,7 +47,11 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
 
     private float timer = 0;  //计时器
 
-    private float switchTime = 1; //切换目标所需时间
+    private float switchTime = 1f; //切换目标所需时间
+
+    private float attackTimer = 0;  //转换到攻击状态计时器
+
+    private float attackSwitchTime = 5; //切换攻击状态所需时间
 
     private GameObject targetGameObject;  //目标物体
 
@@ -58,8 +64,10 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
 
     public void OnEnter()
     {
+        //ballBlackBoard.Arrow = ballBlackBoard.thisBall.transform.GetChild(0).gameObject;  //绑定箭
+        //ballBlackBoard.Arrow.SetActive(false);
         //加初始速度
-        ballBlackBoard.initialOrientation.x = (float)ballBlackBoard.ballFaction;
+        ballBlackBoard.initialOrientation.x = -(float)ballBlackBoard.ballFaction;
         ballBlackBoard.initialOrientation.y = Random.Range(-0.5f, 0.5f);
         ballBlackBoard.rigidbody2D.velocity = ballBlackBoard.initialOrientation;
     }
@@ -72,44 +80,118 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
     {
         if (targetGameObject != null)
         {
-            ballBlackBoard.thisBall.transform.DOLookAt(targetGameObject.transform.position, 100000f);  //转向目标物体
+            LookAt(targetGameObject, ballBlackBoard.thisBall);  //转向目标物体
         }
-        ////加速
-        //if (ballBlackBoard.rigidbody2D.velocity != Vector2.zero)
-        //{
-        //    ballBlackBoard.rigidbody2D.AddForce(new Vector2(ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
-        //    ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
-        //}
+        //加速
+        if (ballBlackBoard.rigidbody2D.velocity != Vector2.zero)
+        {
+            ballBlackBoard.rigidbody2D.AddForce(new Vector2(ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.x / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y)),
+            ballBlackBoard.acceleration * ballBlackBoard.rigidbody2D.velocity.y / (Math.Abs(ballBlackBoard.rigidbody2D.velocity.x) + Math.Abs(ballBlackBoard.rigidbody2D.velocity.y))), ForceMode2D.Force);
+        }
     }
 
     public void OnUpdate()
     {
         timer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
+        if (timer >= switchTime)
         {
-            if (timer >= switchTime)
+            timer = 0;
+            float minDistance = 10000;
+            foreach (GameObject ball in BallList.instance.ballGameObjectList)  //切换目标物体
             {
-                timer = 0;
-                float maxDistance = 0;
-                foreach (GameObject ball in PlaceSoliderScript.ballGameObjectList)  //切换目标物体
+                if (ball == null || ball == ballBlackBoard.thisBall)
                 {
-                    Debug.Log(ball.transform.position);
-                    if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction != ballBlackBoard.ballFaction && Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position) > maxDistance)
-                    {
-                        maxDistance = Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position);
-                        targetGameObject = ball;    
-                    }
+                    continue;
                 }
-                //PlaceSoliderScript.ballGameObjectList.ForEach(ball =>
-                //{
-                //    Debug.Log(ball.transform.position);
-                //    if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction != ballBlackBoard.ballFaction && Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position) > maxDistance)
-                //    {
-                //        maxDistance = Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position);
-                //        targetGameObject = ball;
-                //    }
-                //});
-                Debug.Log(targetGameObject);
+                if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction != ballBlackBoard.ballFaction && Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position) < minDistance)
+                {
+                    minDistance = Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position);
+                    targetGameObject = ball;
+                }
             }
+            Debug.Log(targetGameObject);
+        }
+        float randomAttackTime = Random.Range(attackSwitchTime - 1.5f, attackSwitchTime + 1.5f);
+        if (attackTimer >= randomAttackTime)
+        {
+            attackTimer = 0;
+            fsm.SwitchState(StateType.Attack);
+        }
+    }
+
+    public static void LookAt(GameObject target, GameObject self)    //朝向其他物体
+    {
+        Vector3 dir = target.transform.position - self.transform.position;
+        dir.z = 0;
+        float angle =
+            Vector3.SignedAngle(Vector3.right, dir, Vector3.forward);
+        Quaternion rotation = Quaternion.Euler(0, 0, angle);                     //利用角度得到rotation
+        self.transform.rotation = rotation;
+        //self.transform.eulerAngles =
+        //    Vector3.Lerp(self.transform.eulerAngles, new Vector3(0, 0, angle), 0.1f);
+    }
+}
+public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
+{
+    public BallBlackBoard ballBlackBoard;
+
+    private FSM fsm;
+
+    private GameObject targetGameObject;  //目标物体
+
+    public float shootTime = 4;  //射出箭所需的时间
+
+    public float attackTimer = 0; //射箭计时器
+
+    public float minDistance = 10000;
+
+    public ArcherAI_AttackState(FSM fsm)
+    {
+        this.fsm = fsm;
+        this.ballBlackBoard = fsm.blockBorad as BallBlackBoard;
+    }
+    public void OnEnter()
+    {
+        ballBlackBoard.Weapon.GetComponent<Bow>().OpenArrowPic(); //显示箭图片
+        minDistance = 10000;  //得到最近物体后重置
+        foreach (GameObject ball in BallList.instance.ballGameObjectList)  //切换目标物体
+        {
+            if (ball == null)
+            {
+                continue;
+            }
+            if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction != ballBlackBoard.ballFaction && Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position) < minDistance)
+            {
+                minDistance = Vector2.Distance(ball.transform.position, ballBlackBoard.thisBall.transform.position);
+                targetGameObject = ball;
+            }
+        }
+    }
+
+    public void OnExit()
+    {
+        ballBlackBoard.Weapon.GetComponent<Bow>().CloseArrowPic();  //取消显示箭图片
+    }
+
+    public void OnFixedUpdate()
+    {
+
+    }
+
+    public void OnUpdate()
+    {
+        ballBlackBoard.rigidbody2D.velocity = Vector2.zero; //物体速度为0
+        attackTimer += Time.deltaTime;
+        if (attackTimer > shootTime)
+        {
+            ballBlackBoard.Weapon.GetComponent<Bow>().Archery(); //射箭
+            fsm.SwitchState(StateType.Move);
+            attackTimer = 0;
+        }
+        if (targetGameObject != null)
+        {
+            ArcherAI_MoveState.LookAt(targetGameObject, ballBlackBoard.thisBall);  //转向目标物体
         }
     }
 }
@@ -122,6 +204,8 @@ public class ArcherAI : BallAi
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new ArcherAI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new ArcherAI_MoveState(fsm));
-        fsm.SwitchState(StateType.Move);
+        fsm.states.Add(StateType.Attack, new ArcherAI_AttackState(fsm));
+        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
+        ChangeState();
     }
 }
