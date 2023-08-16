@@ -23,6 +23,7 @@ public class PlayPlotManagerScript : MonoBehaviour
         if (dialogues.Count==0)
         {
             canvas.SetActive(false);
+            return;
         }
         text.DOText(dialogues.Peek(), dialogues.Peek().Length / 10).SetEase(Ease.Linear);
         dialogues.Dequeue();
