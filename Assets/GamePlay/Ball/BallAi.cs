@@ -151,11 +151,11 @@ public class BallAi : MonoBehaviour
     IEnumerator BeHurtColor() //改变小球颜色
     {
         float timer = 0;
-        ballBlackBoard.spriteRenderer.color = new Color32(255, 105, 105, 255);
+        ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, 105, 105, 255));
         while (timer < 1.5f)
         {
             timer += Time.deltaTime;
-            ballBlackBoard.spriteRenderer.color = new Color32(255, (byte)(105 + timer * 100), (byte)(105 + timer * 100), 255);
+            ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, (byte)(105 + timer * 100), (byte)(105 + timer * 100), 255));
             yield return null;
         }
         ballBlackBoard.spriteRenderer.color = Color.white;

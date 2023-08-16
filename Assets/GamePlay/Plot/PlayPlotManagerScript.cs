@@ -19,11 +19,12 @@ public class PlayPlotManagerScript : MonoBehaviour
     public void ShowDialogue()         //œ‘ æ∂‘ª∞
     {
         text.text = "";
+        text.DOKill();
         if (dialogues.Count==0)
         {
             canvas.SetActive(false);
         }
-        text.DOText(dialogues.Peek(), dialogues.Peek().Length / 5);
+        text.DOText(dialogues.Peek(), dialogues.Peek().Length / 10).SetEase(Ease.Linear);
         dialogues.Dequeue();
     }
 }
