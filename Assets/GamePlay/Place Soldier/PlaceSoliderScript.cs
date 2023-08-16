@@ -17,6 +17,7 @@ public class PlaceSoliderScript : MonoBehaviour
     public bool isFree; //是否开启自由模式
     SummonBall ball;     //当前选择小球
     private GameObject ballListGameObject;
+    bool preIsPointerOverUI;//前一帧是否触摸在屏幕上
     public SummonBall Ball{get{return ball;}}
     [SerializeField] Text leftTextCoin;   //显示金钱数量的Ui
     [SerializeField] Text leftTextSolider;   //显示小球数量的Ui
@@ -36,7 +37,7 @@ public class PlaceSoliderScript : MonoBehaviour
         leftTextCoin.text=leftCurrentCoin.ToString();   //同步ui显示
         UpdateUI();
 
-        var maps = GameObject.FindGameObjectsWithTag("Map");
+        var maps = GameObject.FindGameObjectsWithTag("Map"); //初始化地图位置
         if (maps.Length!=1)
         {
             Debug.LogError("地图不存在或有复数个");
@@ -47,10 +48,10 @@ public class PlaceSoliderScript : MonoBehaviour
         if (Input.touchCount > 0)
         {
             cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;
-            //Debug.Log(-Input.GetTouch(0).deltaPosition);
+            //Debug.Log(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId));
             if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero)
             {//放置小球
-                if (Input.GetTouch(0).phase == TouchPhase.Ended && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                if (Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI)
                 {
                     //Debug.Log("开始调试"+Input.GetTouch(0).position);
                     Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 10 * Vector3.forward;
@@ -77,11 +78,14 @@ public class PlaceSoliderScript : MonoBehaviour
                     }
                 }
             }
+            preIsPointerOverUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
         }
         else
         {
             cameraFollow.velocity = Vector2.zero;
         }
+
+        
     }
     public void ChangeBall(SummonBall newBall){    //改变当前选择小球
         ball = newBall;
