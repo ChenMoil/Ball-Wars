@@ -16,8 +16,7 @@ public class Arrow : MonoBehaviour
             collision.gameObject.GetComponent<BallAi>().DeductHP(Damage);  //扣血
             Destroy(gameObject);
         }
-        else
-        {
+        else (collision.gameObject.tag == "Boundary"){
             Destroy(gameObject);
         }
     }
