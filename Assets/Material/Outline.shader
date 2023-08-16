@@ -5,6 +5,7 @@ Shader "lcl/shader2D/outline"
         _MainTex("Texture", 2D) = "white" {}
         _lineWidth("lineWidth",Range(0,10)) = 1
         _lineColor("lineColor",Color) = (1,1,1,1)
+        _spriteColor("spriteColor",Color) = (1,1,1,1)
     }
         // ---------------------------【子着色器】---------------------------
             SubShader
@@ -48,11 +49,13 @@ Shader "lcl/shader2D/outline"
         float4 _MainTex_TexelSize;
         float _lineWidth;
         float4 _lineColor;
+        float4 _spriteColor;
 
         // ---------------------------【片元着色器】---------------------------
         fixed4 frag(VertexOutput i) : SV_Target
         {
             fixed4 col = tex2D(_MainTex, i.uv);
+            col *= _spriteColor;
         // 采样周围4个点
         float2 up_uv = i.uv + float2(0,1) * _lineWidth * _MainTex_TexelSize.xy;
         float2 down_uv = i.uv + float2(0,-1) * _lineWidth * _MainTex_TexelSize.xy;

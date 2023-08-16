@@ -1070,7 +1070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660296435261, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660296435648, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_IsActive
@@ -1081,13 +1081,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 18682585}
     - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: outlineMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 18682585}
     - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: redOutlineMat
       value: 
-      objectReference: {fileID: 2100000, guid: e35941b3a2d11764da0d4f9849b16aad, type: 2}
+      objectReference: {fileID: 2100000, guid: 6a52c2c3e355db54abe6384fdfbdb87e, type: 2}
     - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: greenOutlineMat
       value: 

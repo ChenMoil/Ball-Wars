@@ -10,8 +10,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
     [SerializeField] Rigidbody2D cameraFollow;   //摄像机
-    [SerializeField] Material greenOutlineMat;   //绿描边材质
-    [SerializeField] Material redOutlineMat;     //红描边材质
+    [SerializeField] Material outlineMat;   //描边材质
     int leftNumberOfSoldiers;         //士兵数量
     int rightNumberOfSoldiers;
     public bool isFree; //是否开启自由模式
@@ -61,7 +60,8 @@ public class PlaceSoliderScript : MonoBehaviour
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
                         BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
-                        newBall.GetComponent<SpriteRenderer>().material=greenOutlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material=outlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.green);
 
                         PlaceSoldierToLeft(ball.coin);
                     }
@@ -72,7 +72,8 @@ public class PlaceSoliderScript : MonoBehaviour
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
                         BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
-                        newBall.GetComponent<SpriteRenderer>().material = redOutlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material = outlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.red);
 
                         PlaceSoldierToRight(ball.coin);
                     }
