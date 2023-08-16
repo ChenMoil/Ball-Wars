@@ -23,6 +23,8 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] Text rightTextCoin;   //显示金钱数量的Ui
     [SerializeField] Text rightTextSolider;   //显示小球数量的Ui
 
+    float mapPos;  //地图中心线位置
+
     //显示兵种选择界面
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
@@ -33,6 +35,13 @@ public class PlaceSoliderScript : MonoBehaviour
         if(!isFree)
         leftTextCoin.text=leftCurrentCoin.ToString();   //同步ui显示
         UpdateUI();
+
+        var maps = GameObject.FindGameObjectsWithTag("Map");
+        if (maps.Length!=1)
+        {
+            Debug.LogError("地图不存在或有复数个");
+        }
+        mapPos = maps[0].transform.position.x;
     }
     void Update(){
         if (Input.touchCount > 0)
@@ -45,7 +54,7 @@ public class PlaceSoliderScript : MonoBehaviour
                 {
                     //Debug.Log("开始调试"+Input.GetTouch(0).position);
                     Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 10 * Vector3.forward;
-                    if (touchPos.x < 0)
+                    if (touchPos.x < mapPos)
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
@@ -55,14 +64,14 @@ public class PlaceSoliderScript : MonoBehaviour
 
                         PlaceSoldierToLeft(ball.coin);
                     }
-                    else if (isFree && touchPos.x>0)
+                    else if (isFree && touchPos.x>mapPos)
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
 
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
                         BallList.instance.ballGameObjectList.Add(newBall);                          //将新生成的小球加入容器中
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
-                       // newBall.GetComponent<SpriteRenderer>().material = redOutlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material = redOutlineMat;
 
                         PlaceSoldierToRight(ball.coin);
                     }
