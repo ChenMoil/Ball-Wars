@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
@@ -42,6 +43,15 @@ public class PlaceSoliderScript : MonoBehaviour
             Debug.LogError("地图不存在或有复数个");
         }
         mapPos = maps[0].transform.position.x;
+    }
+    private void Start()
+    {
+        var balls = GameObject.FindGameObjectsWithTag("BallSoldier");  //把关卡自带的小球加入列表中
+        foreach (var ball in balls)
+        {
+            BallList.instance.ballGameObjectList.Add(ball);
+            ball.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right;
+        }
     }
     void Update(){
         if (Input.touchCount > 0)
