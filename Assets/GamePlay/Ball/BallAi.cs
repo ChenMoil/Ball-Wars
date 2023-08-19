@@ -133,13 +133,34 @@ public class BallAi : MonoBehaviour
         }
         beHurtIEnumerators.Clear(); //清除协程列表
         ballBlackBoard.HP -= HP;
+        if (ballBlackBoard.HP <= 0)
+        {
+            Dead();
+            return;
+        }
         Coroutine a = StartCoroutine(BeHurtSprite());
         Coroutine b = StartCoroutine(BeHurtColor());
         beHurtIEnumerators.Add(a);
         beHurtIEnumerators.Add(b);
-        if (ballBlackBoard.HP <= 0)
+    }
+    public void Dead()   //小球死亡函数，死了后变尸体
+    {
+        //切换到死亡状态
+        fsm.SwitchState(StateType.Dead);
+        //从数据结构中删除
+        BallList.instance.ballGameObjectList.Remove(gameObject);
+        BallList.instance.ballBlackBoards.Remove(gameObject);
+        gameObject.layer = LayerMask.NameToLayer("DeadBody"); //更改物体的Layer层
+        gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);     //更改物体大小
+        gameObject.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 255);  //更改颜色
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+        foreach (Transform tran in GetComponentsInChildren<Transform>())
         {
-            Destroy(this.gameObject);
+            //遍历当前物体及其所有子物体
+            tran.gameObject.layer = LayerMask.NameToLayer("DeadBody"); //更改物体的Layer层
+            tran.gameObject.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 255); //更改颜色
+            tran.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+            //tran.localScale = new Vector3(0.8f, 0.8f, 0.8f);  //更改物体大小
         }
     }
     IEnumerator BeHurtSprite() //改变小球表情
@@ -167,6 +188,7 @@ public class BallAi : MonoBehaviour
         fsm = new FSM(ballBlackBoard);
         fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
+        fsm.states.Add(StateType.Dead, new AI_Dead(fsm));
         BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
         ChangeState();
     }
@@ -180,5 +202,36 @@ public class BallAi : MonoBehaviour
         {
             fsm.SwitchState(StateType.Idle);
         }
+    }
+}
+
+public class AI_Dead : IState
+{
+    public FSM fsm;
+    public BallBlackBoard ballBlackBoard;
+    public AI_Dead(FSM fsm)
+    {
+        this.fsm = fsm;
+        this.ballBlackBoard = fsm.blockBorad as BallBlackBoard;
+    }
+    public void OnEnter()
+    {
+        
+    }
+
+    public void OnExit()
+    {
+        
+    }
+
+    public void OnFixedUpdate()
+    {
+        
+    }
+
+    public void OnUpdate()
+    {
+        ballBlackBoard.rigidbody2D.velocity = Vector2.zero; //物体速度为0
+        ballBlackBoard.rigidbody2D.angularVelocity = 0;     //角速度为0
     }
 }

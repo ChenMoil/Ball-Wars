@@ -35,7 +35,7 @@ public class Bow : MonoBehaviour
         arrowrRigidbody2D.AddForce(new Vector2(-forceX * arrowForce, -forceY * arrowForce), ForceMode2D.Impulse); //施加力
         newArrow.GetComponent<Arrow>().arrowFation = BallList.instance.ballBlackBoards[gameObject.transform.parent.gameObject].ballFaction;   //改变阵营
         newArrow.GetComponent<Arrow>().Damage = arrowDamage;
-
+        newArrow.transform.parent = GameObject.Find("FlyingObjects").transform;
 
     }
 }
