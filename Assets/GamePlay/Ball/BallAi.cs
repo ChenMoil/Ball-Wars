@@ -152,7 +152,7 @@ public class BallAi : MonoBehaviour
         BallList.instance.ballBlackBoards.Remove(gameObject);
         gameObject.layer = LayerMask.NameToLayer("DeadBody"); //更改物体的Layer层
         gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);     //更改物体大小
-        gameObject.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 255);  //更改颜色
+        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_spriteColor", new Color32(100, 100, 100, 255)) ;  //更改颜色
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
         foreach (Transform tran in GetComponentsInChildren<Transform>())
         {
@@ -162,6 +162,8 @@ public class BallAi : MonoBehaviour
             tran.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
             //tran.localScale = new Vector3(0.8f, 0.8f, 0.8f);  //更改物体大小
         }
+
+        GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);
     }
     IEnumerator BeHurtSprite() //改变小球表情
     {

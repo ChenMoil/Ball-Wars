@@ -21,6 +21,14 @@ public class FightStart : MonoBehaviour
         foreach (GameObject ball in ballList)
         {
             ball.GetComponent<BallAi>().fsm.SwitchState(StateType.Move);
+            if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction==BallBlackBoard.Faction.Left)
+            {
+                BallList.instance.leftBallNum++;
+            }
+            else
+            {
+                BallList.instance.rightBallNum++;
+            }
         }
     }
 }
