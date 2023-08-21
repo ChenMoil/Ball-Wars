@@ -225,6 +225,14 @@ public class ArcherAI : BallAi
         fsm.states.Add(StateType.Attack, new ArcherAI_AttackState(fsm));
         fsm.states.Add(StateType.Dead, new AI_Dead(fsm));
         BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
+        if (!BallList.instance.ballGameObjectList.Contains(gameObject)) //列表中没该小球就加入
+        {
+            BallList.instance.ballGameObjectList.Add(gameObject);
+        }
+        if (gameObject.transform.parent == null || gameObject.transform.parent.gameObject.name != "BallList")  //存放小球的物体中没该小球就加入
+        {
+            gameObject.transform.SetParent(GameObject.Find("BallList").transform);
+        }
         ChangeState();
     }
 }
