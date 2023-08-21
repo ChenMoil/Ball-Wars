@@ -8,6 +8,7 @@ public enum StateType
     Idle,
     Move,
     Attack,
+    Dead,
 }
 
 //各个状态所执行的函数

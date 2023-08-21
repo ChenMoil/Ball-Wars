@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -7,7 +8,7 @@ public class Arrow : MonoBehaviour
     public BallBlackBoard.Faction arrowFation;
     private void Start()
     {
-        
+        StartCoroutine(DestoryArrow());
     }
     private void OnCollisionEnter2D(Collision2D collision)  //武器与其他物体发生碰撞
     {
@@ -16,9 +17,14 @@ public class Arrow : MonoBehaviour
             collision.gameObject.GetComponent<BallAi>().DeductHP(Damage);  //扣血
             Destroy(gameObject);
         }
-        else
+        else if(collision.gameObject.tag == "Boundary")
         {
             Destroy(gameObject);
         }
+    }
+    IEnumerator DestoryArrow() //定时销毁箭
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }
