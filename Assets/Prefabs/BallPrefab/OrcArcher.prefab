@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57983057402170818}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 2659068544519525043}
   m_Father: {fileID: 57983059099254690}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &57983057402170847
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b3a98e2dac246af478bd96b892321f7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.17, y: 0.64}
@@ -100,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12330055, y: 0.011844277}
+  m_Offset: {x: 0.09229469, y: 0.011844277}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.36873817, y: 1.4745402}
+  m_Size: {x: 0.55846214, y: 1.4745402}
   m_EdgeRadius: 0
 --- !u!114 &2659068544455243645
 MonoBehaviour:
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 2718747539752055603, guid: a43f4bfacbc4c1349ad2d5d5a655cd34, type: 3}
-  arrowDamage: 1
-  arrowForce: 2
+  arrowDamage: 20
+  arrowForce: 3
 --- !u!1 &57983059099254693
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,12 +267,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballBlackBoard:
     ballFaction: 1
-    acceleration: 0.5
+    acceleration: 1.5
     addAngularVelocity: 0
-    HP: 2
+    HP: 75
     Weapon: {fileID: 57983057402170818}
     normalSprite: {fileID: 21300000, guid: af38b060df58032418e2b5f8a53144c6, type: 3}
     beAttackSprite: {fileID: 21300000, guid: 5e67c1b09bc313846ad56d43865946eb, type: 3}
+  shootTime: 1.5
+  attackSwitchTime: 1.5
 --- !u!1 &2659068544519525040
 GameObject:
   m_ObjectHideFlags: 0
