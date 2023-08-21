@@ -18,11 +18,26 @@ public class Bow : MonoBehaviour
     void Start()
     {
         ballTransform = gameObject.transform.parent;
-        arrowPic = gameObject.transform.GetChild(0).gameObject;    
+        if (gameObject.transform.childCount != 0)
+        {
+            arrowPic = gameObject.transform.GetChild(0).gameObject;
+        }
     }
 
-    public void OpenArrowPic() { arrowPic.SetActive(true); }
-    public void CloseArrowPic() { arrowPic.SetActive(false); }
+    public void OpenArrowPic() 
+    {
+        if (arrowPic != null)
+        {
+            arrowPic.SetActive(true);
+        }
+    }
+    public void CloseArrowPic()
+    {
+        if (arrowPic != null)
+        {
+            arrowPic.SetActive(false);
+        }
+    }
 
     public void Archery()   //射箭
     {
@@ -31,8 +46,8 @@ public class Bow : MonoBehaviour
         float eur = gameObject.transform.eulerAngles.z * Mathf.Deg2Rad;
         float forceX = (float)Math.Cos(eur);
         float forceY = (float)Math.Sin(eur);
-        newArrow.transform.position = new Vector2(gameObject.transform.position.x + -1 * forceX, gameObject.transform.position.y + -1 * forceY); //调整位置
-        arrowrRigidbody2D.AddForce(new Vector2(-forceX * arrowForce, -forceY * arrowForce), ForceMode2D.Impulse); //施加力
+        newArrow.transform.position = new Vector2(gameObject.transform.position.x + 1 * forceX, gameObject.transform.position.y + 1 * forceY); //调整位置
+        arrowrRigidbody2D.AddForce(new Vector2(forceX * arrowForce, forceY * arrowForce), ForceMode2D.Impulse); //施加力
         newArrow.GetComponent<Arrow>().arrowFation = BallList.instance.ballBlackBoards[gameObject.transform.parent.gameObject].ballFaction;   //改变阵营
         newArrow.GetComponent<Arrow>().Damage = arrowDamage;
         newArrow.transform.parent = GameObject.Find("FlyingObjects").transform;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1260102100648949002}
   - component: {fileID: 1260102100648949045}
   m_Layer: 0
-  m_Name: Orc
+  m_Name: "\u517D\u4EBA\u65A7\u624B"
   m_TagString: BallSoldier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,9 +140,9 @@ MonoBehaviour:
   ballBlackBoard:
     ballFaction: 1
     acceleration: 3
-    addAngularVelocity: 0.5
-    HP: 5
-    Weapon: {fileID: 0}
+    addAngularVelocity: 0.375
+    HP: 100
+    Weapon: {fileID: 1260102101621142261}
     normalSprite: {fileID: 21300000, guid: af38b060df58032418e2b5f8a53144c6, type: 3}
     beAttackSprite: {fileID: 21300000, guid: 5e67c1b09bc313846ad56d43865946eb, type: 3}
 --- !u!1 &1260102101621142261
@@ -159,8 +159,9 @@ GameObject:
   - component: {fileID: 1260102101621142223}
   - component: {fileID: 1260102101621142220}
   - component: {fileID: 1260102101621142221}
-  m_Layer: 0
-  m_Name: Sword
+  - component: {fileID: 2881985221366452895}
+  m_Layer: 6
+  m_Name: axe
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1260102101621142261}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.7, y: 0, z: 0}
+  m_LocalPosition: {x: 1.58, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -222,12 +223,12 @@ SpriteRenderer:
   m_SortingLayerID: 823992435
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7b7975c6a3d8bb748b19072fc1932b97, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2aaac4827edadd4ead9551f743d425a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.17, y: 0.64}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -267,18 +268,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0020203441, y: -0.0063049793}
+  m_Offset: {x: 0.0049305074, y: -0.0042016506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 0.17, y: 0.64}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21339366, y: 1.4755933}
+  m_Size: {x: 0.093306996, y: 1.2610137}
   m_EdgeRadius: 0
 --- !u!254 &1260102101621142220
 RelativeJoint2D:
@@ -297,7 +298,7 @@ RelativeJoint2D:
   m_MaxTorque: 20
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
-  m_LinearOffset: {x: 0.000000074309355, y: -1.6999998}
+  m_LinearOffset: {x: 0.00000006950111, y: -1.5900002}
   m_AngularOffset: 1.5707964
 --- !u!114 &1260102101621142221
 MonoBehaviour:
@@ -311,4 +312,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: 1
+  Attack: 25
+--- !u!61 &2881985221366452895
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260102101621142261}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.1038782, y: 0.7212708}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5265111, y: 0.49907207}
+  m_EdgeRadius: 0

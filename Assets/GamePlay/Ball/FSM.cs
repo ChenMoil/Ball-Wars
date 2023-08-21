@@ -31,7 +31,7 @@ public class FSM  //有限状态机
 
     public Dictionary<StateType, IState> states;  //用字典将状态与状态执行的函数连通
 
-    public BlockBorad blockBorad;  
+    public BlockBorad blockBorad;
 
     public FSM(BlockBorad blockBorad)
     {
