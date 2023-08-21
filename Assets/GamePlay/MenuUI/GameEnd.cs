@@ -18,7 +18,7 @@ public class GameEnd : MonoBehaviour
         } 
         if (BallList.instance.rightBallNum <= 0)
         {
-            ShowEndUI("成功");
+            ShowEndUI("胜利");
         }
         else if (BallList.instance.leftBallNum<=0)
         {
@@ -31,12 +31,16 @@ public class GameEnd : MonoBehaviour
     }
     static void ShowEndUI(string str)
     {
-        GameObject endUI = GameObject.Find("GameEnd");
+        GameObject endUI = GameObject.Find("UI").transform.Find("GameEnd").gameObject;
         if (endUI == null)
         {
             Debug.LogError("未找到endUI");
         }
         endUI.SetActive(true);
-        endUI.transform.Find("Text").GetComponent<Text>().text = str;
+        if (endUI.transform.Find("EndText").gameObject.GetComponent<Text>()==null)
+        {
+            Debug.LogError("未找到endUI的Text");
+        }
+        endUI.transform.Find("EndText").gameObject.GetComponent<Text>().text = str;
     }
 }
