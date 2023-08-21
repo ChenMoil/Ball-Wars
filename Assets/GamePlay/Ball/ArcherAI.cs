@@ -51,8 +51,6 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
 
     private float attackTimer = 0;  //转换到攻击状态计时器
 
-    private float attackSwitchTime = 5; //切换攻击状态所需时间
-
     private GameObject targetGameObject;  //目标物体
 
     private FSM fsm;
@@ -118,7 +116,7 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
         }
         if (firstRandom)
         {
-            randomAttackTime = Random.Range(attackSwitchTime - 1.5f, attackSwitchTime + 1.5f);
+            randomAttackTime = Random.Range(ballBlackBoard.thisBall.GetComponent<ArcherAI>().attackSwitchTime - 1f, ballBlackBoard.thisBall.GetComponent<ArcherAI>().attackSwitchTime + 1f);
             firstRandom = false;
         }
         if (attackTimer >= randomAttackTime)
@@ -148,8 +146,6 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
     private FSM fsm;
 
     private GameObject targetGameObject;  //目标物体
-
-    public float shootTime = 4;  //射出箭所需的时间
 
     public float attackTimer = 0; //射箭计时器
 
@@ -200,9 +196,9 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
 
     public void OnUpdate()
     {
-        ballBlackBoard.rigidbody2D.velocity = Vector2.zero; //物体速度为0
+        //ballBlackBoard.rigidbody2D.velocity = Vector2.zero; //物体速度为0
         attackTimer += Time.deltaTime;
-        if (attackTimer > shootTime)
+        if (attackTimer > ballBlackBoard.thisBall.GetComponent<ArcherAI>().shootTime)
         {
             ballBlackBoard.Weapon.GetComponent<Bow>().Archery(); //射箭
             fsm.SwitchState(StateType.Move);
@@ -216,11 +212,14 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
 }
 public class ArcherAI : BallAi
 {
+    public float shootTime;  //射出箭所需的时间
+
+    public float attackSwitchTime; //切换攻击状态所需时间
     public override void initBall()
     {
         ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
         ballBlackBoard.thisBall = this.gameObject;
-        fsm = new FSM(ballBlackBoard);
+        fsm = new FSM(ballBlackBoard as BallBlackBoard);
         fsm.states.Add(StateType.Idle, new ArcherAI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new ArcherAI_MoveState(fsm));
         fsm.states.Add(StateType.Attack, new ArcherAI_AttackState(fsm));
