@@ -162,6 +162,8 @@ public class BallAi : MonoBehaviour
             tran.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
             //tran.localScale = new Vector3(0.8f, 0.8f, 0.8f);  //更改物体大小
         }
+
+        GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);
     }
     IEnumerator BeHurtSprite() //改变小球表情
     {

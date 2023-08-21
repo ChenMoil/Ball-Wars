@@ -19,8 +19,8 @@ public class PlayPlotManagerScript : MonoBehaviour
     public void ShowDialogue()         //显示对话
     {
         text.text = "";
-        text.DOKill();
-        if (dialogues.Count==0)
+        text.DOKill();                  //结束之前的对话显示
+        if (dialogues.Count==0)         //对话播放完后禁用对话框
         {
             canvas.SetActive(false);
             return;
