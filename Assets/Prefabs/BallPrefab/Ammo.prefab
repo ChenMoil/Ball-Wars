@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9121355633874732534}
   - component: {fileID: 5623553123032956871}
   m_Layer: 7
-  m_Name: Arrow
+  m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,9 +76,9 @@ SpriteRenderer:
   m_SortingLayerID: 823992435
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dd795f35d3aa48c47bca9be312cc1ba8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d11f39272ba1aa41b765c6d9e09aefd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.5, y: 1.5}
@@ -121,18 +121,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.025280237, y: 0.055283338}
+  m_Offset: {x: 0.010867238, y: -0.013455942}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 1.5, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1651874, y: 0.09211779}
+  m_Size: {x: 0.24940276, y: 0.13203093}
   m_EdgeRadius: 0
 --- !u!114 &5623553123032956871
 MonoBehaviour:

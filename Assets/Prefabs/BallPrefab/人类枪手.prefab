@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0473d1212b97a5d4d92e2a563d14948b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 2718747539752055603, guid: a43f4bfacbc4c1349ad2d5d5a655cd34, type: 3}
+  arrow: {fileID: 2718747539752055603, guid: bf8185878c1dd2f469016aa7f61cd4ce, type: 3}
   arrowDamage: 20
   arrowForce: 6
 --- !u!1 &2606202684008845708
