@@ -7,6 +7,7 @@ public class FightStart : MonoBehaviour
 {
     private List<GameObject> ballList;
     public List<GameObject> closeUI;  //需要关闭的UI集合
+    public PlaceSoliderScript place;  //放置士兵的脚本
     public void Start()
     {
         ballList = BallList.instance.ballGameObjectList;
@@ -30,5 +31,6 @@ public class FightStart : MonoBehaviour
                 BallList.instance.rightBallNum++;
             }
         }
+        place.isStart = true; //战斗开始
     }
 }

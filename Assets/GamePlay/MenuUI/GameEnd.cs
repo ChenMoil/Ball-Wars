@@ -27,7 +27,7 @@ public class GameEnd : MonoBehaviour
     }
     public void ReturnMenu()
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
     }
     static void ShowEndUI(string str)
     {

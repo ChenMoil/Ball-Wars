@@ -4,17 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using System;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
     //放置士兵功能
     [SerializeField] int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
-    [SerializeField] Rigidbody2D cameraFollow;   //摄像机
     [SerializeField] Material outlineMat;   //描边材质
     int leftNumberOfSoldiers;         //士兵数量
     int rightNumberOfSoldiers;
     public bool isFree; //是否开启自由模式
+    [SerializeField] Rigidbody2D cameraFollow;   //摄像机
+    [NonSerialized] public bool isStart; //战斗是否开始
     SummonBall ball;     //当前选择小球
     private GameObject ballListGameObject;
     bool preIsPointerOverUI;//前一帧是否触摸在屏幕上
@@ -56,9 +58,9 @@ public class PlaceSoliderScript : MonoBehaviour
     void Update(){
         if (Input.touchCount > 0)
         {
-            cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;
+            cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;          //摄像机移动
             //Debug.Log(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId));
-            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero)
+            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !isStart)
             {//放置小球
                 if (Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI)
                 {
