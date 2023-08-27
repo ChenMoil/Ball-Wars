@@ -20,4 +20,8 @@ public class BallList : MonoBehaviour
     {
         instance = this; //每次进入新场景都会更改为当前场景的 BallList
     }
+    private void Update()
+    {
+        //Debug.Log("L:" + leftBallNum + "\nR:" + rightBallNum);
+    }
 }

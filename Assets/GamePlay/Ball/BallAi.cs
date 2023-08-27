@@ -111,6 +111,7 @@ public class BallAi : MonoBehaviour
     public BallBlackBoard ballBlackBoard;
 
     private List<Coroutine> beHurtIEnumerators = new List<Coroutine>();  //储存受伤运行的协程
+    private bool isDead;  //小球是否死亡
 
     private void Start()
     {
@@ -136,6 +137,7 @@ public class BallAi : MonoBehaviour
         if (ballBlackBoard.HP <= 0)
         {
             Dead();
+            //Debug.Log(ballBlackBoard.thisBall.name);
             return;
         }
         Coroutine a = StartCoroutine(BeHurtSprite());
@@ -145,6 +147,14 @@ public class BallAi : MonoBehaviour
     }
     public void Dead()   //小球死亡函数，死了后变尸体
     {
+        if (isDead)
+        {
+            return;
+        }
+        else
+        {
+            isDead = true;
+        }
         //切换到死亡状态
         fsm.SwitchState(StateType.Dead);
         //从数据结构中删除
@@ -163,7 +173,7 @@ public class BallAi : MonoBehaviour
             //tran.localScale = new Vector3(0.8f, 0.8f, 0.8f);  //更改物体大小
         }
 
-        GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);
+        GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);       //检测战斗是否结束
     }
     IEnumerator BeHurtSprite() //改变小球表情
     {
