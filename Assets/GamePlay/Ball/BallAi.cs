@@ -145,6 +145,24 @@ public class BallAi : MonoBehaviour
         beHurtIEnumerators.Add(a);
         beHurtIEnumerators.Add(b);
     }
+    IEnumerator BeHurtSprite() //改变小球表情
+    {
+        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.beAttackSprite;
+        yield return new WaitForSeconds(1.5f);
+        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.normalSprite;
+    }
+    IEnumerator BeHurtColor() //改变小球颜色
+    {
+        float timer = 0;
+        ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, 105, 105, 255));
+        while (timer < 1.5f)
+        {
+            timer += Time.deltaTime;
+            ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, (byte)(105 + timer * 100), (byte)(105 + timer * 100), 255));
+            yield return null;
+        }
+        ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, 255, 255, 255));
+    }
     public void Dead()   //小球死亡函数，死了后变尸体
     {
         if (isDead)
@@ -162,8 +180,9 @@ public class BallAi : MonoBehaviour
         BallList.instance.ballBlackBoards.Remove(gameObject);
         gameObject.layer = LayerMask.NameToLayer("DeadBody"); //更改物体的Layer层
         gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);     //更改物体大小
-        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_spriteColor", new Color32(100, 100, 100, 255)) ;  //更改颜色
+        gameObject.GetComponent<SpriteRenderer>().material.SetColor("_spriteColor", new Color32(100, 100, 100, 255));  //更改颜色
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+        gameObject.name = "Dead";
         foreach (Transform tran in GetComponentsInChildren<Transform>())
         {
             //遍历当前物体及其所有子物体
@@ -174,24 +193,6 @@ public class BallAi : MonoBehaviour
         }
 
         GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);       //检测战斗是否结束
-    }
-    IEnumerator BeHurtSprite() //改变小球表情
-    {
-        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.beAttackSprite;
-        yield return new WaitForSeconds(1.5f);
-        ballBlackBoard.spriteRenderer.sprite = ballBlackBoard.normalSprite;
-    }
-    IEnumerator BeHurtColor() //改变小球颜色
-    {
-        float timer = 0;
-        ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, 105, 105, 255));
-        while (timer < 1.5f)
-        {
-            timer += Time.deltaTime;
-            ballBlackBoard.spriteRenderer.material.SetColor("_spriteColor", new Color32(255, (byte)(105 + timer * 100), (byte)(105 + timer * 100), 255));
-            yield return null;
-        }
-        ballBlackBoard.spriteRenderer.color = Color.white;
     }
     public virtual void initBall() //初始化小球函数
     {

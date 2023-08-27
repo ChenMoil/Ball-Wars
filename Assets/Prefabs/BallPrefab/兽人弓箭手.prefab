@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 57983059099254691}
   - component: {fileID: 3405283859753565644}
   m_Layer: 0
-  m_Name: OrcArcher
+  m_Name: "\u517D\u4EBA\u5F13\u7BAD\u624B"
   m_TagString: BallSoldier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

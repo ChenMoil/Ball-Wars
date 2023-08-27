@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,23 +6,23 @@ using UnityEngine.UI;
 
 public class GameEnd : MonoBehaviour
 {
-    static public void CheckGameEnd(BallBlackBoard.Faction faction)  //¼ì²é¸Ã³¡ÓÎÏ·ÊÇ·ñ½áÊø
+    static public void CheckGameEnd(BallBlackBoard.Faction faction)  //æ£€æŸ¥è¯¥åœºæ¸¸æˆæ˜¯å¦ç»“æŸ
     {
-        if (faction == BallBlackBoard.Faction.Left)
+        if (faction == BallBlackBoard.Faction.Left)  //æ ¹æ®é˜µè¥å‡å°‘æ•°é‡
         {
             BallList.instance.leftBallNum--;
         }
         else
         {
             BallList.instance.rightBallNum--;
-        } 
+        }
         if (BallList.instance.rightBallNum <= 0)
         {
-            ShowEndUI("Ê¤Àû");
+            ShowEndUI("èƒœåˆ©");
         }
-        else if (BallList.instance.leftBallNum<=0)
+        else if (BallList.instance.leftBallNum <= 0)
         {
-            ShowEndUI("Ê§°Ü");
+            ShowEndUI("å¤±è´¥");
         }
     }
     public void ReturnMenu()
@@ -34,12 +34,12 @@ public class GameEnd : MonoBehaviour
         GameObject endUI = GameObject.Find("UI").transform.Find("GameEnd").gameObject;
         if (endUI == null)
         {
-            Debug.LogError("Î´ÕÒµ½endUI");
+            Debug.LogError("æœªæ‰¾åˆ°endUI");
         }
         endUI.SetActive(true);
         if (endUI.transform.Find("EndText").gameObject.GetComponent<Text>()==null)
         {
-            Debug.LogError("Î´ÕÒµ½endUIµÄText");
+            Debug.LogError("æœªæ‰¾åˆ°endUIçš„Text");
         }
         endUI.transform.Find("EndText").gameObject.GetComponent<Text>().text = str;
     }
