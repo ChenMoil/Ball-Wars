@@ -228,14 +228,14 @@ public class ArcherAI : BallAi
         if (!BallList.instance.ballGameObjectList.Contains(gameObject)) //列表中没该小球就加入
         {
             BallList.instance.ballGameObjectList.Add(gameObject);
-            if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Left)
-            {
-                BallList.instance.leftBallNum++;
-            }
-            else if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
-            {
-                BallList.instance.rightBallNum++;
-            }
+            //if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Left)
+            //{
+            //    BallList.instance.leftBallNum++;
+            //}
+            //else if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
+            //{
+            //    BallList.instance.rightBallNum++;
+            //}
         }
         if (gameObject.transform.parent == null || gameObject.transform.parent.gameObject.name != "BallList")  //存放小球的物体中没该小球就加入
         {
