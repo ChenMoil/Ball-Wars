@@ -46,12 +46,12 @@ public class PlaceSoliderScript : MonoBehaviour
     }
     private void Start()
     {
-        var balls = GameObject.FindGameObjectsWithTag("BallSoldier");  //把关卡自带的小球加入列表中
-        foreach (var ball in balls)
-        {
-            BallList.instance.ballGameObjectList.Add(ball);
-            ball.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right;
-        }
+        //var balls = GameObject.FindGameObjectsWithTag("BallSoldier");  //把关卡自带的小球加入列表中
+        //foreach (var ball in balls)
+        //{
+        //    BallList.instance.ballGameObjectList.Add(ball);
+        //    ball.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right;
+        //}
     }
     void Update(){
         if (Input.touchCount > 0)
