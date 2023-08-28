@@ -112,7 +112,6 @@ public class ArcherAI_MoveState : IState  //移动状态下执行的函数
                     targetGameObject = ball;
                 }
             }
-            Debug.Log(targetGameObject);
         }
         if (firstRandom)
         {

@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 2718747539752055603, guid: bf8185878c1dd2f469016aa7f61cd4ce, type: 3}
-  arrowDamage: 20
+  arrowDamage: 25
   arrowForce: 6
 --- !u!1 &2606202684008845708
 GameObject:
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

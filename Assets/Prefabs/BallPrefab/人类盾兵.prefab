@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: 10
+  Attack: 5
 --- !u!1 &5137914731171039545
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: 10
+  Attack: 5
 --- !u!1 &9125547107305041243
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +392,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -476,7 +476,7 @@ MonoBehaviour:
   ballBlackBoard:
     ballFaction: 1
     acceleration: 1.5
-    addAngularVelocity: 0.75
+    addAngularVelocity: 0.3
     HP: 150
     Weapon: {fileID: 0}
     normalSprite: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}

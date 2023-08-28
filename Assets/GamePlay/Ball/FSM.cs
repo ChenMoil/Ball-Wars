@@ -51,7 +51,6 @@ public class FSM  //有限状态机
 
     public void SwitchState(StateType stateType)
     {
-        Debug.Log("切换到状态" + stateType);
         if (!states.ContainsKey(stateType))
         {
             Debug.Log("无法切换，不存在状态" + stateType);
