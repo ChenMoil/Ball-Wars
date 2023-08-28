@@ -31,16 +31,19 @@ public class GameEnd : MonoBehaviour
     }
     static void ShowEndUI(string str)
     {
-        GameObject endUI = GameObject.Find("UI").transform.Find("GameEnd").gameObject;
-        if (endUI == null)
+        if (BallList.instance.sceneType != BallList.SceneType.Test)
         {
-            Debug.LogError("未找到endUI");
+            GameObject endUI = GameObject.Find("UI").transform.Find("GameEnd").gameObject;
+            if (endUI == null)
+            {
+                Debug.LogError("未找到endUI");
+            }
+            endUI.SetActive(true);
+            if (endUI.transform.Find("EndText").gameObject.GetComponent<Text>() == null)
+            {
+                Debug.LogError("未找到endUI的Text");
+            }
+            endUI.transform.Find("EndText").gameObject.GetComponent<Text>().text = str;
         }
-        endUI.SetActive(true);
-        if (endUI.transform.Find("EndText").gameObject.GetComponent<Text>()==null)
-        {
-            Debug.LogError("未找到endUI的Text");
-        }
-        endUI.transform.Find("EndText").gameObject.GetComponent<Text>().text = str;
     }
 }

@@ -224,7 +224,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   ballBlackBoard:
     ballFaction: 1
     acceleration: 3
-    addAngularVelocity: 0.5
+    addAngularVelocity: 1
     HP: 100
     Weapon: {fileID: 0}
     normalSprite: {fileID: 21300000, guid: e7d157db8d4b12147ae9a86beaaf3481, type: 3}
