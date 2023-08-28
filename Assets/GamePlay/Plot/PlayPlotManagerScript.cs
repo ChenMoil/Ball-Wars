@@ -19,19 +19,19 @@ public class Dialogues           //对话类
 }
 public class PlayPlotManagerScript : MonoBehaviour
 {
-    public List<Dialogues> prelines = new List<Dialogues>();   //战斗前对话列表
-    public List<Dialogues> postlines = new List<Dialogues>();  //战斗后对话列表
-    public Queue<Dialogues> dialogues;             //暂存对话的队列
-    public GameObject canvas;                  //剧情画布
-    public List<GameObject> enabledGameObjects ;            //对话结束后启用的物体
-    public GameObject leftCharacter;        //左边的人物及对话框
-    public GameObject rightCharacter;       //右边的人物及对话框
-    public Text leftText;                //左边剧情文字ui
-    public Text rightText;               //右边剧情文字Ui
-    public Text leftName;                //左边人物名字ui
-    public Text rightName;               //右边人物名字ui
-    public Image leftImage;              //左边人物头像
-    public Image rightImage;             //右边任务头像
+    [SerializeField] List<Dialogues> prelines = new List<Dialogues>();   //战斗前对话列表
+    [SerializeField] List<Dialogues> postlines = new List<Dialogues>();  //战斗后对话列表
+    Queue<Dialogues> dialogues;             //暂存对话的队列
+    [SerializeField] GameObject canvas;                  //剧情画布
+    [SerializeField] List<GameObject> enabledGameObjects ;            //对话结束后启用的物体
+    [SerializeField] GameObject leftCharacter;        //左边的人物及对话框
+    [SerializeField] GameObject rightCharacter;       //右边的人物及对话框
+    [SerializeField] Text leftText;                //左边剧情文字ui
+    [SerializeField] Text rightText;               //右边剧情文字Ui
+    [SerializeField] Text leftName;                //左边人物名字ui
+    [SerializeField] Text rightName;               //右边人物名字ui
+    [SerializeField] Image leftImage;              //左边人物头像
+    [SerializeField] Image rightImage;             //右边任务头像
     Dialogues.characterDirection direction; //当前说话的人物
     Text currentText;                   //当前文字ui
     Text currentName;                   //当前人名ui
@@ -60,7 +60,7 @@ public class PlayPlotManagerScript : MonoBehaviour
             canvas.SetActive(false);
             foreach (var item in enabledGameObjects)
             {
-                item.SetActive(true);
+                item.transform.localScale = new Vector3(1, 1, 1);
             }
             return;
         }
@@ -76,6 +76,7 @@ public class PlayPlotManagerScript : MonoBehaviour
                     direction = dialogues.Peek().direction;
                     currentName=leftName;
                     currentImage=leftImage;
+                    currentText.text = "";
                     break;
                 case Dialogues.characterDirection.Right:
                     leftCharacter.GetComponent<Canvas>().sortingOrder=0;
@@ -84,6 +85,7 @@ public class PlayPlotManagerScript : MonoBehaviour
                     direction=dialogues.Peek().direction;
                     currentName=rightName;
                     currentImage=rightImage;
+                    currentText.text = "";
                     break;
                 default:
                     break;
