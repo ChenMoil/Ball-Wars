@@ -187,8 +187,11 @@ public class BallAi : MonoBehaviour
         {
             //遍历当前物体及其所有子物体
             tran.gameObject.layer = LayerMask.NameToLayer("DeadBody"); //更改物体的Layer层
-            tran.gameObject.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 255); //更改颜色
-            tran.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+            if (tran.gameObject.name != "Trail")
+            {
+                tran.gameObject.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 255); //更改颜色
+                tran.gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+            }
             //tran.localScale = new Vector3(0.8f, 0.8f, 0.8f);  //更改物体大小
         }
 

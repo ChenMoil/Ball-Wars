@@ -1080,7 +1080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4862745, g: 0.49019608, b: 0.2901961, a: 1}
+  m_Color: {r: 0.6603774, g: 0.40400586, b: 0, a: 0.72156864}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1369,11 +1369,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40a6a6980d7e7c42b5367d8ab158808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCurrentCoin: 500
+  leftCurrentCoin: 1500
   rightCurrentCoin: 0
-  cameraFollow: {fileID: 0}
   outlineMat: {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
   isFree: 0
+  cameraFollow: {fileID: 0}
+  ballListGameObject: {fileID: 0}
   leftTextCoin: {fileID: 7975623659145529503}
   leftTextSolider: {fileID: 7975623659639888831}
   rightTextCoin: {fileID: 0}
@@ -1381,10 +1382,10 @@ MonoBehaviour:
   gridPrefab: {fileID: 3722811068276370260, guid: d467e221d5d0d7f43a0d59eb032f37c1, type: 3}
   soldierContent: {fileID: 7975623659940622014}
   ballList:
-  - {fileID: 11400000, guid: df33a21752e40414c9ebfbd7a04788b3, type: 2}
-  - {fileID: 11400000, guid: 9726d0ec70fee2b4e9542e3d1f4778f5, type: 2}
   - {fileID: 11400000, guid: 8f4837ec2ca494642abc5b70c3c1963d, type: 2}
-  - {fileID: 11400000, guid: 4be22d5faeb8fd74b891896e9d49fa3a, type: 2}
+  - {fileID: 11400000, guid: fca2754dad07b204e95e62ec58ebed82, type: 2}
+  - {fileID: 11400000, guid: a165687633d91134a80dbc5c627e95ce, type: 2}
+  - {fileID: 11400000, guid: dd64acd2a71b8cc4189b7366595cf1a0, type: 2}
 --- !u!1001 &2328378801427716279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1392,9 +1393,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7975623658902338041}
     m_Modifications:
+    - target: {fileID: 5692280930997303080, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.00048828
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280930997303080, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280930997303080, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280930997303080, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5692280931351694471, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_Name
       value: GameEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280931351694471, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5692280931351694488, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_Pivot.x
@@ -1479,6 +1500,10 @@ PrefabInstance:
     - target: {fileID: 5692280931351694488, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280932978894570, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_Name
+      value: EndText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea39ac411140904583e340b05296393, type: 3}
