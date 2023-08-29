@@ -64,7 +64,7 @@ public class PlaceSoliderScript : MonoBehaviour
                 if (Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI)
                 {
                     //Debug.Log("开始调试"+Input.GetTouch(0).position);
-                    Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 10 * Vector3.forward;
+                    Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
                     if (touchPos.x < mapPos)
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
@@ -128,6 +128,7 @@ public class PlaceSoliderScript : MonoBehaviour
        GridSoldierScript grid= Instantiate(gridPrefab, soldierContent.transform).GetComponent<GridSoldierScript>();
        grid.Image.sprite = newBall.ballImage;
        grid.Text.text = newBall.coin.ToString();
+       grid.Name.text=newBall.name;
        grid.ball=newBall;
        grid.Toggle.group=soldierContent.GetComponent<ToggleGroup>();
     }

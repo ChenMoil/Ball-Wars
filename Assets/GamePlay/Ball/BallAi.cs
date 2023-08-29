@@ -182,6 +182,7 @@ public class BallAi : MonoBehaviour
         gameObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);     //更改物体大小
         gameObject.GetComponent<SpriteRenderer>().material.SetColor("_spriteColor", new Color32(100, 100, 100, 255));  //更改颜色
         gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;  //改图层的排序顺序
+        gameObject.transform.position = gameObject.transform.position+100*Vector3.forward ;//改位置的z轴
         gameObject.name = "Dead";
         foreach (Transform tran in GetComponentsInChildren<Transform>())
         {
