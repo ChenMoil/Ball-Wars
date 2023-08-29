@@ -1637,6 +1637,7 @@ MonoBehaviour:
   closeUI:
   - {fileID: 7975623659963701956}
   - {fileID: 7975623660296435648}
+  - {fileID: 0}
 --- !u!1 &7975623660296435648
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +1996,8 @@ MonoBehaviour:
   isFree: 0
   cameraFollow: {fileID: 0}
   ballListGameObject: {fileID: 0}
+  longPressTime: 0.5
+  longPressPlaceSoliderTime: 0.1
   leftTextCoin: {fileID: 7975623659145529503}
   leftTextSolider: {fileID: 7975623659639888831}
   rightTextCoin: {fileID: 0}

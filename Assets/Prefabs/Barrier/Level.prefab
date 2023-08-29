@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 4916797490809137402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.75, y: 3, z: 3}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4916797492290565770}
   - {fileID: 1712178592199031848}
@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4916797492290565770}
   - component: {fileID: 4916797492290565769}
+  - component: {fileID: 1847318374}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -170,6 +171,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &1847318374
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916797492290565771}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.0659261, y: 0.6526371}
+  - {x: 0.29786766, y: -0.62210405}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1001 &4916797492527646830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +200,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4916797490809137400}
     m_Modifications:
+    - target: {fileID: 2137409681, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
+      propertyPath: m_Points.Array.data[4].x
+      value: -4.3568687
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137409681, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
+      propertyPath: m_Points.Array.data[4].y
+      value: 6.8718476
+      objectReference: {fileID: 0}
     - target: {fileID: 6050894096093063040, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.6321993
@@ -253,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirWall
       objectReference: {fileID: 0}
+    - target: {fileID: 6050894097024644167, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6050894097087961161, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
       propertyPath: m_Color.a
       value: 0
@@ -296,3 +331,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6050894097024644166, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
   m_PrefabInstance: {fileID: 4916797492527646830}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1712178592199031849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6050894097024644167, guid: a13e1ccffe8f0154faa85f2d2da17f2d, type: 3}
+  m_PrefabInstance: {fileID: 4916797492527646830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!66 &2137409682
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712178592199031849}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005

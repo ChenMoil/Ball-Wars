@@ -20,6 +20,10 @@ public class PlaceSoliderScript : MonoBehaviour
     SummonBall ball;     //当前选择小球
     public GameObject ballListGameObject;
     bool preIsPointerOverUI;//前一帧是否触摸在屏幕上
+    [SerializeField] float longPressTime; //开始放置士兵的长按时间
+    [SerializeField] float longPressPlaceSoliderTime;//长按时放置士兵的间隔时间
+    float longPressTimer;   //长按时间
+    bool isLongPressPlace;  //长按时放小球
     public SummonBall Ball{get{return ball;}}
     [SerializeField] Text leftTextCoin;   //显示金钱数量的Ui
     [SerializeField] Text leftTextSolider;   //显示小球数量的Ui
@@ -58,12 +62,24 @@ public class PlaceSoliderScript : MonoBehaviour
         if (Input.touchCount > 0)
         {
             cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;          //摄像机移动
-            //Debug.Log(EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId));
+            if (Input.GetTouch(0).deltaPosition != Vector2.zero)
+            {
+                longPressTimer = Mathf.Infinity;
+            }
             if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !isStart)
             {//放置小球
-                if (Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    //Debug.Log("开始调试"+Input.GetTouch(0).position);
+                    longPressTimer = Time.time + longPressTime +longPressPlaceSoliderTime;
+                }
+                else if (Input.GetTouch(0).phase==TouchPhase.Stationary && Time.time>longPressTimer)
+                {
+                    longPressTimer+=longPressPlaceSoliderTime;
+                    isLongPressPlace = true;
+                }
+                if ((Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI) || isLongPressPlace)
+                {
+                    isLongPressPlace=false;
                     Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
                     if (touchPos.x < mapPos)
                     {
@@ -93,6 +109,7 @@ public class PlaceSoliderScript : MonoBehaviour
         else
         {
             cameraFollow.velocity = Vector2.zero;
+            longPressTimer = Mathf.Infinity;
         }
 
         
