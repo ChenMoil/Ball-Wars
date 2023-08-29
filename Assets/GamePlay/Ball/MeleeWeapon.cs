@@ -12,7 +12,7 @@ public class MeleeWeapon : MonoBehaviour
         {
             collision.gameObject.GetComponent<BallAi>().DeductHP(Attack);  //扣血
         }
-        else if (collision.gameObject.GetComponent<Barrier>() != null)
+        else if (collision.gameObject.GetComponent<Barrier>() != null && gameObject.GetComponentInParent<BallAi>().ballBlackBoard.ballFaction != collision.gameObject.GetComponent<Barrier>().faction)
         {
             collision.gameObject.GetComponent<Barrier>().DeductHP(Attack);
         }

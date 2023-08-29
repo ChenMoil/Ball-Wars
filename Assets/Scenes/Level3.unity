@@ -657,6 +657,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandbag
       objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
 --- !u!4 &229855297 stripped
@@ -1075,6 +1083,14 @@ PrefabInstance:
     - target: {fileID: 406589953718543014, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
       propertyPath: m_Name
       value: Sandbag (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
@@ -1918,6 +1934,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandbag (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
 --- !u!4 &735326992 stripped
@@ -2701,6 +2725,14 @@ PrefabInstance:
     - target: {fileID: 406589953718543014, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
       propertyPath: m_Name
       value: Sandbag (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
@@ -3825,6 +3857,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandbag (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
 --- !u!4 &1514805338 stripped
@@ -4285,6 +4325,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandbag (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
 --- !u!4 &1923723261 stripped
@@ -4642,6 +4690,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sandbag (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
 --- !u!4 &2016143473 stripped
@@ -4703,6 +4759,14 @@ PrefabInstance:
     - target: {fileID: 406589953718543014, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
       propertyPath: m_Name
       value: Sandbag (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: HP
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116238848587395473, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
+      propertyPath: faction
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01ad151252186d54a9983d58a99b7260, type: 3}
@@ -5314,15 +5378,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975623658902338041, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623658902338041, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623658902338041, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623658902338041, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5370,43 +5434,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975623658902338042, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659715651176, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659715651176, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659715651176, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -2121.9983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 240
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00012207031
+      value: -100329.016
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25311.365
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660071874716, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660071874716, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660071874716, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMin.x
