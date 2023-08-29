@@ -128,6 +128,7 @@ public class PlaceSoliderScript : MonoBehaviour
        GridSoldierScript grid= Instantiate(gridPrefab, soldierContent.transform).GetComponent<GridSoldierScript>();
        grid.Image.sprite = newBall.ballImage;
        grid.Text.text = newBall.coin.ToString();
+       grid.Name.text=newBall.name;
        grid.ball=newBall;
        grid.Toggle.group=soldierContent.GetComponent<ToggleGroup>();
     }
