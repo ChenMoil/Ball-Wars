@@ -19,11 +19,13 @@ public class GameEnd : MonoBehaviour
         }
         if (BallList.instance.rightBallNum <= 0)
         {
-            ShowEndUI("win");
+            GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
+            gameEnd.StartCoroutine(ShowEndUI("win"));
         }
         else if (BallList.instance.leftBallNum <= 0)
         {
-            ShowEndUI("lose");
+            GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
+            gameEnd.StartCoroutine(ShowEndUI("lose"));
         }
     }
     public void ReturnMenu()
@@ -34,18 +36,27 @@ public class GameEnd : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    static void ShowEndUI(string str)
+    static IEnumerator ShowEndUI(string str)
     {
         if (BallList.instance.sceneType != BallList.SceneType.Test)
         {
+            if (str == "win")
+            {
+                PlayPlotManagerScript playPlot = GameObject.Find("GamePlot").GetComponent<PlayPlotManagerScript>();
+                playPlot.PostPlayDialog();
+                yield return new WaitUntil(() => !playPlot.IsPostPlay);
+            }
             string imagePath = "Image/" + str;
             Sprite image=Resources.Load<Sprite>(imagePath);
-            GameObject endUI = GameObject.Find("UI").transform.Find("GameEnd").gameObject;
+            GameObject endUI = GameObject.Find("GameEnd");
             if (endUI == null)
             {
                 Debug.LogError("未找到endUI");
             }
-            endUI.SetActive(true);
+            for (int i= 0;i<endUI.transform.childCount;i++)
+            {
+                endUI.transform.GetChild(i).gameObject.SetActive(true);
+            }
             if (endUI.transform.Find("EndImage").gameObject.GetComponent<Image>() == null)
             {
                 Debug.LogError("未找到endUI的Image");

@@ -22,6 +22,8 @@ public class PlayPlotManagerScript : MonoBehaviour
     [SerializeField] List<Dialogues> prelines = new List<Dialogues>();   //战斗前对话列表
     [SerializeField] List<Dialogues> postlines = new List<Dialogues>();  //战斗后对话列表
     Queue<Dialogues> dialogues;             //暂存对话的队列
+    bool _isPostPlay;                        //是否播放战斗后对话
+    public bool IsPostPlay { get { return _isPostPlay; } }
     [SerializeField] GameObject canvas;                  //剧情画布
     [SerializeField] List<GameObject> enabledGameObjects ;            //对话结束后启用的物体
     [SerializeField] GameObject leftCharacter;        //左边的人物及对话框
@@ -56,7 +58,11 @@ public class PlayPlotManagerScript : MonoBehaviour
             return;
         }                       
         if (dialogues.Count==0)         //对话播放完后禁用对话框
-        { 
+        {
+            if (_isPostPlay)
+            {
+                _isPostPlay = false;
+            }
             canvas.SetActive(false);
             foreach (var item in enabledGameObjects)
             {
@@ -104,11 +110,16 @@ public class PlayPlotManagerScript : MonoBehaviour
     }
     public void PostPlayDialog()         //播放战斗后动画
     {
-        if (postlines != null)
+        if (postlines.Count!=0)
         {
             dialogues = new Queue<Dialogues>(postlines);
             postlines = null;
             canvas.SetActive(true);
+            _isPostPlay = true;
+            leftText.text = "";
+            rightText.text = "";
+            leftName.text = "";
+            rightName.text = "";
             ShowDialogue();
         }
     }

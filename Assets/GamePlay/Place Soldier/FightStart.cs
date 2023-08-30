@@ -14,6 +14,11 @@ public class FightStart : MonoBehaviour
         ballList = BallList.instance.ballGameObjectList;
 
         place = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>();
+        GameObject square = GameObject.Find("Square");
+        if (!closeUI.Contains(square))
+        {
+            closeUI.Add(square);
+        }
     }
     public void FigthStart() //让战斗开始的函数
     {
