@@ -9,6 +9,7 @@ public class OtherButton : MonoBehaviour
 {
     private List<GameObject> ballList;
     private PlaceSoliderScript place;  //放置士兵的脚本
+    public List<GameObject> closeUI;
     private int levelMoney;
     private GameObject front;  //上面部分的UI
     private GameObject under;  //下面部分的UI
@@ -32,7 +33,10 @@ public class OtherButton : MonoBehaviour
         under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 160, underT.position.z), 1f).OnComplete(() =>
         {
             //关闭UI
-            GameObject.Find("UI").SetActive(false);
+            foreach (GameObject gameObject in closeUI)
+            {
+                gameObject.SetActive(false);
+            }
         });
         //改变小球状态
         foreach (GameObject ball in ballList)
