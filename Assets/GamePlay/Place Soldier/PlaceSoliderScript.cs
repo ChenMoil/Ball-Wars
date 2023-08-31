@@ -9,7 +9,7 @@ using System;
 public class PlaceSoliderScript : MonoBehaviour
 {
     //放置士兵功能
-    [SerializeField] int leftCurrentCoin;   //当前金钱
+    [SerializeField]public int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
     int leftNumberOfSoldiers;         //士兵数量
