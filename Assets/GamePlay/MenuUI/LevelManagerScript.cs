@@ -17,16 +17,22 @@ public class LevelManagerScript : MonoBehaviour
     [SerializeField] List<levelInfo> levelInfos;
     [SerializeField] GameObject levelInfoPrefab;
     [SerializeField] GameObject campaignPanel;
-    public void ShowLevelInfo(int index)
+    public void ShowLevelInfo(int index)        //显示关卡信息
     {
         GameObject level = Instantiate(levelInfoPrefab, campaignPanel.transform);
-        level.transform.Find("LevelName").GetComponent<Text>().text = levelInfos[index].levelName;
+        level.transform.Find("LevelName").GetComponent<Text>().text = levelInfos[index].levelName;   ///初始化
         level.transform.Find("LevelImage").GetComponent<Image>().sprite = levelInfos[index].levelImage;
         level.transform.Find("LevelDescription").GetComponent<Text>().text = levelInfos[index].levelDescription;
         level.transform.Find("LevelButton").GetComponent<Button>().onClick.AddListener(()=> LoadLevel(levelInfos[index].levelSceneIndex));
+        level.transform.Find("ReturnButton").GetComponent<Button>().onClick.AddListener(() => ReturnMenu());
+        level.name = "LevelInfo";
     }
-    public void LoadLevel(int index)
+    public void LoadLevel(int index)   //加载关卡场景
     {
         SceneManager.LoadScene(index);
+    }
+    public void ReturnMenu()    //关闭关卡信息界面
+    {
+        Destroy(campaignPanel.transform.Find("LevelInfo").gameObject);
     }
 }

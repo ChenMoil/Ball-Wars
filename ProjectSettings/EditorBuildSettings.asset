@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1-Camera-Outline.unity
     guid: fa3310e0f52f29541b5ee62722ecc331
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: de16e7169adc29f4eb1c1b49d79633fd
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: c37b5fc53906a744b8f9eb17cdda37b8
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 196d6382c01ecea469b9c017217e97b6
+  - enabled: 1
+    path: Assets/Scenes/Level5.unity
+    guid: 4c55f33e5829e6845b3e0a4ef22d118a
   m_configObjects: {}
