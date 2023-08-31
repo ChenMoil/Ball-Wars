@@ -6,6 +6,10 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName ="New Ball", menuName ="SummonBall")]
 public class SummonBall:ScriptableObject
 {
+    public enum category
+    {
+
+    }
     public int coin;   //该小球所消耗的金钱
     public GameObject ball;  //该小球的prefab
     public Sprite ballImage;  //该小球的图片

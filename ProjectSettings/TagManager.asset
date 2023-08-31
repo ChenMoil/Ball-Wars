@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BallSoldier
   - Weapon
+  - Map
   layers:
   - Default
   - TransparentFX
@@ -13,11 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Weapon
+  - NoArrow
   - Arrow
   - Camera
-  - 
-  - 
+  - Boundary
+  - DeadBody
   - 
   - 
   - 

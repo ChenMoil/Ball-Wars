@@ -8,6 +8,7 @@ public enum StateType
     Idle,
     Move,
     Attack,
+    Dead,
 }
 
 //各个状态所执行的函数
@@ -30,7 +31,7 @@ public class FSM  //有限状态机
 
     public Dictionary<StateType, IState> states;  //用字典将状态与状态执行的函数连通
 
-    public BlockBorad blockBorad;  
+    public BlockBorad blockBorad;
 
     public FSM(BlockBorad blockBorad)
     {
@@ -50,7 +51,6 @@ public class FSM  //有限状态机
 
     public void SwitchState(StateType stateType)
     {
-        Debug.Log("切换到状态" + stateType);
         if (!states.ContainsKey(stateType))
         {
             Debug.Log("无法切换，不存在状态" + stateType);
