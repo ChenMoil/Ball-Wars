@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -45,6 +46,8 @@ public class GameEnd : MonoBehaviour
                 PlayPlotManagerScript playPlot = GameObject.Find("GamePlot").GetComponent<PlayPlotManagerScript>();
                 playPlot.PostPlayDialog();
                 yield return new WaitUntil(() => !playPlot.IsPostPlay);
+                if(SceneManager.GetActiveScene().name.Substring(0,5)=="Level")
+                    PlayerPrefs.SetInt("Level",int.Parse(SceneManager.GetActiveScene().name.Remove(0,5)));
             }
             string imagePath = "Image/" + str;
             Sprite image=Resources.Load<Sprite>(imagePath);

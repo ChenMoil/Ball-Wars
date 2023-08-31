@@ -697,7 +697,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 386005487}
   m_OnClick:
     m_PersistentCalls:
@@ -1259,7 +1259,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 648187566}
   m_OnClick:
     m_PersistentCalls:
@@ -1581,7 +1581,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 821207216}
   m_OnClick:
     m_PersistentCalls:
@@ -1925,7 +1925,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1074601564}
   m_OnClick:
     m_PersistentCalls:
@@ -2724,6 +2724,12 @@ MonoBehaviour:
     levelSceneIndex: 5
   levelInfoPrefab: {fileID: 4456298968449444319, guid: 050c21bbe7cf4704e8851b0465d04e9b, type: 3}
   campaignPanel: {fileID: 2102908960}
+  buttons:
+  - {fileID: 821207215}
+  - {fileID: 1989764483}
+  - {fileID: 1074601563}
+  - {fileID: 386005486}
+  - {fileID: 648187565}
 --- !u!1 &1525535104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3718,7 +3724,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1989764484}
   m_OnClick:
     m_PersistentCalls:

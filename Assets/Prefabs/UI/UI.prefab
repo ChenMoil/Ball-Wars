@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8708183909869378514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1199,7 +1199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -14133.537, y: -4927.2373}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7975623659940622011
@@ -1868,8 +1868,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7975623660071874715}
   m_HandleRect: {fileID: 7975623660071874716}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.5
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2014,6 +2014,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7975623658902338041}
     m_Modifications:
+    - target: {fileID: 5692280930997303063, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5692280930997303080, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_SizeDelta.x
       value: -0.00048828
@@ -2036,7 +2040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692280931351694471, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5692280931351694488, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_Pivot.x
@@ -2126,6 +2130,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5692280932145328841, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5692280932145328842, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_SizeDelta.x
       value: 336.9664
@@ -2141,6 +2149,10 @@ PrefabInstance:
     - target: {fileID: 5692280932978894570, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_Name
       value: EndImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692280932978894570, guid: fea39ac411140904583e340b05296393, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5692280932978894571, guid: fea39ac411140904583e340b05296393, type: 3}
       propertyPath: m_SizeDelta.x
