@@ -161,8 +161,8 @@ RelativeJoint2D:
   m_ConnectedRigidBody: {fileID: 503685299420640280}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_MaxForce: 20
-  m_MaxTorque: 20
+  m_MaxForce: 100
+  m_MaxTorque: 8
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
   m_LinearOffset: {x: 0.0060001174, y: -1.7250004}

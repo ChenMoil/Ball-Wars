@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -413,8 +413,8 @@ RelativeJoint2D:
   m_ConnectedRigidBody: {fileID: 1260102100648949002}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_MaxForce: 20
-  m_MaxTorque: 20
+  m_MaxForce: 100
+  m_MaxTorque: 8
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
   m_LinearOffset: {x: 0.00000009725781, y: -2.2249994}
