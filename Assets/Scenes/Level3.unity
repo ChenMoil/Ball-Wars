@@ -5139,5 +5139,21 @@ PrefabInstance:
       propertyPath: ballListGameObject
       value: 
       objectReference: {fileID: 107213277}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d867c6fa2f4ae3f4caf76c030466e142, type: 2}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b0c05a16402e3bd448700f567005e209, type: 2}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: a8f3c30ae9c9bc84cbf209fc93f90f95, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}

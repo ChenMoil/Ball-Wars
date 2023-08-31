@@ -5,7 +5,8 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     public int HP;  //障碍物的血量
-    // Start is called before the first frame update
+
+    public BallBlackBoard.Faction faction;  //障碍物的阵营
     public void DeductHP(int attack) //扣血函数
     {
         HP -= attack;

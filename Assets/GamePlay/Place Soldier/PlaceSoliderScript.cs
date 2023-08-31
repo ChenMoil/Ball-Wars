@@ -18,7 +18,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] Rigidbody2D cameraFollow;   //摄像机
     [NonSerialized] public bool isStart; //战斗是否开始
     SummonBall ball;     //当前选择小球
-    public GameObject ballListGameObject;
+    private GameObject ballListGameObject;
     bool preIsPointerOverUI;//前一帧是否触摸在屏幕上
     [SerializeField] float longPressTime; //开始放置士兵的长按时间
     [SerializeField] float longPressPlaceSoliderTime;//长按时放置士兵的间隔时间
@@ -38,7 +38,8 @@ public class PlaceSoliderScript : MonoBehaviour
     public List<SummonBall> ballList = new List<SummonBall>();
     void Awake()
     {
-        if(!isFree)
+        ballListGameObject = GameObject.Find("BallList");
+        if (!isFree)
         leftTextCoin.text=leftCurrentCoin.ToString();   //同步ui显示
         UpdateUI();
 

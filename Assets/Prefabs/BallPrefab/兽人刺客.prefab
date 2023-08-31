@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4984903744193171723}
   - component: {fileID: 2860245074449226382}
   - component: {fileID: 2215614824302269128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: "\u517D\u4EBA\u523A\u5BA2"
   m_TagString: BallSoldier
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ RelativeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_MaxForce: 100
-  m_MaxTorque: 100
+  m_MaxTorque: 8
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
   m_LinearOffset: {x: 0.058000147, y: -1.3640003}
@@ -880,7 +880,7 @@ RelativeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_MaxForce: 100
-  m_MaxTorque: 100
+  m_MaxTorque: 8
   m_CorrectionScale: 0.3
   m_AutoConfigureOffset: 1
   m_LinearOffset: {x: -0.23299986, y: 1.323}
