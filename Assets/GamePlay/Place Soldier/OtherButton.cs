@@ -67,10 +67,12 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
+            GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().leftNumberOfSoldiers--;
             ballList.Remove(ball);
             Destroy(ball);
         }
         ClearBall.Clear();
+        GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().RefreshText();  //刷新金钱
     }
     public void HideUI()
     {
