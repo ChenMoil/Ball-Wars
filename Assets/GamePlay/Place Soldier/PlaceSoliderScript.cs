@@ -48,7 +48,7 @@ public class PlaceSoliderScript : MonoBehaviour
         {
             Debug.LogError("地图不存在或有复数个");
         }
-        mapPos = maps[0].transform.position.x;
+        mapPos = maps[0].transform.Find("Square").position.x;
     }
     private void Start()
     {
