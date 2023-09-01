@@ -12,7 +12,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField]public int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
-    int leftNumberOfSoldiers;         //士兵数量
+    public int leftNumberOfSoldiers;         //士兵数量
     int rightNumberOfSoldiers;
     public bool isFree; //是否开启自由模式
     [SerializeField] Rigidbody2D cameraFollow;   //摄像机
@@ -149,6 +149,11 @@ public class PlaceSoliderScript : MonoBehaviour
        grid.Name.text=newBall.name;
        grid.ball=newBall;
        grid.Toggle.group=soldierContent.GetComponent<ToggleGroup>();
+    }
+    public void RefreshText()
+    {
+        leftTextCoin.text = leftCurrentCoin.ToString();
+        leftTextSolider.text = leftNumberOfSoldiers.ToString();
     }
     public void UpdateUI(){
         for(int i=soldierContent.transform.childCount-1;i>=0;i--){
