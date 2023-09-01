@@ -8,11 +8,11 @@ using UnityEngine;
 public class OtherButton : MonoBehaviour
 {
     private List<GameObject> ballList;
-    public List<GameObject> closeUI;  //需要关闭的UI集合
     private PlaceSoliderScript place;  //放置士兵的脚本
+    public List<GameObject> closeUI;
     private int levelMoney;
-    public GameObject front;  //上面部分的UI
-    public GameObject under;  //下面部分的UI
+    private GameObject front;  //上面部分的UI
+    private GameObject under;  //下面部分的UI
     private bool isHide = false;       //是否隐藏了UI
     private bool isMove = false;       //UI是否在移动
     public void Start()
@@ -78,9 +78,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 100, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 200, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 140, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 280, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
             });
@@ -90,9 +90,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 100, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 200, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 140, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 280, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
             });
