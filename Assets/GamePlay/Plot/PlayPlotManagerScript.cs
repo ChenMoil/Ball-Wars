@@ -113,7 +113,7 @@ public class PlayPlotManagerScript : MonoBehaviour
         if (postlines.Count!=0)
         {
             dialogues = new Queue<Dialogues>(postlines);
-            postlines = null;
+            postlines.Clear();
             canvas.SetActive(true);
             _isPostPlay = true;
             leftText.text = "";
