@@ -11,7 +11,11 @@ public class MainMenuScript : MonoBehaviour
     GameObject settingsPanel; 
     [SerializeField]
     GameObject campaignPanel;
-   
+    private void Awake()
+    {
+        if(Screen.sleepTimeout!=SleepTimeout.NeverSleep)
+            Screen.sleepTimeout=SleepTimeout.NeverSleep;
+    }
     public void ShowSettingsPanel(){
         settingsPanel.SetActive(true);
         ShowScrolls(settingsPanel.transform.Find("MiddleInformation").GetComponent<RectTransform>());

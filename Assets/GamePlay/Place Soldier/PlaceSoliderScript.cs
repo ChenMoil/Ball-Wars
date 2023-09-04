@@ -1,21 +1,20 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
-using System;
+using UnityEngine.UI;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
     //放置士兵功能
-    [SerializeField]public int leftCurrentCoin;   //当前金钱
+    [SerializeField] public int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
     public int leftNumberOfSoldiers;         //士兵数量
     int rightNumberOfSoldiers;
-    public bool isFree; //是否开启自由模式
-    [SerializeField] Rigidbody2D cameraFollow;   //摄像机
+    [SerializeField] bool isFree; //是否开启自由模式
+    Rigidbody2D cameraFollow;   //摄像机
+    BoxCollider2D cameraCollider; //摄像机碰撞体
     [NonSerialized] public bool isStart; //战斗是否开始
     SummonBall ball;     //当前选择小球
     private GameObject ballListGameObject;
@@ -24,7 +23,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] float longPressPlaceSoliderTime;//长按时放置士兵的间隔时间
     float longPressTimer;   //长按时间
     bool isLongPressPlace;  //长按时放小球
-    public SummonBall Ball{get{return ball;}}
+    public SummonBall Ball { get { return ball; } }
     [SerializeField] Text leftTextCoin;   //显示金钱数量的Ui
     [SerializeField] Text leftTextSolider;   //显示小球数量的Ui
     [SerializeField] Text rightTextCoin;   //显示金钱数量的Ui
@@ -40,15 +39,25 @@ public class PlaceSoliderScript : MonoBehaviour
     {
         ballListGameObject = GameObject.Find("BallList");
         if (!isFree)
-        leftTextCoin.text=leftCurrentCoin.ToString();   //同步ui显示
+            leftTextCoin.text = leftCurrentCoin.ToString();   //同步ui显示
         UpdateUI();
 
         var maps = GameObject.FindGameObjectsWithTag("Map"); //初始化地图位置
-        if (maps.Length!=1)
+        if (maps.Length != 1)
         {
             Debug.LogError("地图不存在或有复数个");
         }
-        mapPos = maps[0].transform.position.x;
+        mapPos = maps[0].transform.Find("Square").position.x;
+
+        //初始化摄像机
+        GameObject camera = GameObject.Find("Camera Follow");
+        cameraCollider = camera.GetComponent<BoxCollider2D>();
+        cameraFollow = camera.GetComponent<Rigidbody2D>();
+        Vector2 min = Camera.main.ViewportToWorldPoint(new Vector3(0, 0));// 获取摄像机的视野范围（左下角和右上角的视口坐标）
+        Vector2 max = Camera.main.ViewportToWorldPoint(new Vector3(1, 1));
+       
+        //cameraCollider.offset = (min + max) / 2; // 设置碰撞体的中心和大小为视野范围
+        cameraCollider.size = max - min;
     }
     private void Start()
     {
@@ -59,7 +68,8 @@ public class PlaceSoliderScript : MonoBehaviour
         //    ball.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right;
         //}
     }
-    void Update(){
+    void Update()
+    {
         if (Input.touchCount > 0)
         {
             cameraFollow.velocity = -Input.GetTouch(0).deltaPosition;          //摄像机移动
@@ -71,28 +81,28 @@ public class PlaceSoliderScript : MonoBehaviour
             {//放置小球
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    longPressTimer = Time.time + longPressTime +longPressPlaceSoliderTime;
+                    longPressTimer = Time.time + longPressTime + longPressPlaceSoliderTime;
                 }
-                else if (Input.GetTouch(0).phase==TouchPhase.Stationary && Time.time>longPressTimer)
+                else if (Input.GetTouch(0).phase == TouchPhase.Stationary && Time.time > longPressTimer)
                 {
-                    longPressTimer+=longPressPlaceSoliderTime;
+                    longPressTimer += longPressPlaceSoliderTime;
                     isLongPressPlace = true;
                 }
                 if ((Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI) || isLongPressPlace)
                 {
-                    isLongPressPlace=false;
+                    isLongPressPlace = false;
                     Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
                     if (touchPos.x < mapPos)
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
                         newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
                         newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
-                        newBall.GetComponent<SpriteRenderer>().material=outlineMat;
+                        newBall.GetComponent<SpriteRenderer>().material = outlineMat;
                         newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.green);
 
                         PlaceSoldierToLeft(ball.coin);
                     }
-                    else if (isFree && touchPos.x>mapPos)
+                    else if (isFree && touchPos.x > mapPos)
                     {
                         GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
 
@@ -113,9 +123,10 @@ public class PlaceSoliderScript : MonoBehaviour
             longPressTimer = Mathf.Infinity;
         }
 
-        
+
     }
-    public void ChangeBall(SummonBall newBall){    //改变当前选择小球
+    public void ChangeBall(SummonBall newBall)
+    {    //改变当前选择小球
         ball = newBall;
     }
     public void ChangeBall()  //重置当前选择小球
@@ -124,45 +135,50 @@ public class PlaceSoliderScript : MonoBehaviour
     }
     void PlaceSoldierToLeft(int coin)   //在左边放置士兵
     {
-        if(isFree) 
-        leftCurrentCoin+=coin;
-        else leftCurrentCoin-=coin;
+        if (isFree)
+            leftCurrentCoin += coin;
+        else leftCurrentCoin -= coin;
         leftTextCoin.text = leftCurrentCoin.ToString();
         leftNumberOfSoldiers++;
         leftTextSolider.text = leftNumberOfSoldiers.ToString();
     }
     void PlaceSoldierToRight(int coin)   //在右边放置士兵
     {
-        if(isFree)
-        rightCurrentCoin += coin;
+        if (isFree)
+            rightCurrentCoin += coin;
         else rightCurrentCoin -= coin;
-        if(rightTextCoin!=null)
-        rightTextCoin.text = rightCurrentCoin.ToString();
+        if (rightTextCoin != null)
+            rightTextCoin.text = rightCurrentCoin.ToString();
         rightNumberOfSoldiers++;
-        if(rightTextSolider!=null)
-        rightTextSolider.text = rightNumberOfSoldiers.ToString();
+        if (rightTextSolider != null)
+            rightTextSolider.text = rightNumberOfSoldiers.ToString();
     }
-    void InsertSoldierToUI(SummonBall newBall){
-       GridSoldierScript grid= Instantiate(gridPrefab, soldierContent.transform).GetComponent<GridSoldierScript>();
-       grid.Image.sprite = newBall.ballImage;
-       grid.Text.text = newBall.coin.ToString();
-       grid.Name.text=newBall.name;
-       grid.ball=newBall;
-       grid.Toggle.group=soldierContent.GetComponent<ToggleGroup>();
+    void InsertSoldierToUI(SummonBall newBall)
+    {
+        GridSoldierScript grid = Instantiate(gridPrefab, soldierContent.transform).GetComponent<GridSoldierScript>();
+        grid.Image.sprite = newBall.ballImage;
+        grid.Text.text = newBall.coin.ToString();
+        grid.Name.text = newBall.name;
+        grid.ball = newBall;
+        grid.Toggle.group = soldierContent.GetComponent<ToggleGroup>();
     }
     public void RefreshText()
     {
         leftTextCoin.text = leftCurrentCoin.ToString();
         leftTextSolider.text = leftNumberOfSoldiers.ToString();
     }
-    public void UpdateUI(){
-        for(int i=soldierContent.transform.childCount-1;i>=0;i--){
+    public void UpdateUI()
+    {
+        for (int i = soldierContent.transform.childCount - 1; i >= 0; i--)
+        {
             Destroy(soldierContent.transform.GetChild(i).gameObject);
         }
-        for(int i=0;i<ballList.Count;i++){
-                    if(ballList[i]!=null){
-                        InsertSoldierToUI(ballList[i]);
-                    }
-                }
+        for (int i = 0; i < ballList.Count; i++)
+        {
+            if (ballList[i] != null)
+            {
+                InsertSoldierToUI(ballList[i]);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsScript : MonoBehaviour
@@ -12,7 +13,7 @@ public class SettingsScript : MonoBehaviour
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
         soundEffectVolumeSlider.value = PlayerPrefs.GetFloat("SoundEffectVolume", 1f);
     }
-    public void ChangeMusicVolume(float volume)
+    public void ChangeMusicVolume(float volume)        //改变音量
     {
         PlayerPrefs.SetFloat("MusicVolume", volume);
         GameObject.Find("AudioManager").GetComponent<AudioManagerScript>().UpdateVolume();
@@ -21,5 +22,17 @@ public class SettingsScript : MonoBehaviour
     {
         PlayerPrefs.SetFloat("SoundEffectVolume",volume);
         GameObject.Find("AudioManager").GetComponent<AudioManagerScript>().UpdateVolume();
+    }
+    public void ChangePanelStatus()      //改变设置面板的显示状态
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
+    public void RetuenMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
