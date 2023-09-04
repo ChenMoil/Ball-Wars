@@ -1,16 +1,16 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class Dialogues           //¶Ô»°Àà
+public class Dialogues           //å¯¹è¯ç±»
 {
-    public string dialogue;       //¶Ô»°
-    public characterDirection direction;      //Ëµ»°µÄ·½Ïò
-    public string name;                       //·¢ÑÔÈËÃû×Ö
-    public Sprite image;                       //·¢ÑÔÈËÍ·Ïñ
+    public string dialogue;       //å¯¹è¯
+    public characterDirection direction;      //è¯´è¯çš„æ–¹å‘
+    public string name;                       //å‘è¨€äººåå­—
+    public Sprite image;                       //å‘è¨€äººå¤´åƒ
     public enum characterDirection
     {
         Left,
@@ -19,29 +19,28 @@ public class Dialogues           //¶Ô»°Àà
 }
 public class PlayPlotManagerScript : MonoBehaviour
 {
-    [SerializeField] List<Dialogues> prelines = new List<Dialogues>();   //Õ½¶·Ç°¶Ô»°ÁĞ±í
-    [SerializeField] List<Dialogues> postlines = new List<Dialogues>();  //Õ½¶·ºó¶Ô»°ÁĞ±í
-    Queue<Dialogues> dialogues;             //Ôİ´æ¶Ô»°µÄ¶ÓÁĞ
-    bool _isPostPlay;                        //ÊÇ·ñ²¥·ÅÕ½¶·ºó¶Ô»°
+    [SerializeField] List<Dialogues> prelines = new List<Dialogues>();   //æˆ˜æ–—å‰å¯¹è¯åˆ—è¡¨
+    [SerializeField] List<Dialogues> postlines = new List<Dialogues>();  //æˆ˜æ–—åå¯¹è¯åˆ—è¡¨
+    Queue<Dialogues> dialogues;             //æš‚å­˜å¯¹è¯çš„é˜Ÿåˆ—
+    bool _isPostPlay;                        //æ˜¯å¦æ’­æ”¾æˆ˜æ–—åå¯¹è¯
     public bool IsPostPlay { get { return _isPostPlay; } }
-    [SerializeField] GameObject canvas;                  //¾çÇé»­²¼
-    [SerializeField] List<GameObject> enabledGameObjects ;            //¶Ô»°½áÊøºóÆôÓÃµÄÎïÌå
-    [SerializeField] GameObject leftCharacter;        //×ó±ßµÄÈËÎï¼°¶Ô»°¿ò
-    [SerializeField] GameObject rightCharacter;       //ÓÒ±ßµÄÈËÎï¼°¶Ô»°¿ò
-    [SerializeField] Text leftText;                //×ó±ß¾çÇéÎÄ×Öui
-    [SerializeField] Text rightText;               //ÓÒ±ß¾çÇéÎÄ×ÖUi
-    [SerializeField] Text leftName;                //×ó±ßÈËÎïÃû×Öui
-    [SerializeField] Text rightName;               //ÓÒ±ßÈËÎïÃû×Öui
-    [SerializeField] Image leftImage;              //×ó±ßÈËÎïÍ·Ïñ
-    [SerializeField] Image rightImage;             //ÓÒ±ßÈÎÎñÍ·Ïñ
-    Dialogues.characterDirection direction; //µ±Ç°Ëµ»°µÄÈËÎï
-    Text currentText;                   //µ±Ç°ÎÄ×Öui
-    Text currentName;                   //µ±Ç°ÈËÃûui
-    Image currentImage;                 //µ±Ç°Í·Ïñ
-    Tweener currentTweener;             //µ±Ç°ÎÄ×Ö¶¯»­
+    [SerializeField] GameObject canvas;                  //å‰§æƒ…ç”»å¸ƒ
+    [SerializeField] GameObject leftCharacter;        //å·¦è¾¹çš„äººç‰©åŠå¯¹è¯æ¡†
+    [SerializeField] GameObject rightCharacter;       //å³è¾¹çš„äººç‰©åŠå¯¹è¯æ¡†
+    [SerializeField] Text leftText;                //å·¦è¾¹å‰§æƒ…æ–‡å­—ui
+    [SerializeField] Text rightText;               //å³è¾¹å‰§æƒ…æ–‡å­—Ui
+    [SerializeField] Text leftName;                //å·¦è¾¹äººç‰©åå­—ui
+    [SerializeField] Text rightName;               //å³è¾¹äººç‰©åå­—ui
+    [SerializeField] Image leftImage;              //å·¦è¾¹äººç‰©å¤´åƒ
+    [SerializeField] Image rightImage;             //å³è¾¹ä»»åŠ¡å¤´åƒ
+    Dialogues.characterDirection direction; //å½“å‰è¯´è¯çš„äººç‰©
+    Text currentText;                   //å½“å‰æ–‡å­—ui
+    Text currentName;                   //å½“å‰äººåui
+    Image currentImage;                 //å½“å‰å¤´åƒ
+    Tweener currentTweener;             //å½“å‰æ–‡å­—åŠ¨ç”»
     private void Awake()
     {
-        dialogues = new Queue<Dialogues>(prelines);//³õÊ¼»¯
+        dialogues = new Queue<Dialogues>(prelines);//åˆå§‹åŒ–
         currentText = leftText;
         direction = Dialogues.characterDirection.Left;
         currentName = leftName;
@@ -49,15 +48,15 @@ public class PlayPlotManagerScript : MonoBehaviour
 
         ShowDialogue();
     }
-    public void ShowDialogue()         //ÏÔÊ¾¶Ô»°
+    public void ShowDialogue()         //æ˜¾ç¤ºå¯¹è¯
     {
-        if (currentTweener != null && !currentTweener.IsComplete())//½áÊøÖ®Ç°µÄ¶Ô»°ÏÔÊ¾
+        if (currentTweener != null && !currentTweener.IsComplete())//ç»“æŸä¹‹å‰çš„å¯¹è¯æ˜¾ç¤º
         {
             currentText.DOComplete();
             currentText.DOKill();
             return;
         }                       
-        if (dialogues.Count==0)         //¶Ô»°²¥·ÅÍêºó½ûÓÃ¶Ô»°¿ò
+        if (dialogues.Count==0)         //å¯¹è¯æ’­æ”¾å®Œåç¦ç”¨å¯¹è¯æ¡†
         {
             if (!IsPostPlay)
             {
@@ -72,14 +71,13 @@ public class PlayPlotManagerScript : MonoBehaviour
                 _isPostPlay = false;
             }
             canvas.SetActive(false);
-            foreach (var item in enabledGameObjects)
-            {
-                item.transform.localScale = new Vector3(1, 1, 1);
-            }
+
+            OtherButton.instance.DisplayUI();  //æ˜¾ç¤ºUI
+
             return;
         }
         
-        if (dialogues.Peek().direction!=direction)       //ÇĞ»»ÏÔÊ¾µÄÈËÎï
+        if (dialogues.Peek().direction!=direction)       //åˆ‡æ¢æ˜¾ç¤ºçš„äººç‰©
         {
             switch (dialogues.Peek().direction)
             {
@@ -110,13 +108,13 @@ public class PlayPlotManagerScript : MonoBehaviour
             currentText.text = "";
         }
         
-        currentName.text=dialogues.Peek().name;             //²¥·Å¶Ô»°
+        currentName.text=dialogues.Peek().name;             //æ’­æ”¾å¯¹è¯
         currentImage.sprite=dialogues.Peek().image;
         currentTweener = currentText.DOText(dialogues.Peek().dialogue, dialogues.Peek().dialogue.Length / 10).SetEase(Ease.Linear);
         currentTweener.OnComplete(() => currentTweener = null);
         dialogues.Dequeue();
     }
-    public void PostPlayDialog()         //²¥·ÅÕ½¶·ºó¶¯»­
+    public void PostPlayDialog()         //æ’­æ”¾æˆ˜æ–—ååŠ¨ç”»
     {
         if (postlines.Count!=0)
         {
