@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcArcher
       objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -260,6 +264,10 @@ PrefabInstance:
     - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_Name
       value: Orc (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
@@ -394,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcArcher (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -467,6 +479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcArcher (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -539,6 +555,10 @@ PrefabInstance:
     - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Name
       value: OrcArcher (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -621,6 +641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc
       objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
       value: -0.00000006906474
@@ -698,6 +722,10 @@ PrefabInstance:
     - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_Name
       value: Orc (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
@@ -921,6 +949,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrcArcher (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1116,6 +1148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
       value: -0.00000006906474
@@ -1232,6 +1268,10 @@ PrefabInstance:
     - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_Name
       value: Orc (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
@@ -1369,6 +1409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
       value: -0.00000006906474
@@ -1441,6 +1485,10 @@ PrefabInstance:
     - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_Name
       value: Orc (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
@@ -1629,6 +1677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
       value: -0.00000006906474
@@ -1707,6 +1759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1260102100648949047, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1260102101621142220, guid: e43c4c3e6391e8e43ba06a9c80e8f641, type: 3}
       propertyPath: m_LinearOffset.x
       value: -0.00000006906474
@@ -1771,6 +1827,10 @@ PrefabInstance:
     - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Name
       value: OrcArcher (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 57983059099254718, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2335,11 +2395,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4013876
+      value: -4258676
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659940622013, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -976736.06
+      value: -1049133.5
       objectReference: {fileID: 0}
     - target: {fileID: 7975623659989920382, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_IsActive

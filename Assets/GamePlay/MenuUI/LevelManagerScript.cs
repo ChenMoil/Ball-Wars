@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,11 @@ public class LevelManagerScript : MonoBehaviour
         level.transform.Find("LevelButton").GetComponent<Button>().onClick.AddListener(()=> LoadLevel(levelInfos[index].levelSceneIndex));
         level.transform.Find("ReturnButton").GetComponent<Button>().onClick.AddListener(() => ReturnMenu());
         level.name = "LevelInfo";
+
+        level.GetComponent<CanvasGroup>().DOFade(1, 1.5f);
+        level.GetComponent<RectTransform>().anchoredPosition = new Vector2(campaignPanel.GetComponent<RectTransform>().rect.width, 0);
+        level.GetComponent<RectTransform>().DOAnchorPos(new Vector2(0, 0), 1f);
+        level.GetComponent<RectTransform>().sizeDelta=campaignPanel.GetComponent<RectTransform>().sizeDelta;
     }
     public void LoadLevel(int index)   //º”‘ÿπÿø®≥°æ∞
     {
