@@ -85,9 +85,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
             });
@@ -97,9 +97,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
             });
