@@ -10,7 +10,7 @@ public class SettingsScript : MonoBehaviour
     [SerializeField] Slider musicVolumeSlider;  //音乐音量滑块
     [SerializeField] Slider soundEffectVolumeSlider; //音效音量滑块
     bool isHide=true;  //设置面板移动动画
-    bool isMove;
+    bool isMove=false;
     GameObject informationPanel;//设置面板
     private void Start()
     {

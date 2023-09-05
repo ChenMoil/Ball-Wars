@@ -20,12 +20,18 @@ public class LevelManagerScript : MonoBehaviour
     [SerializeField] GameObject campaignPanel;
     [SerializeField] List<Button> buttons;   //选择关卡的按钮
     [SerializeField] Sprite passedLevel;   //通过关卡的图标
+    bool isShow;  //当前是否存在关卡信息界面
     private void Start()
     {
         UpdateLevel(PlayerPrefs.GetInt("Level", 0));
     }
     public void ShowLevelInfo(int index)        //显示关卡信息
     {
+        if (isShow)
+        {
+            return;
+        }
+        isShow = true;
         GameObject level = Instantiate(levelInfoPrefab, campaignPanel.transform);
         level.transform.Find("LevelName").GetComponent<Text>().text = levelInfos[index].levelName;   ///初始化
         level.transform.Find("LevelImage").GetComponent<Image>().sprite = levelInfos[index].levelImage;
@@ -45,7 +51,13 @@ public class LevelManagerScript : MonoBehaviour
     }
     public void ReturnMenu()    //关闭关卡信息界面
     {
-        Destroy(campaignPanel.transform.Find("LevelInfo").gameObject);
+        GameObject level = GameObject.Find("LevelInfo");
+        level.GetComponent<CanvasGroup>().DOFade(0, 1f);
+        level.GetComponent<RectTransform>().DOAnchorPos(new Vector2(campaignPanel.GetComponent<RectTransform>().rect.width/2, 0), 1f).OnComplete(() =>
+        {
+            Destroy(campaignPanel.transform.Find("LevelInfo").gameObject);
+            isShow = false;
+        });     
     }
     void UpdateLevel(int lockedNum)   //更新关卡解锁情况
     {
