@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class AudioManagerScript : MonoBehaviour
 {
+    static AudioManagerScript _instance;
+    public static AudioManagerScript Instance
+    {
+        get { 
+            if (_instance == null)
+                _instance = GameObject.FindObjectOfType<AudioManagerScript>();
+            return _instance; 
+        }
+    }
     [SerializeField] AudioClip musicClip;   //ƒ¨»œ≤•∑≈±≥æ∞“Ù¿÷
     AudioSource audioSource;                //“Ù‘¥
     float musicVolume;                //“Ù¿÷“Ù¡ø

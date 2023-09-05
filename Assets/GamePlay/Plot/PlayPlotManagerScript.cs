@@ -58,6 +58,14 @@ public class PlayPlotManagerScript : MonoBehaviour
         }                       
         if (dialogues.Count==0)         //对话播放完后禁用对话框
         {
+            if (!IsPostPlay)
+            {
+                Transform list = GameObject.Find("BallList").transform;
+                for(int i = 0; i < list.childCount; i++)
+                {
+                    list.GetChild(i).gameObject.SetActive(true);
+                }
+            }
             if (_isPostPlay)
             {
                 _isPostPlay = false;
