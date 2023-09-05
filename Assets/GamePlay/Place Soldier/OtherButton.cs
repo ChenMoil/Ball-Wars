@@ -42,6 +42,7 @@ public class OtherButton : MonoBehaviour
             {
                 gameObject.SetActive(false);
             }
+            GameObject.Find("HideButton").SetActive(false);
         });
         //改变小球状态
         foreach (GameObject ball in ballList)
@@ -81,6 +82,7 @@ public class OtherButton : MonoBehaviour
     }
     public void HideUI()
     {
+        Transform hideButton = GameObject.Find("HideButton").transform;
         if (isHide == false && isMove == false)
         {
             isMove = true;
@@ -90,6 +92,7 @@ public class OtherButton : MonoBehaviour
             under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
+                hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
             });
             isHide = true;
         }
@@ -102,6 +105,7 @@ public class OtherButton : MonoBehaviour
             under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
+                hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
             });
             isHide = false;
         }

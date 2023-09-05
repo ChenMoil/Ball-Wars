@@ -19,6 +19,7 @@ public class LevelManagerScript : MonoBehaviour
     [SerializeField] GameObject levelInfoPrefab;
     [SerializeField] GameObject campaignPanel;
     [SerializeField] List<Button> buttons;   //选择关卡的按钮
+    [SerializeField] Sprite passedLevel;   //通过关卡的图标
     private void Start()
     {
         UpdateLevel(PlayerPrefs.GetInt("Level", 0));
@@ -51,6 +52,10 @@ public class LevelManagerScript : MonoBehaviour
         for (int i = 0; i <= lockedNum; i++)
         {
             buttons[i].interactable = true;
+        }
+        for (int i = 0; i < lockedNum; i++)
+        {
+            buttons[i].gameObject.GetComponent<Image>().sprite = passedLevel;
         }
     }
 }

@@ -8,6 +8,8 @@ public class SettingsScript : MonoBehaviour
 {
     [SerializeField] Slider musicVolumeSlider;  //音乐音量滑块
     [SerializeField] Slider soundEffectVolumeSlider; //音效音量滑块
+    bool isHide;  //设置面板移动动画
+    bool isMove;
     private void Start()
     {
         musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
@@ -25,7 +27,7 @@ public class SettingsScript : MonoBehaviour
     }
     public void ChangePanelStatus()      //改变设置面板的显示状态
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        
     }
     public void RetuenMainMenu()
     {
