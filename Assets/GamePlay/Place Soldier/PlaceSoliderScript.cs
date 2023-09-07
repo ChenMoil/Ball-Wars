@@ -118,7 +118,15 @@ public class PlaceSoliderScript : MonoBehaviour
 
                         PlaceSoldierToRight(ball.coin);
                     }
+                    else if (!isFree && touchPos.x > mapPos)
+                    {
+                        SignUI.instance.DisplayText("无法在敌方地盘放置士兵", 1f, Color.white);
+                    }
                 }
+            }
+            else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart)
+            {
+                SignUI.instance.DisplayText("缺少金币，无法放置士兵", 1f, Color.white);
             }
             preIsPointerOverUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
         }
