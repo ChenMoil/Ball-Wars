@@ -63,6 +63,7 @@ public class LevelManagerScript : MonoBehaviour
     {
         for (int i = 0; i <= lockedNum; i++)
         {
+            if(buttons.Count>i)
             buttons[i].interactable = true;
         }
         for (int i = 0; i < lockedNum; i++)
