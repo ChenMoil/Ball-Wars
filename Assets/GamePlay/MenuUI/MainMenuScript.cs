@@ -11,10 +11,15 @@ public class MainMenuScript : MonoBehaviour
     GameObject settingsPanel; 
     [SerializeField]
     GameObject campaignPanel;
+    [SerializeField] bool isBegin; //是否重置关卡进度
     private void Awake()
     {
         if(Screen.sleepTimeout!=SleepTimeout.NeverSleep)
             Screen.sleepTimeout=SleepTimeout.NeverSleep;
+        if (isBegin)
+        {
+            PlayerPrefs.SetInt("Level", 0);
+        }
     }
     public void ShowSettingsPanel(){
         settingsPanel.SetActive(true);

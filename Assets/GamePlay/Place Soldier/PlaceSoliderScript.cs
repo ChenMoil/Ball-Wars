@@ -35,8 +35,11 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
     public List<SummonBall> ballList = new List<SummonBall>();
+    List<SummonBall> currentBallList;//当前小球列表
     void Awake()
     {
+        //初始化种类列表
+        ChangeCategory(SummonBall.Category.all);
         ballListGameObject = GameObject.Find("BallList");
         if (!isFree)
             leftTextCoin.text = leftCurrentCoin.ToString();   //同步ui显示
@@ -56,8 +59,10 @@ public class PlaceSoliderScript : MonoBehaviour
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector3(0, 0));// 获取摄像机的视野范围（左下角和右上角的视口坐标）
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector3(1, 1));
        
-        //cameraCollider.offset = (min + max) / 2; // 设置碰撞体的中心和大小为视野范围
+        // 设置碰撞体的中心和大小为视野范围
         cameraCollider.size = max - min;
+
+      
     }
     private void Start()
     {
@@ -77,7 +82,7 @@ public class PlaceSoliderScript : MonoBehaviour
             {
                 longPressTimer = Mathf.Infinity;
             }
-            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !isStart)
+            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !OtherButton.instance.isStart)
             {//放置小球
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
@@ -162,6 +167,10 @@ public class PlaceSoliderScript : MonoBehaviour
         grid.ball = newBall;
         grid.Toggle.group = soldierContent.GetComponent<ToggleGroup>();
     }
+    void InsertCategoryToUI()
+    {
+
+    }
     public void RefreshText()
     {
         leftTextCoin.text = leftCurrentCoin.ToString();
@@ -173,12 +182,31 @@ public class PlaceSoliderScript : MonoBehaviour
         {
             Destroy(soldierContent.transform.GetChild(i).gameObject);
         }
-        for (int i = 0; i < ballList.Count; i++)
+        for (int i = 0; i < currentBallList.Count; i++)
         {
-            if (ballList[i] != null)
+            if (currentBallList[i] != null)
             {
-                InsertSoldierToUI(ballList[i]);
+                InsertSoldierToUI(currentBallList[i]);
             }
         }
+    }
+    public void ChangeCategory(SummonBall.Category category)
+    {
+        if (category==SummonBall.Category.all)
+        {
+            currentBallList=ballList;
+        }
+        else
+        {
+            currentBallList.Clear();
+            foreach (var ball in ballList)
+            {
+                if (ball.category==category)
+                {
+                    currentBallList.Add(ball);
+                }
+            }
+        }
+        UpdateUI();
     }
 }

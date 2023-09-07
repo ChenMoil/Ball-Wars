@@ -10,6 +10,7 @@ public class OtherButton : MonoBehaviour
     public static OtherButton instance;
     private List<GameObject> ballList;
     private PlaceSoliderScript place;  //放置士兵的脚本
+    public bool isStart; //战斗是否开始
     public List<GameObject> closeUI;
     private int levelMoney;
     private GameObject front;  //上面部分的UI
@@ -26,7 +27,11 @@ public class OtherButton : MonoBehaviour
         levelMoney = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().leftCurrentCoin;
         place = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>();
         front = GameObject.Find("Front");
-        under = GameObject.Find("Scroll View");
+        under = GameObject.Find("Under");
+        if (BallList.instance.sceneType==BallList.SceneType.Test)
+        {
+            DisplayUI();
+        }
     }
     public void FigthStart() //让战斗开始的函数
     {
@@ -58,7 +63,7 @@ public class OtherButton : MonoBehaviour
             }
         }
         GameObject.Find("Square").SetActive(false);  //关闭分界线
-        place.isStart = true; //战斗开始
+        isStart = true; //战斗开始
     }
     public void Clear()
     {
