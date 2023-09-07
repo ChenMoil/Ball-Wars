@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5812760106503855662}
   - component: {fileID: 8394715259522294930}
   m_Layer: 6
-  m_Name: Bow
+  m_Name: Staff
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 8605668763417429243, guid: d02f1669f15d91e48a83dba64308ec52, type: 3}
-  arrowDamage: 15
-  arrowForce: 3
+  arrowDamage: 25
+  arrowForce: 4
 --- !u!1 &5812760108292254794
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,12 +270,12 @@ MonoBehaviour:
     ballFaction: 1
     acceleration: 1.5
     addAngularVelocity: 0
-    HP: 75
+    HP: 50
     Weapon: {fileID: 5812760106503855661}
     normalSprite: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}
     beAttackSprite: {fileID: 21300000, guid: 51b9b05f5b80ec445bbff5cf5234668b, type: 3}
-  shootTime: 1.5
-  attackSwitchTime: 1.5
+  shootTime: 2.5
+  attackSwitchTime: 2.5
 --- !u!96 &4368916796778297792
 TrailRenderer:
   serializedVersion: 2

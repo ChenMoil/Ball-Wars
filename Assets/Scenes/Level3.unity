@@ -5579,7 +5579,7 @@ PrefabInstance:
       objectReference: {fileID: 107213277}
     - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: ballList.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: ballList.Array.data[0]
@@ -5593,6 +5593,10 @@ PrefabInstance:
       propertyPath: ballList.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: a8f3c30ae9c9bc84cbf209fc93f90f95, type: 2}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: ac4673cf62664da498057043667aab5c, type: 2}
     - target: {fileID: 8631304697069562763, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

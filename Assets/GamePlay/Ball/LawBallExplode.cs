@@ -18,10 +18,12 @@ public class LawBallExplode : MonoBehaviour
     {
 
     }
-
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.tag == "BallSoldier" && gameObject.GetComponentInParent<LawBall>().lawBallFation != collision.gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction)
+        {
+            collision.gameObject.GetComponent<BallAi>().DeductHP(gameObject.GetComponentInParent<LawBall>().Damage);  //扣血
+        }
     }
 
     public void StartCon()

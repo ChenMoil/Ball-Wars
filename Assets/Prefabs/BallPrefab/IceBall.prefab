@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.11372549}
+  m_Color: {r: 0, g: 0.875185, b: 1, a: 0.11372549}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,8 +229,8 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.990566, g: 0.19157171, b: 0.19157171, a: 1}
-      key2: {r: 0.9622642, g: 0.52198297, b: 0.52198297, a: 0.49803922}
+      key1: {r: 0, g: 0.2599814, b: 1, a: 1}
+      key2: {r: 0.52156866, g: 0.84405977, b: 0.9607843, a: 0.49803922}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 3189116716962820670}
   - component: {fileID: 3592427079166648589}
   m_Layer: 7
-  m_Name: FireBall
+  m_Name: IceBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: 823992435
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a16f1b952bfd73419ee9749da13dc0c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aca97cdf2ec27ec44af8d4dc907071c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
