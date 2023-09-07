@@ -35,35 +35,35 @@ public class OtherButton : MonoBehaviour
     }
     public void FigthStart() //让战斗开始的函数
     {
-        Debug.Log("战斗开始");
-        //先移动UI
-        Transform frontT = front.GetComponent<RectTransform>();
-        front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
-        Transform underT = under.GetComponent<RectTransform>();
-        under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+        if (BallList.instance.leftBallNum != 0 && BallList.instance.rightBallNum != 0)
         {
-            //关闭UI
-            foreach (GameObject gameObject in closeUI)
+            Debug.Log("战斗开始");
+            //先移动UI
+            Transform frontT = front.GetComponent<RectTransform>();
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
+            Transform underT = under.GetComponent<RectTransform>();
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
-                gameObject.SetActive(false);
-            }
-            GameObject.Find("HideButton").SetActive(false);
-        });
-        //改变小球状态
-        foreach (GameObject ball in ballList)
-        {
-            ball.GetComponent<BallAi>().fsm.SwitchState(StateType.Move);
-            if (ball.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Left)
+                //关闭UI
+                foreach (GameObject gameObject in closeUI)
+                {
+                    gameObject.SetActive(false);
+                }
+                GameObject.Find("HideButton").SetActive(false);
+            });
+            //改变小球状态
+            foreach (GameObject ball in ballList)
             {
-                BallList.instance.leftBallNum++;
+                ball.GetComponent<BallAi>().fsm.SwitchState(StateType.Move);
             }
-            else
-            {
-                BallList.instance.rightBallNum++;
-            }
+            GameObject.Find("Square").SetActive(false);  //关闭分界线
+            isStart = true; //战斗开始
         }
-        GameObject.Find("Square").SetActive(false);  //关闭分界线
-        isStart = true; //战斗开始
+        else
+        {
+            SignUI.instance.DisplayText("未放置士兵，无法开始战斗", 1.5f, Color.white);
+        }
+        
     }
     public void Clear()
     {
@@ -92,9 +92,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
@@ -105,9 +105,9 @@ public class OtherButton : MonoBehaviour
         {
             isMove = true;
             Transform frontT = front.GetComponent<RectTransform>();
-            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
+            front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);

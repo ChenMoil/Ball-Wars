@@ -48,8 +48,16 @@ public class Bow : MonoBehaviour
         float forceY = (float)Math.Sin(eur);
         newArrow.transform.position = new Vector2(gameObject.transform.position.x + 1 * forceX, gameObject.transform.position.y + 1 * forceY); //调整位置
         arrowrRigidbody2D.AddForce(new Vector2(forceX * arrowForce, forceY * arrowForce), ForceMode2D.Impulse); //施加力
-        newArrow.GetComponent<Arrow>().arrowFation = BallList.instance.ballBlackBoards[gameObject.transform.parent.gameObject].ballFaction;   //改变阵营
-        newArrow.GetComponent<Arrow>().Damage = arrowDamage;
+        if (newArrow.GetComponent<Arrow>() != null)
+        {
+            newArrow.GetComponent<Arrow>().arrowFation = BallList.instance.ballBlackBoards[gameObject.transform.parent.gameObject].ballFaction;   //改变阵营
+            newArrow.GetComponent<Arrow>().Damage = arrowDamage;
+        }
+        else if (newArrow.GetComponent<LawBall>() != null)
+        {
+            newArrow.GetComponent<LawBall>().lawBallFation = BallList.instance.ballBlackBoards[gameObject.transform.parent.gameObject].ballFaction;   //改变阵营
+            newArrow.GetComponent<LawBall>().Damage = arrowDamage;
+        }
         newArrow.transform.parent = GameObject.Find("FlyingObjects").transform;
 
     }
