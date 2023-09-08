@@ -22,11 +22,19 @@ public class GameEnd : MonoBehaviour
         {
             GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
             gameEnd.StartCoroutine(ShowEndUI("win"));
+            if (BallList.instance.sceneType == BallList.SceneType.level)    //增援系统判断
+            {
+                AidScript.Instance.Win();
+            }
         }
         else if (BallList.instance.leftBallNum <= 0)
         {
             GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
             gameEnd.StartCoroutine(ShowEndUI("lose"));
+            if (BallList.instance.sceneType==BallList.SceneType.level)     //增援系统判断
+            {
+                AidScript.Instance.Lose(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
     public void ReturnMenu()
@@ -71,13 +79,13 @@ public class GameEnd : MonoBehaviour
             endUI.transform.Find("EndImage").gameObject.GetComponent<Image>().sprite = image;
 
             GameObject reButton = endUI.transform.Find("RestartButton").gameObject;
-            if (str=="win")
+            if (str=="win" && LevelConst.LevelIndex.ContainsKey("Level" + (int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5)) + 1)))
             {
                 reButton.GetComponent<Button>().onClick.AddListener(()=>NextLevel());
                 reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/next");
                 reButton.GetComponent<Image>().SetNativeSize();
             }
-            else if (str=="lose")
+            else
             {
                 reButton.GetComponent<Button>().onClick.AddListener(() => RestartLevel());
                 reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/restart");
