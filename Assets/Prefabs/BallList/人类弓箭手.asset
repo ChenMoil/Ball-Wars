@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
   m_Name: "\u4EBA\u7C7B\u5F13\u7BAD\u624B"
   m_EditorClassIdentifier: 
+  category: 1
   coin: 50
   ball: {fileID: 2606202684008845708, guid: 781767aad2b63b3449a45585d68898a1, type: 3}
   ballImage: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}

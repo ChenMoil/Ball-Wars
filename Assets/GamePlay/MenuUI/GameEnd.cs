@@ -33,9 +33,13 @@ public class GameEnd : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void RestartLevel()
+    public static void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public static void NextLevel()
+    {
+        SceneManager.LoadScene(LevelConst.LevelIndex["Level"+ (int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5))+1)]);
     }
     static IEnumerator ShowEndUI(string str)
     {
@@ -65,6 +69,20 @@ public class GameEnd : MonoBehaviour
                 Debug.LogError("未找到endUI的Image");
             }
             endUI.transform.Find("EndImage").gameObject.GetComponent<Image>().sprite = image;
+
+            GameObject reButton = endUI.transform.Find("RestartButton").gameObject;
+            if (str=="win")
+            {
+                reButton.GetComponent<Button>().onClick.AddListener(()=>NextLevel());
+                reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/next");
+                reButton.GetComponent<Image>().SetNativeSize();
+            }
+            else if (str=="lose")
+            {
+                reButton.GetComponent<Button>().onClick.AddListener(() => RestartLevel());
+                reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/restart");
+                reButton.GetComponent<Image>().SetNativeSize();
+            }
         }
     }
 }
