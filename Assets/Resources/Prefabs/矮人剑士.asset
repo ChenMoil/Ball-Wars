@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
-  m_Name: "\u4EBA\u7C7B\u67AA\u5175"
+  m_Name: "\u77EE\u4EBA\u5251\u58EB"
   m_EditorClassIdentifier: 
-  category: 1
-  coin: 50
-  ball: {fileID: 3668663654198914710, guid: 87cf0a4242444bc4e9c7a6b440502693, type: 3}
-  ballImage: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}
-  pressedImage: {fileID: 21300000, guid: 51b9b05f5b80ec445bbff5cf5234668b, type: 3}
+  category: 0
+  coin: 20
+  ball: {fileID: 503685299420640282, guid: fa98334c808ead4449515ac83fdbfc9f, type: 3}
+  ballImage: {fileID: 21300000, guid: e7d157db8d4b12147ae9a86beaaf3481, type: 3}
+  pressedImage: {fileID: 21300000, guid: 036f93df374316d409c2f483f0b103a8, type: 3}

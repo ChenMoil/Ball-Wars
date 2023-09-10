@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dc450d78b54624281ece6e5fbabc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: 1
+  Attack: 20
 --- !u!254 &7660830656906989818
 RelativeJoint2D:
   m_ObjectHideFlags: 0
@@ -307,9 +307,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballBlackBoard:
     ballFaction: 1
-    acceleration: 3
-    addAngularVelocity: 1
-    HP: 100
+    acceleration: 5
+    addAngularVelocity: 2
+    HP: 200
     Weapon: {fileID: 0}
     normalSprite: {fileID: 21300000, guid: e7d157db8d4b12147ae9a86beaaf3481, type: 3}
     beAttackSprite: {fileID: 21300000, guid: ed1f91d975a18044eb7dfae15b07f15b, type: 3}
