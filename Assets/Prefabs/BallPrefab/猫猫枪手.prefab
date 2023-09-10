@@ -128,8 +128,8 @@ MonoBehaviour:
     addAngularVelocity: 0
     HP: 100
     Weapon: {fileID: 6920608488611289538}
-    normalSprite: {fileID: 21300000, guid: 80d7aaf04a2eb3249839b0d891ef4635, type: 3}
-    beAttackSprite: {fileID: 21300000, guid: 51b9b05f5b80ec445bbff5cf5234668b, type: 3}
+    normalSprite: {fileID: 21300000, guid: 75c6045e66466c54ba5ac169ef059a29, type: 3}
+    beAttackSprite: {fileID: 21300000, guid: 091d4084905d8a146a3f7b4d8064deb4, type: 3}
   shootTime: 0.5
   attackSwitchTime: 0.5
 --- !u!96 &6448202556744099938
