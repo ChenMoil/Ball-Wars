@@ -15,7 +15,7 @@ public class AidScript
     }
     int loseCount; //在同一关连续失败的次数
     int currentLostLevel; //当前失败的关卡
-    int aidCount=1;  //增援出现时的失败次数
+    int aidCount=5;  //增援出现时的失败次数
     bool isAid;  //是否增援
     public void Lose(int index)
     {
