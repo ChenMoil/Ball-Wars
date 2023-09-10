@@ -9,7 +9,6 @@ public class OtherButton : MonoBehaviour
 {
     public static OtherButton instance;
     private List<GameObject> ballList;
-    private PlaceSoliderScript place;  //放置士兵的脚本
     public bool isStart; //战斗是否开始
     public List<GameObject> closeUI;
     private int levelMoney;
@@ -24,8 +23,8 @@ public class OtherButton : MonoBehaviour
             instance = this;
         }
         ballList = BallList.instance.ballGameObjectList;
-        levelMoney = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().leftCurrentCoin;
-        place = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>();
+        levelMoney = PlaceSoliderScript.instance.leftCurrentCoin;
+
         front = GameObject.Find("Front");
         under = GameObject.Find("Under");
         if (BallList.instance.sceneType!=BallList.SceneType.level)
@@ -67,7 +66,7 @@ public class OtherButton : MonoBehaviour
     }
     public void Clear()
     {
-        GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().leftCurrentCoin = levelMoney;
+        PlaceSoliderScript.instance.leftCurrentCoin = levelMoney;
         List<GameObject> ClearBall = new List<GameObject>();
         foreach (GameObject ball in BallList.instance.ballGameObjectList)
         {
@@ -78,12 +77,12 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
-            GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().leftNumberOfSoldiers--;
+            PlaceSoliderScript.instance.leftNumberOfSoldiers--;
             ballList.Remove(ball);
             Destroy(ball);
         }
         ClearBall.Clear();
-        GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>().RefreshText();  //刷新金钱
+        PlaceSoliderScript.instance.RefreshText();  //刷新金钱
     }
     public void HideUI()
     {

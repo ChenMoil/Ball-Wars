@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
+  m_Name: "\u732B\u732B\u67AA\u624B"
+  m_EditorClassIdentifier: 
+  category: 0
+  coin: 100
+  ball: {fileID: 6920608487161588645, guid: 08d9df8b0dbbc84429a6b672b4a6adeb, type: 3}
+  ballImage: {fileID: 21300000, guid: 75c6045e66466c54ba5ac169ef059a29, type: 3}
+  pressedImage: {fileID: 21300000, guid: 091d4084905d8a146a3f7b4d8064deb4, type: 3}
