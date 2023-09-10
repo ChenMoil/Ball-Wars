@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
+    public static PlaceSoliderScript instance;
     //放置士兵功能
     [SerializeField] public int leftCurrentCoin;   //当前金钱
     [SerializeField] int rightCurrentCoin;
@@ -38,6 +39,10 @@ public class PlaceSoliderScript : MonoBehaviour
     List<SummonBall> currentBallList;//当前小球列表
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         //初始化种类列表
         ChangeCategory(SummonBall.Category.all);
         ballListGameObject = GameObject.Find("BallList");
