@@ -22,20 +22,32 @@ public class GameEnd : MonoBehaviour
         {
             GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
             gameEnd.StartCoroutine(ShowEndUI("win"));
+            if (BallList.instance.sceneType == BallList.SceneType.level)    //增援系统判断
+            {
+                AidScript.Instance.Win();
+            }
         }
         else if (BallList.instance.leftBallNum <= 0)
         {
             GameEnd gameEnd = GameObject.Find("GameEnd").GetComponent<GameEnd>();
             gameEnd.StartCoroutine(ShowEndUI("lose"));
+            if (BallList.instance.sceneType==BallList.SceneType.level)     //增援系统判断
+            {
+                AidScript.Instance.Lose(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
     public void ReturnMenu()
     {
         SceneManager.LoadScene(0);
     }
-    public void RestartLevel()
+    public static void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public static void NextLevel()
+    {
+        SceneManager.LoadScene(LevelConst.LevelIndex["Level"+ (int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5))+1)]);
     }
     static IEnumerator ShowEndUI(string str)
     {
@@ -65,6 +77,20 @@ public class GameEnd : MonoBehaviour
                 Debug.LogError("未找到endUI的Image");
             }
             endUI.transform.Find("EndImage").gameObject.GetComponent<Image>().sprite = image;
+
+            GameObject reButton = endUI.transform.Find("RestartButton").gameObject;
+            if (str=="win" && LevelConst.LevelIndex.ContainsKey("Level" + (int.Parse(SceneManager.GetActiveScene().name.Remove(0, 5)) + 1)))
+            {
+                reButton.GetComponent<Button>().onClick.AddListener(()=>NextLevel());
+                reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/next");
+                reButton.GetComponent<Image>().SetNativeSize();
+            }
+            else
+            {
+                reButton.GetComponent<Button>().onClick.AddListener(() => RestartLevel());
+                reButton.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/restart");
+                reButton.GetComponent<Image>().SetNativeSize();
+            }
         }
     }
 }

@@ -3296,6 +3296,10 @@ PrefabInstance:
       propertyPath: ballList.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: c872987f36a65954b92d92e8667d61a9, type: 2}
+    - target: {fileID: 7975623660847865991, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
+      propertyPath: ballList.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: d62a818a1f8c21942b8fd9710854a593, type: 2}
     - target: {fileID: 8631304697069562763, guid: 2c3ccfa127c1ad148a71deae1f61ac7d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -11,6 +11,15 @@ public class Dialogues           //对话类
     public characterDirection direction;      //说话的方向
     public string name;                       //发言人名字
     public Sprite image;                       //发言人头像
+
+    public Dialogues(string dialogue, characterDirection direction, string name, Sprite image)
+    {
+        this.dialogue = dialogue;
+        this.direction = direction;
+        this.name = name;
+        this.image = image;
+    }
+
     public enum characterDirection
     {
         Left,
@@ -19,7 +28,7 @@ public class Dialogues           //对话类
 }
 public class PlayPlotManagerScript : MonoBehaviour
 {
-    [SerializeField] List<Dialogues> prelines = new List<Dialogues>();   //战斗前对话列表
+    public List<Dialogues> prelines = new List<Dialogues>();   //战斗前对话列表
     [SerializeField] List<Dialogues> postlines = new List<Dialogues>();  //战斗后对话列表
     Queue<Dialogues> dialogues;             //暂存对话的队列
     bool _isPostPlay;                        //是否播放战斗后对话
@@ -40,6 +49,7 @@ public class PlayPlotManagerScript : MonoBehaviour
     Tweener currentTweener;             //当前文字动画
     private void Awake()
     {
+        AidScript.Instance.Aid();
         dialogues = new Queue<Dialogues>(prelines);//初始化
         currentText = leftText;
         direction = Dialogues.characterDirection.Left;

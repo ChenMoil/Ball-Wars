@@ -5,6 +5,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+public class LevelConst
+{
+    static Dictionary<string, int> m_levelIndex = new Dictionary<string, int>()
+    {
+        ["Level1"] = 1,
+        ["Level2"] = 2,
+        ["Level3"] = 3,
+        ["Level4"] = 4,
+        ["Level5"] = 5
+    };
+    public static Dictionary<string, int> LevelIndex
+    {
+        get { return m_levelIndex; }
+    }
+}
+
 [System.Serializable]
 public class levelInfo          //关卡信息类
 {

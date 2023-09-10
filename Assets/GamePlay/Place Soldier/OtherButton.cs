@@ -28,7 +28,7 @@ public class OtherButton : MonoBehaviour
         place = GameObject.Find("Place soldier").GetComponent<PlaceSoliderScript>();
         front = GameObject.Find("Front");
         under = GameObject.Find("Under");
-        if (BallList.instance.sceneType==BallList.SceneType.Test)
+        if (BallList.instance.sceneType!=BallList.SceneType.level)
         {
             DisplayUI();
         }

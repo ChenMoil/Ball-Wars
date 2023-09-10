@@ -118,7 +118,7 @@ public class PlaceSoliderScript : MonoBehaviour
 
                         PlaceSoldierToRight(ball.coin);
                     }
-                    else if (!isFree && touchPos.x > mapPos)
+                    else if (!isFree && touchPos.x > mapPos && !OtherButton.instance.isStart)
                     {
                         SignUI.instance.DisplayText("无法在敌方地盘放置士兵", 1f, Color.white);
                     }
