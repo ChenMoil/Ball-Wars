@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 57983057402170847}
   - component: {fileID: 57983057402170817}
   - component: {fileID: 2659068544455243645}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bow
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 57983059099254691}
   - component: {fileID: 3405283859753565644}
   - component: {fileID: 8565808571837931101}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: "\u7CBE\u7075\u5F13\u7BAD\u624B"
   m_TagString: BallSoldier
   m_Icon: {fileID: 0}
