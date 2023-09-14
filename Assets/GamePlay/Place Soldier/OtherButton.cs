@@ -64,9 +64,16 @@ public class OtherButton : MonoBehaviour
         }
         
     }
-    public void Clear()
+    public void ClearLeftBall()
     {
-        PlaceSoliderScript.instance.leftCurrentCoin = levelMoney;
+        if (BallList.instance.sceneType == BallList.SceneType.level)
+        {
+            PlaceSoliderScript.instance.leftCurrentCoin = levelMoney;
+        }
+        else if (BallList.instance.sceneType == BallList.SceneType.Free)
+        {
+            PlaceSoliderScript.instance.leftCurrentCoin = 0;
+        }
         List<GameObject> ClearBall = new List<GameObject>();
         foreach (GameObject ball in BallList.instance.ballGameObjectList)
         {
@@ -78,6 +85,33 @@ public class OtherButton : MonoBehaviour
         foreach (GameObject ball in ClearBall)
         {
             PlaceSoliderScript.instance.leftNumberOfSoldiers--;
+            ballList.Remove(ball);
+            Destroy(ball);
+        }
+        ClearBall.Clear();
+        PlaceSoliderScript.instance.RefreshText();  //刷新金钱
+    }
+    public void ClearRightBall()
+    {
+        if (BallList.instance.sceneType == BallList.SceneType.level)
+        {
+            PlaceSoliderScript.instance.rightCurrentCoin = levelMoney;
+        }
+        else if (BallList.instance.sceneType == BallList.SceneType.Free)
+        {
+            PlaceSoliderScript.instance.rightCurrentCoin = 0;
+        }
+        List<GameObject> ClearBall = new List<GameObject>();
+        foreach (GameObject ball in BallList.instance.ballGameObjectList)
+        {
+            if (BallList.instance.ballBlackBoards[ball].ballFaction == BallBlackBoard.Faction.Right)
+            {
+                ClearBall.Add(ball);
+            }
+        }
+        foreach (GameObject ball in ClearBall)
+        {
+            PlaceSoliderScript.instance.rightNumberOfSoldiers--;
             ballList.Remove(ball);
             Destroy(ball);
         }
