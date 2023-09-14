@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +13,10 @@ public class AidScript
             return instance; 
         }
     }
-    int loseCount; //ÔÚÍ¬Ò»¹ØÁ¬ĞøÊ§°ÜµÄ´ÎÊı
-    int currentLostLevel; //µ±Ç°Ê§°ÜµÄ¹Ø¿¨
-    int aidCount=2;  //ÔöÔ®³öÏÖÊ±µÄÊ§°Ü´ÎÊı
-    bool isAid;  //ÊÇ·ñÔöÔ®
+    int loseCount; //åœ¨åŒä¸€å…³è¿ç»­å¤±è´¥çš„æ¬¡æ•°
+    int currentLostLevel; //å½“å‰å¤±è´¥çš„å…³å¡
+    int aidCount=5;  //å¢æ´å‡ºç°æ—¶çš„å¤±è´¥æ¬¡æ•°
+    bool isAid;  //æ˜¯å¦å¢æ´
     public void Lose(int index)
     {
         if (index==currentLostLevel)
@@ -51,10 +51,11 @@ public class AidScript
             Sprite dwarf = Resources.Load<Sprite>("Image/dwarf");
             playPlot.prelines = new List<Dialogues>
             {
-                new Dialogues("ÈËÀà£¬°«ÈËÀ´°ïÖúÄãÃÇÁË!",Dialogues.characterDirection.Left,"°«ÈË",dwarf)
+                new Dialogues("äººç±»ï¼ŒçŸ®äººå’ŒçŒ«çŒ«è™«æ¥å¸®åŠ©ä½ ä»¬äº†!",Dialogues.characterDirection.Left,"çŸ®äºº",dwarf)
             };
         }
     PlaceSoliderScript place = GameObject.FindObjectOfType<PlaceSoliderScript>();
-        place.ballList.Add(Resources.Load<SummonBall>("Prefabs/°«ÈË½£Ê¿"));
+        place.ballList.Add(Resources.Load<SummonBall>("Prefabs/çŸ®äººå‰‘å£«"));
+        place.ballList.Add(Resources.Load<SummonBall>("Prefabs/çŒ«çŒ«æªæ‰‹"));
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +20,7 @@ public class GridSoldierScript : MonoBehaviour
         toggle = GetComponent<Toggle>();
         text = transform.Find("CoinText").gameObject.GetComponent<Text>();
         nameText = transform.Find("NameText").gameObject.GetComponent<Text>();
-        placeSoliderScript = FindObjectOfType<PlaceSoliderScript>();
+        placeSoliderScript = PlaceSoliderScript.instance;
     }
     public void SelectBall(bool selected){               //根据toggle组件的选中与否改变所选中小球
         if (selected){

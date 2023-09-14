@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
+    public static PlaceSoliderScript instance;
     //放置士兵功能
     [SerializeField] public int leftCurrentCoin;   //当前金钱
-    [SerializeField] int rightCurrentCoin;
+    [SerializeField] public int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
     public int leftNumberOfSoldiers;         //士兵数量
-    int rightNumberOfSoldiers;
+    public int rightNumberOfSoldiers;
     [SerializeField] bool isFree; //是否开启自由模式
     Rigidbody2D cameraFollow;   //摄像机
     BoxCollider2D cameraCollider; //摄像机碰撞体
@@ -38,6 +39,10 @@ public class PlaceSoliderScript : MonoBehaviour
     List<SummonBall> currentBallList;//当前小球列表
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
         //初始化种类列表
         ChangeCategory(SummonBall.Category.all);
         ballListGameObject = GameObject.Find("BallList");
