@@ -11,7 +11,7 @@ public class OtherButton : MonoBehaviour
     private List<GameObject> ballList;
     public bool isStart; //战斗是否开始
     public List<GameObject> closeUI;
-    private int levelMoney;
+    private int levelMoney; //关卡初始时给的金币
     private GameObject front;  //上面部分的UI
     private GameObject under;  //下面部分的UI
     private bool isHide = false;       //是否隐藏了UI
