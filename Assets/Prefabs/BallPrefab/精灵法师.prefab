@@ -271,7 +271,7 @@ MonoBehaviour:
     acceleration: 1.5
     addAngularVelocity: 0
     HP: 50
-    Weapon: {fileID: 5812760106503855661}
+    longRangeWeapon: {fileID: 5812760106503855661}
     normalSprite: {fileID: 21300000, guid: bd5d8e6c79fc14b40912f4db9910007f, type: 3}
     beAttackSprite: {fileID: 21300000, guid: a877ab0817d7a6143a888543c44a6797, type: 3}
   shootTime: 2

@@ -24,7 +24,7 @@ public class BallBlackBoard : BlockBorad
 
     [NonSerialized]public GameObject thisBall;  //这个小球
 
-    public GameObject Weapon;  //这个小球所带的武器
+    public GameObject longRangeWeapon;  //远程武器
 
     [NonSerialized] public SpriteRenderer spriteRenderer;  //精灵组件
     public Sprite normalSprite;    //正常情况下的精灵
