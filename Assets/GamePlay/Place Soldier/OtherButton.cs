@@ -42,7 +42,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 //关闭UI
                 foreach (GameObject gameObject in closeUI)
@@ -86,6 +86,7 @@ public class OtherButton : MonoBehaviour
         foreach (GameObject ball in ClearBall)
         {
             PlaceSoliderScript.instance.leftNumberOfSoldiers--;
+            BallList.instance.leftBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
         }
@@ -113,6 +114,7 @@ public class OtherButton : MonoBehaviour
         foreach (GameObject ball in ClearBall)
         {
             PlaceSoliderScript.instance.rightNumberOfSoldiers--;
+            BallList.instance.rightBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
         }
@@ -128,7 +130,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
@@ -141,7 +143,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
@@ -155,7 +157,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 260 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
             });
