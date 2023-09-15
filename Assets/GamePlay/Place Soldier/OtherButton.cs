@@ -64,7 +64,7 @@ public class OtherButton : MonoBehaviour
         }
         
     }
-    public void ClearLeftBall()
+    public void ClearLeftBall() //清除左侧小球
     {
         if (BallList.instance.sceneType == BallList.SceneType.level)
         {
@@ -91,7 +91,7 @@ public class OtherButton : MonoBehaviour
         ClearBall.Clear();
         PlaceSoliderScript.instance.RefreshText();  //刷新金钱
     }
-    public void ClearRightBall()
+    public void ClearRightBall() //清除右侧小球
     {
         if (BallList.instance.sceneType == BallList.SceneType.level)
         {
