@@ -34,7 +34,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
     public List<SummonBall> ballList = new List<SummonBall>();
-    List<SummonBall> currentBallList;//当前小球列表
+    List<SummonBall> currentBallList= new List<SummonBall>();//当前小球列表
     void Awake()
     {
         if (instance == null)
@@ -42,7 +42,7 @@ public class PlaceSoliderScript : MonoBehaviour
             instance = this;
         }
         //初始化种类列表
-        ChangeCategory(SummonBall.Category.all);
+        ChangeCategory(SummonBall.Category.human);
         ballListGameObject = GameObject.Find("BallList");
         if (!isFree)
             leftTextCoin.text = leftCurrentCoin.ToString();   //同步ui显示
@@ -54,6 +54,11 @@ public class PlaceSoliderScript : MonoBehaviour
             Debug.LogError("地图不存在或有复数个");
         }
         mapPos = maps[0].transform.Find("Square").position.x;
+
+        GameObject.Find("Human").GetComponent<Button>().onClick.AddListener(()=> ChangeCategory(SummonBall.Category.human));
+        GameObject.Find("Elf").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.elf));
+        GameObject.Find("Orc").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.orc));
+        GameObject.Find("Dwarf").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.dwarf));
 
         //初始化摄像机
         GameObject camera = GameObject.Find("Camera Follow");
@@ -176,14 +181,12 @@ public class PlaceSoliderScript : MonoBehaviour
         grid.ball = newBall;
         grid.Toggle.group = soldierContent.GetComponent<ToggleGroup>();
     }
-    void InsertCategoryToUI()
-    {
-
-    }
     public void RefreshText()
     {
         leftTextCoin.text = leftCurrentCoin.ToString();
         leftTextSolider.text = BallList.instance.leftBallNum.ToString();
+        rightTextCoin.text=rightCurrentCoin.ToString();
+        rightTextSolider.text=BallList.instance.rightBallNum.ToString();
     }
     public void UpdateUI()
     {
@@ -201,21 +204,15 @@ public class PlaceSoliderScript : MonoBehaviour
     }
     public void ChangeCategory(SummonBall.Category category)
     {
-        if (category==SummonBall.Category.all)
-        {
-            currentBallList=ballList;
-        }
-        else
-        {
+         if(currentBallList.Count != 0)
             currentBallList.Clear();
             foreach (var ball in ballList)
             {
-                if (ball.category==category)
+                if (ball.category == category)
                 {
                     currentBallList.Add(ball);
                 }
             }
-        }
         UpdateUI();
     }
 }
