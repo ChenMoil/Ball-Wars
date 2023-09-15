@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3378087545873477090}
         m_TargetAssemblyTypeName: OtherButton, Assembly-CSharp
-        m_MethodName: Clear
+        m_MethodName: ClearLeftBall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3474,6 +3474,7 @@ MonoBehaviour:
   rightCurrentCoin: 0
   outlineMat: {fileID: 2100000, guid: 6bb86685a96706d4ba12c4c250242f03, type: 2}
   leftNumberOfSoldiers: 0
+  rightNumberOfSoldiers: 0
   isFree: 0
   longPressTime: 0.5
   longPressPlaceSoliderTime: 0.1

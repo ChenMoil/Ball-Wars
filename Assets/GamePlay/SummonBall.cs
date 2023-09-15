@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="New Ball", menuName ="SummonBall")]
+[System.Serializable]
 public class SummonBall:ScriptableObject
 {
     [System.Serializable]
