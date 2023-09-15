@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,6 +18,7 @@ public class OtherButton : MonoBehaviour
     private GameObject under;  //下面部分的UI
     private bool isHide = false;       //是否隐藏了UI
     private bool isMove = false;       //UI是否在移动
+    float UIMoveY = 260;
     public void Start()
     {
         if (instance == null)
@@ -30,8 +32,10 @@ public class OtherButton : MonoBehaviour
         under = GameObject.Find("Under");
         if (BallList.instance.sceneType!=BallList.SceneType.level)
         {
+            UIMoveY = 325;
             DisplayUI();
         }
+        
     }
     public void FigthStart() //让战斗开始的函数
     {
@@ -42,7 +46,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - UIMoveY * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 //关闭UI
                 foreach (GameObject gameObject in closeUI)
@@ -85,7 +89,6 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
-            PlaceSoliderScript.instance.leftNumberOfSoldiers--;
             BallList.instance.leftBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
@@ -113,7 +116,6 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
-            PlaceSoliderScript.instance.rightNumberOfSoldiers--;
             BallList.instance.rightBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
@@ -130,7 +132,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + UIMoveY* under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
@@ -143,7 +145,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y + 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 0.5f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y - UIMoveY * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 0.5f).OnComplete(() =>
             {
                 isMove = false;
                 hideButton.localScale = new Vector3(hideButton.localScale.x, -hideButton.localScale.y, hideButton.localScale.z);
@@ -157,7 +159,7 @@ public class OtherButton : MonoBehaviour
             Transform frontT = front.GetComponent<RectTransform>();
             front.GetComponent<RectTransform>().DOMove(new Vector3(frontT.position.x, frontT.position.y - 155 * front.gameObject.transform.parent.transform.localScale.x, frontT.position.z), 1f);
             Transform underT = under.GetComponent<RectTransform>();
-            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + 325 * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
+            under.GetComponent<RectTransform>().DOMove(new Vector3(underT.position.x, underT.position.y + UIMoveY * under.gameObject.transform.parent.transform.localScale.x, underT.position.z), 1f).OnComplete(() =>
             {
                 isMove = false;
             });

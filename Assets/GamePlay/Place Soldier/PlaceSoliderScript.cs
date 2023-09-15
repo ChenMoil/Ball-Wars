@@ -173,7 +173,7 @@ public class PlaceSoliderScript : MonoBehaviour
         if (rightTextCoin != null)
             rightTextCoin.text = rightCurrentCoin.ToString();
         if (rightTextSolider != null)
-            rightTextSolider.text = BallList.instance.leftBallNum.ToString();
+            rightTextSolider.text = BallList.instance.rightBallNum.ToString();
     }
     void InsertSoldierToUI(SummonBall newBall)
     {
