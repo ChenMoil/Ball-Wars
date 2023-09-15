@@ -11,8 +11,6 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] public int leftCurrentCoin;   //当前金钱
     [SerializeField] public int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
-    public int leftNumberOfSoldiers;         //士兵数量
-    public int rightNumberOfSoldiers;
     [SerializeField] bool isFree; //是否开启自由模式
     Rigidbody2D cameraFollow;   //摄像机
     BoxCollider2D cameraCollider; //摄像机碰撞体
@@ -165,8 +163,7 @@ public class PlaceSoliderScript : MonoBehaviour
             leftCurrentCoin += coin;
         else leftCurrentCoin -= coin;
         leftTextCoin.text = leftCurrentCoin.ToString();
-        leftNumberOfSoldiers++;
-        leftTextSolider.text = leftNumberOfSoldiers.ToString();
+        leftTextSolider.text = BallList.instance.leftBallNum.ToString();
     }
     void PlaceSoldierToRight(int coin)   //在右边放置士兵
     {
@@ -175,9 +172,8 @@ public class PlaceSoliderScript : MonoBehaviour
         else rightCurrentCoin -= coin;
         if (rightTextCoin != null)
             rightTextCoin.text = rightCurrentCoin.ToString();
-        rightNumberOfSoldiers++;
         if (rightTextSolider != null)
-            rightTextSolider.text = rightNumberOfSoldiers.ToString();
+            rightTextSolider.text = BallList.instance.leftBallNum.ToString();
     }
     void InsertSoldierToUI(SummonBall newBall)
     {
@@ -191,9 +187,9 @@ public class PlaceSoliderScript : MonoBehaviour
     public void RefreshText()
     {
         leftTextCoin.text = leftCurrentCoin.ToString();
-        leftTextSolider.text = leftNumberOfSoldiers.ToString();
+        leftTextSolider.text = BallList.instance.leftBallNum.ToString();
         rightTextCoin.text=rightCurrentCoin.ToString();
-        rightTextSolider.text=rightNumberOfSoldiers.ToString();
+        rightTextSolider.text=BallList.instance.rightBallNum.ToString();
     }
     public void UpdateUI()
     {
