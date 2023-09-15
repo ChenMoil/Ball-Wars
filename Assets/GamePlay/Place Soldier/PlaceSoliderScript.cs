@@ -55,10 +55,13 @@ public class PlaceSoliderScript : MonoBehaviour
         }
         mapPos = maps[0].transform.Find("Square").position.x;
 
-        GameObject.Find("Human").GetComponent<Button>().onClick.AddListener(()=> ChangeCategory(SummonBall.Category.human));
-        GameObject.Find("Elf").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.elf));
-        GameObject.Find("Orc").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.orc));
-        GameObject.Find("Dwarf").GetComponent<Button>().onClick.AddListener(()=>ChangeCategory(SummonBall.Category.dwarf));
+        if (isFree)
+        {
+            GameObject.Find("Human").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.human));
+            GameObject.Find("Elf").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.elf));
+            GameObject.Find("Orc").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.orc));
+            GameObject.Find("Dwarf").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.dwarf));
+        }
 
         //初始化摄像机
         GameObject camera = GameObject.Find("Camera Follow");
@@ -132,7 +135,7 @@ public class PlaceSoliderScript : MonoBehaviour
                     }
                 }
             }
-            else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart)
+            else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart && !isFree)
             {
                 SignUI.instance.DisplayText("缺少金币，无法放置士兵", 1f, Color.white);
             }

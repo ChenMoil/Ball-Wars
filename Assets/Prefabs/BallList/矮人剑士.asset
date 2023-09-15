@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7934fcc84034f45979ee2445b32d13, type: 3}
   m_Name: "\u77EE\u4EBA\u5251\u58EB"
   m_EditorClassIdentifier: 
-  category: 0
-  coin: 20
+  category: 4
+  coin: 50
   ball: {fileID: 503685299420640282, guid: fa98334c808ead4449515ac83fdbfc9f, type: 3}
   ballImage: {fileID: 21300000, guid: e7d157db8d4b12147ae9a86beaaf3481, type: 3}
   pressedImage: {fileID: 21300000, guid: 036f93df374316d409c2f483f0b103a8, type: 3}

@@ -54,6 +54,7 @@ public class PullDownButton : MonoBehaviour
     public void ChooseObject(int number)
     {
         SelectedObject = number;
+        GameObject.Find("Level").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Image/map" + number);
     }
     IEnumerator FalseGameobject(GameObject gameObject)
     {

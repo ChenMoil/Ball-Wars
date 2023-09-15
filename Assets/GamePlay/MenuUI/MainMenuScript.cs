@@ -46,4 +46,8 @@ public class MainMenuScript : MonoBehaviour
         Tweener tweener = rectTransform.DOSizeDelta(new Vector2(0,1008), 1f);
         tweener.OnComplete(() => gameObject.SetActive(false));
     }
+    public void StartFreeMode()
+    {
+        SceneManager.LoadScene(6);
+    }
 }
