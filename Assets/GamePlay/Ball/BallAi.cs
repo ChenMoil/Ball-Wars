@@ -214,6 +214,10 @@ public class BallAi : MonoBehaviour
         {
             fsm.SwitchState(StateType.Idle);
         }
+        else
+        {
+            fsm.SwitchState(StateType.Idle);
+        }
     }
     public void AddList() //把小球加入各种容器，改变一些数值
     {
