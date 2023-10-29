@@ -24,7 +24,7 @@ public class BallBlackBoard : BlockBorad
 
     [NonSerialized]public GameObject thisBall;  //这个小球
 
-    public GameObject Weapon;  //这个小球所带的武器
+    public GameObject longRangeWeapon;  //远程武器
 
     [NonSerialized] public SpriteRenderer spriteRenderer;  //精灵组件
     public Sprite normalSprite;    //正常情况下的精灵
@@ -198,26 +198,13 @@ public class BallAi : MonoBehaviour
 
         GameEnd.CheckGameEnd(ballBlackBoard.ballFaction);       //检测战斗是否结束
     }
-    public virtual void initBall() //初始化小球函数
+    public void initBall() //初始化小球函数
     {
-        ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
-        ballBlackBoard.thisBall = this.gameObject;
-        fsm = new FSM(ballBlackBoard);
-        fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
-        fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
-        fsm.states.Add(StateType.Dead, new AI_Dead(fsm));
-        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
-        if (!BallList.instance.ballGameObjectList.Contains(gameObject)) //列表中没该小球就加入
-        {
-            BallList.instance.ballGameObjectList.Add(gameObject);
-        }
-        if (gameObject.transform.parent == null || gameObject.transform.parent.gameObject.name != "BallList")  //存放小球的物体中没该小球就加入
-        {
-            gameObject.transform.SetParent(GameObject.Find("BallList").transform);
-        }
+        AddState();
+        AddList();
         ChangeState();
     }
-    public void ChangeState()
+    public void ChangeState()  //改变初始状态
     {
         if (BallList.instance.sceneType == BallList.SceneType.Test)
         {
@@ -227,6 +214,40 @@ public class BallAi : MonoBehaviour
         {
             fsm.SwitchState(StateType.Idle);
         }
+        else
+        {
+            fsm.SwitchState(StateType.Idle);
+        }
+    }
+    public void AddList() //把小球加入各种容器，改变一些数值
+    {
+        ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
+        ballBlackBoard.thisBall = this.gameObject;
+        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
+        if (!BallList.instance.ballGameObjectList.Contains(gameObject)) //列表中没该小球就加入
+        {
+            BallList.instance.ballGameObjectList.Add(gameObject);
+        }
+        if (gameObject.transform.parent == null || gameObject.transform.parent.gameObject.name != "BallList")  //存放小球的物体中没该小球就加入
+        {
+            gameObject.transform.SetParent(GameObject.Find("BallList").transform);
+        }
+        if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Left)
+        {
+            BallList.instance.leftBallNum++;
+        }
+        else
+        {
+            BallList.instance.rightBallNum++;
+        }
+        ChangeState();
+    }
+    public virtual void AddState()
+    {
+        fsm = new FSM(ballBlackBoard);
+        fsm.states.Add(StateType.Idle, new AI_IdleState(fsm));
+        fsm.states.Add(StateType.Move, new AI_MoveState(fsm));
+        fsm.states.Add(StateType.Dead, new AI_Dead(fsm));
     }
 }
 

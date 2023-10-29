@@ -12,7 +12,8 @@ public class BallList : MonoBehaviour
     public enum SceneType
     {
         level,
-        Test
+        Test,
+        Free
     }
     public SceneType sceneType;
 

@@ -158,7 +158,7 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
     public void OnEnter()
     {  
         List<GameObject> enemyGameObject = new List<GameObject>();   //转向其中的随机物体
-        ballBlackBoard.Weapon.GetComponent<Bow>().OpenArrowPic(); //显示箭图片
+        ballBlackBoard.longRangeWeapon.GetComponent<Bow>().OpenArrowPic(); //显示箭图片
         minDistance = 10000;  //得到最近物体后重置
         foreach (GameObject ball in BallList.instance.ballGameObjectList)  //切换目标物体
         {
@@ -185,7 +185,7 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
 
     public void OnExit()
     {
-        ballBlackBoard.Weapon.GetComponent<Bow>().CloseArrowPic();  //取消显示箭图片
+        ballBlackBoard.longRangeWeapon.GetComponent<Bow>().CloseArrowPic();  //取消显示箭图片
     }
 
     public void OnFixedUpdate()
@@ -199,7 +199,7 @@ public class ArcherAI_AttackState : IState  //攻击状态下执行的函数
         attackTimer += Time.deltaTime;
         if (attackTimer > ballBlackBoard.thisBall.GetComponent<ArcherAI>().shootTime)
         {
-            ballBlackBoard.Weapon.GetComponent<Bow>().Archery(); //射箭
+            ballBlackBoard.longRangeWeapon.GetComponent<Bow>().Archery(); //射箭
             fsm.SwitchState(StateType.Move);
             attackTimer = 0;
         }
@@ -214,32 +214,12 @@ public class ArcherAI : BallAi
     public float shootTime;  //射出箭所需的时间
 
     public float attackSwitchTime; //切换攻击状态所需时间
-    public override void initBall()
+    public override void AddState()
     {
-        ballBlackBoard.rigidbody2D = this.GetComponent<Rigidbody2D>();
-        ballBlackBoard.thisBall = this.gameObject;
         fsm = new FSM(ballBlackBoard as BallBlackBoard);
         fsm.states.Add(StateType.Idle, new ArcherAI_IdleState(fsm));
         fsm.states.Add(StateType.Move, new ArcherAI_MoveState(fsm));
         fsm.states.Add(StateType.Attack, new ArcherAI_AttackState(fsm));
         fsm.states.Add(StateType.Dead, new AI_Dead(fsm));
-        BallList.instance.ballBlackBoards.Add(gameObject, ballBlackBoard);  //添加进黑板小球物体对应字典
-        if (!BallList.instance.ballGameObjectList.Contains(gameObject)) //列表中没该小球就加入
-        {
-            BallList.instance.ballGameObjectList.Add(gameObject);
-            //if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Left)
-            //{
-            //    BallList.instance.leftBallNum++;
-            //}
-            //else if (gameObject.GetComponent<BallAi>().ballBlackBoard.ballFaction == BallBlackBoard.Faction.Right)
-            //{
-            //    BallList.instance.rightBallNum++;
-            //}
-        }
-        if (gameObject.transform.parent == null || gameObject.transform.parent.gameObject.name != "BallList")  //存放小球的物体中没该小球就加入
-        {
-            gameObject.transform.SetParent(GameObject.Find("BallList").transform);
-        }
-        ChangeState();
     }
 }
