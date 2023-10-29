@@ -85,7 +85,6 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
-            PlaceSoliderScript.instance.leftNumberOfSoldiers--;
             BallList.instance.leftBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
@@ -113,7 +112,6 @@ public class OtherButton : MonoBehaviour
         }
         foreach (GameObject ball in ClearBall)
         {
-            PlaceSoliderScript.instance.rightNumberOfSoldiers--;
             BallList.instance.rightBallNum--;
             ballList.Remove(ball);
             Destroy(ball);
