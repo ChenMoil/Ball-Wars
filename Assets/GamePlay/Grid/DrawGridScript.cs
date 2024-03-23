@@ -6,7 +6,7 @@ public class DrawGridScript : MonoBehaviour
 {
     [SerializeField] int width;  //地图宽度
     [SerializeField] int height;//地图高度
-    GridMap map;                //地图
+    public GridMap map;                //地图
     GameObject linePrefab;            //边界线预制体
     Vector3 startPoint;         //起始点
     public Vector2 gridSize;           //格子尺寸
@@ -45,7 +45,7 @@ public class DrawGridScript : MonoBehaviour
             lines.Add(line);
             }
     }
-    Vector2Int GetTouchGrid(Vector2 pos)       //获取指定格子
+    public Vector2Int GetTouchGrid(Vector2 pos)       //获取指定格子
     {
         if(pos.x < startPoint.x || pos.x > startPoint.x + width * gridSize.x || pos.y<startPoint.y || pos.y> startPoint.y + height * gridSize.y)  //
         {
@@ -54,7 +54,7 @@ public class DrawGridScript : MonoBehaviour
         }
         return new Vector2Int((int)((pos.x - startPoint.x) / gridSize.x), (int)((pos.y - startPoint.y) / gridSize.y));
     }
-    Vector2 GetGridPos(Vector2 index)         //获取格子位置
+    public Vector2 GetGridPos(Vector2 index)         //获取格子位置
     {
         return new Vector2(startPoint.x + (index.x + (float)0.5) * gridSize.x, startPoint.y + (index.y + (float)0.5) * gridSize.y);
     }
