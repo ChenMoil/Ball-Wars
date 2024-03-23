@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   category: 3
   coin: 80
-  ball: {fileID: 57983059099254693, guid: 9520a602299d88e48b32d924360d68b1, type: 3}
+  ball: {fileID: 1260102100648949047, guid: ee5710af1a0f9ca45821e0610ff92c9f, type: 3}
   ballImage: {fileID: 21300000, guid: af38b060df58032418e2b5f8a53144c6, type: 3}
   pressedImage: {fileID: 21300000, guid: 50c6e6f4b9e988e4b84a5d6b183c3796, type: 3}

@@ -82,7 +82,8 @@ public class PlayPlotManagerScript : MonoBehaviour
             }
             canvas.SetActive(false);
 
-            OtherButton.instance.DisplayUI();  //显示UI
+            OtherButton.instance.DisplayUI();  //显示UI\
+            Debug.Log("1");
 
             return;
         }
