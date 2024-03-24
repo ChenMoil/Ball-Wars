@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildBuildingsScript : MonoBehaviour
 {
     Transform buildingParent;
-    bool isBuilding;   //ÊÇ·ñÕıÔÚ½¨Ôì
-    GameObject building; //ÕıÔÚ½¨ÔìµÄÎïÌå
+    bool isBuilding;   //æ˜¯å¦æ­£åœ¨å»ºé€ 
+    GameObject building; //æ­£åœ¨å»ºé€ çš„ç‰©ä½“
     Color trueColor = new(0, 255, 0, 96);
     private void Start()
     {
@@ -23,9 +23,9 @@ public class BuildBuildingsScript : MonoBehaviour
         building.transform.localPosition = pos;        
         building.transform.localScale=new Vector2(gridSize.x/buildingSize.x,gridSize.y/buildingSize.y);
 
-        if(DrawGridScript.instance.map.IsEnoughSpace(grid,))
-        isBuilding = true;
-        this.building=building;
+        //if(DrawGridScript.instance.map.IsEnoughSpace(grid,))
+        //isBuilding = true;
+        //this.building=building;
          
     }
 }

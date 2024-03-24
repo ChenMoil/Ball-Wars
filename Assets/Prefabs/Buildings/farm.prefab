@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425833767679036769}
   - component: {fileID: 425833767679036768}
+  - component: {fileID: 1567402934937171915}
   m_Layer: 0
   m_Name: farm
   m_TagString: Untagged
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1567402934937171915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425833767679036771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fd4973f1b9c3941aa9a7f932586a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resProduceType: 0
+  resourseMakeSpeed: 10
