@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class BuildBuildingsScript : MonoBehaviour
 {
     Transform buildingParent;
-    bool isBuilding;   //ÊÇ·ñÕıÔÚ½¨Ôì
-    bool isCapableofBuild; //ÊÇ·ñÄÜ¹»½¨Ôì
-    GameObject building; //ÕıÔÚ½¨ÔìµÄÎïÌå
+    bool isBuilding;   //æ˜¯å¦æ­£åœ¨å»ºé€ 
+    bool isCapableofBuild; //æ˜¯å¦èƒ½å¤Ÿå»ºé€ 
+    GameObject building; //æ­£åœ¨å»ºé€ çš„ç‰©ä½“
     Color trueColor = new(0, 255, 0, 96);
     Color falseColor = new Color(255, 0, 0, 96);
     [SerializeField] Transform UITransform;
@@ -55,32 +55,32 @@ public class BuildBuildingsScript : MonoBehaviour
             tempBuilding.GetComponent<SpriteRenderer>().color = falseColor;
             isCapableofBuild = false;
         }
-        //½ûÓÃ½¨Öş½Å±¾
+        //ç¦ç”¨å»ºç­‘è„šæœ¬
         isBuilding = true;
         building=tempBuilding;
         ShowTipsButtons(grid);
     }
-    public void ConfirmBuild()               //È·ÈÏ½¨Ôì
+    public void ConfirmBuild()               //ç¡®è®¤å»ºé€ 
     {
         if (!isBuilding || building==null)
         {
-            Debug.LogError("Î´½¨ÔìÈ´È·ÈÏ½¨Ôì");
+            Debug.LogError("æœªå»ºé€ å´ç¡®è®¤å»ºé€ ");
             return;
         }
         building.GetComponent<SpriteRenderer>().color = Color.white;
         DrawGridScript.instance.map.Place(DrawGridScript.instance.GetTouchGrid(building.transform.position), currentBuildingInfo.width, currentBuildingInfo.height);
-        //ÆôÓÃ½¨Öş½Å±¾
+        //å¯ç”¨å»ºç­‘è„šæœ¬
         isBuilding = false;
         building=null;
 
         Destroy(confirmButton);
         Destroy(cancelButton);
     }
-    public void CancelBuild()               //È¡Ïû½¨Ôì
+    public void CancelBuild()               //å–æ¶ˆå»ºé€ 
     {
         if (!isBuilding || building == null)
         {
-            Debug.LogError("Î´½¨ÔìÈ´È¡Ïû½¨Ôì");
+            Debug.LogError("æœªå»ºé€ å´å–æ¶ˆå»ºé€ ");
             return;
         }
         Destroy(building);
@@ -92,7 +92,7 @@ public class BuildBuildingsScript : MonoBehaviour
     }
     void ShowTipsButtons(Vector2Int pos)
     {
-        bool buttonsDirection;           //°´Å¥µÄ·½Ïò
+        bool buttonsDirection;           //æŒ‰é’®çš„æ–¹å‘
         if (DrawGridScript.instance.isInCamera(pos))
             buttonsDirection = true;
         else 
@@ -102,7 +102,7 @@ public class BuildBuildingsScript : MonoBehaviour
         
         Vector2 confirmButtonPos = Camera.main.WorldToScreenPoint(DrawGridScript.instance.GetGridPos(pos) + new Vector2(0, gridSize.y) * 0.3f);
         Vector2 cancelButtonPos = Camera.main.WorldToScreenPoint(DrawGridScript.instance.GetGridPos(pos) + new Vector2(0, -1 * gridSize.y) * 0.7f);
-        //¶Ô°´Å¥½øĞĞËõ·Å´¦Àí
+        //å¯¹æŒ‰é’®è¿›è¡Œç¼©æ”¾å¤„ç†
         confirmButton = Instantiate(confirmButtonPrefab, UITransform);
         cancelButton = Instantiate(cancelButtonPrefab, UITransform);
         confirmButton.transform.position = confirmButtonPos;
