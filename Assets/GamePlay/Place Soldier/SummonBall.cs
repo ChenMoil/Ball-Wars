@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(fileName ="New Ball", menuName ="SummonBall")]
 [System.Serializable]
-public class SummonBall:ScriptableObject
+public class SummonBall:BasePlace
 {
     [System.Serializable]
     public enum Category

@@ -6,16 +6,23 @@ using UnityEngine.UI;
 
 public class PlaceSoliderScript : MonoBehaviour
 {
+    public enum Placement   //放置的种类
+    {
+        Ball,
+        Building
+    }
     public static PlaceSoliderScript instance;
     //放置士兵功能
     [SerializeField] public int leftCurrentCoin;   //当前金钱
     [SerializeField] public int rightCurrentCoin;
     [SerializeField] Material outlineMat;   //描边材质
     [SerializeField] bool isFree; //是否开启自由模式
+    Placement currentPlacement; //当前放置物品的种类
     Rigidbody2D cameraFollow;   //摄像机
     BoxCollider2D cameraCollider; //摄像机碰撞体
     [NonSerialized] public bool isStart; //战斗是否开始
     SummonBall ball;     //当前选择小球
+    Building building;   //当前选择建筑
     private GameObject ballListGameObject;
     bool preIsPointerOverUI;//前一帧是否触摸在屏幕上
     [SerializeField] float longPressTime; //开始放置士兵的长按时间
@@ -34,6 +41,7 @@ public class PlaceSoliderScript : MonoBehaviour
     [SerializeField] GameObject gridPrefab; //兵种单位预制体
     [SerializeField] GameObject soldierContent; //兵种单位父物体
     public List<SummonBall> ballList = new List<SummonBall>();
+    public List<Building> buildingList = new List<Building>();
     List<SummonBall> currentBallList= new List<SummonBall>();//当前小球列表
     void Awake()
     {
@@ -42,7 +50,6 @@ public class PlaceSoliderScript : MonoBehaviour
             instance = this;
         }
         //初始化种类列表
-        ChangeCategory(SummonBall.Category.human);
         ballListGameObject = GameObject.Find("BallList");
         if (!isFree)
             leftTextCoin.text = leftCurrentCoin.ToString();   //同步ui显示
@@ -57,6 +64,8 @@ public class PlaceSoliderScript : MonoBehaviour
 
         if (isFree)
         {
+            ChangeCategory(SummonBall.Category.human);
+
             GameObject.Find("Human").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.human));
             GameObject.Find("Elf").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.elf));
             GameObject.Find("Orc").GetComponent<Button>().onClick.AddListener(() => ChangeCategory(SummonBall.Category.orc));
@@ -93,51 +102,16 @@ public class PlaceSoliderScript : MonoBehaviour
             {
                 longPressTimer = Mathf.Infinity;
             }
-            if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !OtherButton.instance.isStart)
-            {//放置小球
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    longPressTimer = Time.time + longPressTime + longPressPlaceSoliderTime;
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Stationary && Time.time > longPressTimer)
-                {
-                    longPressTimer += longPressPlaceSoliderTime;
-                    isLongPressPlace = true;
-                }
-                if ((Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI) || isLongPressPlace)
-                {
-                    isLongPressPlace = false;
-                    Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
-                    if (touchPos.x < mapPos)
-                    {
-                        GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
-                        newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                        newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
-                        newBall.GetComponent<SpriteRenderer>().material = outlineMat;
-                        newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.green);
-
-                        PlaceSoldierToLeft(ball.coin);
-                    }
-                    else if (isFree && touchPos.x > mapPos)
-                    {
-                        GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
-
-                        newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
-                        newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
-                        newBall.GetComponent<SpriteRenderer>().material = outlineMat;
-                        newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.red);
-
-                        PlaceSoldierToRight(ball.coin);
-                    }
-                    else if (!isFree && touchPos.x > mapPos && !OtherButton.instance.isStart)
-                    {
-                        SignUI.instance.DisplayText("无法在敌方地盘放置士兵", 1f, Color.white);
-                    }
-                }
-            }
-            else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart && !isFree)
+            switch (currentPlacement)
             {
-                SignUI.instance.DisplayText("缺少金币，无法放置士兵", 1f, Color.white);
+                case Placement.Ball:
+                    PlaceBall();
+                    break;
+                case Placement.Building:
+                    PlaceBuilding();
+                    break;
+                default:
+                    break;
             }
             preIsPointerOverUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
         }
@@ -148,6 +122,104 @@ public class PlaceSoliderScript : MonoBehaviour
         }
 
 
+    }
+    void PlaceBall()
+    {
+        if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !OtherButton.instance.isStart)
+        {//放置小球
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                longPressTimer = Time.time + longPressTime + longPressPlaceSoliderTime;
+            }
+            else if (Input.GetTouch(0).phase == TouchPhase.Stationary && Time.time > longPressTimer)
+            {
+                longPressTimer += longPressPlaceSoliderTime;
+                isLongPressPlace = true;
+            }
+            if ((Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI) || isLongPressPlace)
+            {
+                isLongPressPlace = false;
+                Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
+                if (touchPos.x < mapPos)
+                {
+                    GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
+                    newBall.GetComponent<SpriteRenderer>().material = outlineMat;
+                    newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.green);
+
+                    PlaceSoldierToLeft(ball.coin);
+                }
+                else if (isFree && touchPos.x > mapPos)
+                {
+                    GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
+                    newBall.GetComponent<SpriteRenderer>().material = outlineMat;
+                    newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.red);
+
+                    PlaceSoldierToRight(ball.coin);
+                }
+                else if (!isFree && touchPos.x > mapPos && !OtherButton.instance.isStart)
+                {
+                    SignUI.instance.DisplayText("无法在敌方地盘放置士兵", 1f, Color.white);
+                }
+            }
+        }
+        else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart && !isFree)
+        {
+            SignUI.instance.DisplayText("缺少金币，无法放置士兵", 1f, Color.white);
+        }
+    }
+    void PlaceBuilding()
+    {
+        if (ball != null && (isFree || leftCurrentCoin >= ball.coin) && Input.GetTouch(0).deltaPosition == Vector2.zero && !OtherButton.instance.isStart)
+        {//放置小球
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                longPressTimer = Time.time + longPressTime + longPressPlaceSoliderTime;
+            }
+            else if (Input.GetTouch(0).phase == TouchPhase.Stationary && Time.time > longPressTimer)
+            {
+                longPressTimer += longPressPlaceSoliderTime;
+                isLongPressPlace = true;
+            }
+            if ((Input.GetTouch(0).phase == TouchPhase.Ended && !preIsPointerOverUI) || isLongPressPlace)
+            {
+                isLongPressPlace = false;
+                Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position) + 60 * Vector3.forward;
+                if (touchPos.x < mapPos)
+                {
+                    GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Left; //给小球加上阵营
+                    newBall.GetComponent<SpriteRenderer>().material = outlineMat;
+                    newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.green);
+
+                    PlaceSoldierToLeft(ball.coin);
+                }
+                else if (isFree && touchPos.x > mapPos)
+                {
+                    GameObject newBall = Instantiate(ball.ball, touchPos, Quaternion.identity);
+
+                    newBall.transform.parent = ballListGameObject.transform;  //将新生成的小球挂载到 BallList 物体上
+                    newBall.GetComponent<BallAi>().ballBlackBoard.ballFaction = BallBlackBoard.Faction.Right; //给小球加上阵营
+                    newBall.GetComponent<SpriteRenderer>().material = outlineMat;
+                    newBall.GetComponent<SpriteRenderer>().material.SetColor("_lineColor", Color.red);
+
+                    PlaceSoldierToRight(ball.coin);
+                }
+                else if (!isFree && touchPos.x > mapPos && !OtherButton.instance.isStart)
+                {
+                    SignUI.instance.DisplayText("无法在敌方地盘放置士兵", 1f, Color.white);
+                }
+            }
+        }
+        else if (ball != null && leftCurrentCoin < ball.coin && !OtherButton.instance.isStart && !isFree)
+        {
+            SignUI.instance.DisplayText("缺少金币，无法放置士兵", 1f, Color.white);
+        }
     }
     public void ChangeBall(SummonBall newBall)
     {    //改变当前选择小球
@@ -184,6 +256,10 @@ public class PlaceSoliderScript : MonoBehaviour
         grid.ball = newBall;
         grid.Toggle.group = soldierContent.GetComponent<ToggleGroup>();
     }
+    void InsertBuildingToUI(Building building)
+    {
+
+    }
     public void RefreshText()
     {
         leftTextCoin.text = leftCurrentCoin.ToString();
@@ -197,12 +273,22 @@ public class PlaceSoliderScript : MonoBehaviour
         {
             Destroy(soldierContent.transform.GetChild(i).gameObject);
         }
-        for (int i = 0; i < currentBallList.Count; i++)
+        switch (currentPlacement)
         {
-            if (currentBallList[i] != null)
-            {
-                InsertSoldierToUI(currentBallList[i]);
-            }
+            case Placement.Ball:
+                for (int i = 0; i < currentBallList.Count; i++)
+                {
+                    if (currentBallList[i] != null)
+                    {
+                        InsertSoldierToUI(currentBallList[i]);
+                    }
+                }
+                break;
+            case Placement.Building:
+
+                break;
+            default:
+                break;
         }
     }
     public void ChangeCategory(SummonBall.Category category)

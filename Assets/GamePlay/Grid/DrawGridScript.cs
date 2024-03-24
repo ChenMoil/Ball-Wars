@@ -54,7 +54,7 @@ public class DrawGridScript : MonoBehaviour
         }
         return new Vector2Int((int)((pos.x - startPoint.x) / gridSize.x), (int)((pos.y - startPoint.y) / gridSize.y));
     }
-    public Vector2 GetGridPos(Vector2 index)         //获取格子位置
+    public Vector2 GetGridPos(Vector2 index)         //获取格子中心点的位置
     {
         return new Vector2(startPoint.x + (index.x + (float)0.5) * gridSize.x, startPoint.y + (index.y + (float)0.5) * gridSize.y);
     }
@@ -62,5 +62,12 @@ public class DrawGridScript : MonoBehaviour
     {
         return GetGridPos(GetTouchGrid(pos));
         
+    }
+    public bool isInCamera(Vector2 pos)      //格子是否在摄像机视口内
+    {
+        pos = GetGridPos(pos);
+        pos = Camera.main.WorldToViewportPoint(pos);
+        if(pos.x < 0 || pos.x >1 || pos.y < 0 || pos.y >1) return false;
+        return true;
     }
 }

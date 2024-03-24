@@ -32,7 +32,8 @@ public class OtherButton : MonoBehaviour
         under = GameObject.Find("Under");
         if (BallList.instance.sceneType!=BallList.SceneType.level)
         {
-            UIMoveY = 325;
+            if(BallList.instance.sceneType==BallList.SceneType.Free)
+                UIMoveY = 325;
             DisplayUI();
         }
         
